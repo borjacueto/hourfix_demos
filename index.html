@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOURFIX - Demos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            background: white;
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: #D86018;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        .demos {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .demo-link {
+            background: #FFF8F0;
+            padding: 2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .demo-link:hover {
+            transform: translateY(-5px);
+            border-color: #D86018;
+            box-shadow: 0 10px 30px rgba(216, 96, 24, 0.2);
+        }
+        .demo-icon {
+            font-size: 3rem;
+            background: #D86018;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-content {
+            flex: 1;
+            text-align: left;
+        }
+        .demo-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: #D86018;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        .demo-desc {
+            color: #666;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">⏳</div>
+        <div class="logo">HOURFIX</div>
+        <p class="subtitle">El tiempo es dinero. No lo pierdas.</p>
+        
+        <div class="demos">
+            <a href="hourfix-landing.html" class="demo-link">
+                <div class="demo-icon">🌐</div>
+                <div class="demo-content">
+                    <div class="demo-title">Landing Page</div>
+                    <div class="demo-desc">Página principal del proyecto con todas las características</div>
+                </div>
+            </a>
+            
+            <a href="demo-b2c-interactive.html" class="demo-link">
+                <div class="demo-icon">👤</div>
+                <div class="demo-content">
+                    <div class="demo-title">Demo Cliente B2C</div>
+                    <div class="demo-desc">Flujo completo de reserva desde el punto de vista del cliente</div>
+                </div>
+            </a>
+            
+            <a href="demo-b2b-dashboard.html" class="demo-link">
+                <div class="demo-icon">💼</div>
+                <div class="demo-content">
+                    <div class="demo-title">Dashboard Empresas B2B</div>
+                    <div class="demo-desc">Panel de control para negocios gestionar citas y solicitudes</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
