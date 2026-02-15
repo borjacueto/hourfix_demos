@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOURFIX - Demo Cliente B2C</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: #D86018;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: #D86018;
+            letter-spacing: 2px;
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-container {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .progress-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .step-circle.active {
+            background: #FF8C42;
+        }
+
+        .step-circle.completed {
+            background: #D86018;
+        }
+
+        .step-circle.pending {
+            background: #E0E0E0;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #E0E0E0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D86018, #FF8C42);
+            transition: width 0.5s ease;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            min-height: 500px;
+        }
+
+        .title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: #D86018;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #FFF8F0;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(216, 96, 24, 0.25);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        .date-selector {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            margin: 2rem 0;
+        }
+
+        .date-card {
+            min-width: 100px;
+            background: #FFF8F0;
+            border-radius: 15px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .date-card:hover, .date-card.selected {
+            background: #D86018;
+            color: white;
+            border-color: #D86018;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .time-slot {
+            background: #FFF8F0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .time-slot:hover, .time-slot.selected {
+            background: #D86018;
+            color: white;
+            border-color: #D86018;
+        }
+
+        .business-card {
+            background: #FFF8F0;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .business-card:hover {
+            transform: translateX(10px);
+            border-color: #D86018;
+            box-shadow: 0 10px 30px rgba(216, 96, 24, 0.2);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #D86018;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #B84D10;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(216, 96, 24, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #D86018;
+            border: 2px solid #D86018;
+        }
+
+        .btn-secondary:hover {
+            background: #D86018;
+            color: white;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: #D86018;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .confirmation {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .confirmation-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: bounce 1s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .confirmation-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .detail-box {
+            background: #FFF8F0;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .time-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .business-card {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo-icon">⏳</div>
+            <div class="logo-text">HOURFIX</div>
+        </div>
+        <div class="user-badge">
+            <span style="font-size: 1.2rem;">👤</span>
+            <span style="font-weight: 600;">Demo Cliente</span>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-steps">
+            <div class="progress-step">
+                <div class="step-circle active" id="step1">1</div>
+                <div style="font-size: 0.9rem; font-weight: 600;">Servicio</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-circle pending" id="step2">2</div>
+                <div style="font-size: 0.9rem;">Fecha y Hora</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-circle pending" id="step3">3</div>
+                <div style="font-size: 0.9rem;">Opciones</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-circle pending" id="step4">4</div>
+                <div style="font-size: 0.9rem;">Confirmación</div>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Step 1: Service Selection -->
+        <div id="serviceSelection">
+            <h2 class="title">ELIGE LO QUE NECESITAS</h2>
+            <p class="subtitle">Selecciona el servicio que buscas</p>
+            <div class="services-grid">
+                <div class="service-card" onclick="selectService('Fisioterapia', '💆')">
+                    <div class="service-icon">💆</div>
+                    <div class="service-name">CLÍNICA DE FISIOTERAPIA</div>
+                </div>
+                <div class="service-card" onclick="selectService('Dental', '🦷')">
+                    <div class="service-icon">🦷</div>
+                    <div class="service-name">CLÍNICA DENTAL</div>
+                </div>
+                <div class="service-card" onclick="selectService('Peluquería', '✂️')">
+                    <div class="service-icon">✂️</div>
+                    <div class="service-name">PELUQUERÍA</div>
+                </div>
+                <div class="service-card" onclick="selectService('Estética', '💅')">
+                    <div class="service-icon">💅</div>
+                    <div class="service-name">CLÍNICA ESTÉTICA</div>
+                </div>
+                <div class="service-card" onclick="selectService('Restaurante', '🍽️')">
+                    <div class="service-icon">🍽️</div>
+                    <div class="service-name">RESTAURANTE</div>
+                </div>
+                <div class="service-card" onclick="selectService('Salud Mental', '🧠')">
+                    <div class="service-icon">🧠</div>
+                    <div class="service-name">SALUD MENTAL</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Date & Time Selection -->
+        <div id="dateTimeSelection" class="hidden">
+            <button class="back-button" onclick="goToStep(1)">← Volver</button>
+            <h2 class="title">SELECCIONA DÓNDE Y CUÁNDO</h2>
+            <p class="subtitle">Servicio: <strong id="selectedServiceName"></strong></p>
+
+            <h3 style="font-size: 1.5rem; margin: 2rem 0 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                📅 Selecciona el día
+            </h3>
+            <div class="date-selector">
+                <div class="date-card" onclick="selectDate('15', 'Feb', 'Lun')">
+                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Lun</div>
+                    <div style="font-size: 2rem; font-weight: bold;">15</div>
+                    <div style="font-size: 0.8rem;">Feb</div>
+                </div>
+                <div class="date-card" onclick="selectDate('16', 'Feb', 'Mar')">
+                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Mar</div>
+                    <div style="font-size: 2rem; font-weight: bold;">16</div>
+                    <div style="font-size: 0.8rem;">Feb</div>
+                </div>
+                <div class="date-card" onclick="selectDate('17', 'Feb', 'Mié')">
+                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Mié</div>
+                    <div style="font-size: 2rem; font-weight: bold;">17</div>
+                    <div style="font-size: 0.8rem;">Feb</div>
+                </div>
+                <div class="date-card" onclick="selectDate('18', 'Feb', 'Jue')">
+                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Jue</div>
+                    <div style="font-size: 2rem; font-weight: bold;">18</div>
+                    <div style="font-size: 0.8rem;">Feb</div>
+                </div>
+                <div class="date-card" onclick="selectDate('19', 'Feb', 'Vie')">
+                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Vie</div>
+                    <div style="font-size: 2rem; font-weight: bold;">19</div>
+                    <div style="font-size: 0.8rem;">Feb</div>
+                </div>
+            </div>
+
+            <div id="timeSelection" class="hidden">
+                <h3 style="font-size: 1.5rem; margin: 2rem 0 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    🕐 Selecciona la hora
+                </h3>
+                <div class="time-grid">
+                    <div class="time-slot" onclick="selectTime('09:00')">09:00</div>
+                    <div class="time-slot" onclick="selectTime('10:00')">10:00</div>
+                    <div class="time-slot" onclick="selectTime('11:00')">11:00</div>
+                    <div class="time-slot" onclick="selectTime('12:00')">12:00</div>
+                    <div class="time-slot" onclick="selectTime('14:00')">14:00</div>
+                    <div class="time-slot" onclick="selectTime('15:00')">15:00</div>
+                    <div class="time-slot" onclick="selectTime('16:00')">16:00</div>
+                    <div class="time-slot" onclick="selectTime('17:00')">17:00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Business Options -->
+        <div id="businessSelection" class="hidden">
+            <button class="back-button" onclick="goToStep(2)">← Volver</button>
+            <h2 class="title">OPCIONES DISPONIBLES</h2>
+            <p class="subtitle" id="selectionSummary"></p>
+
+            <div class="business-card" onclick="selectBusiness('FisioSalud Premium', 4.8, 127, '0.8 km', '45€')">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
+                        <span style="font-size: 1.5rem; font-weight: bold;">4.8</span>
+                        <span style="color: #999;">(127 reseñas)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #666;">
+                        <span>📍</span>
+                        <span>0.8 km</span>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #D86018;">45€</div>
+                    <div style="color: #999; font-size: 0.9rem;">Por sesión</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">10:00 - 11:00</div>
+                    <div style="display: inline-block; padding: 0.3rem 1rem; border-radius: 20px; background: #4CAF50; color: white; font-size: 0.85rem; font-weight: 600;">
+                        Alta disponibilidad
+                    </div>
+                </div>
+                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600;">
+                    Reservar →
+                </div>
+            </div>
+
+            <div class="business-card" onclick="selectBusiness('Centro Wellness', 4.9, 203, '1.2 km', '50€')">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
+                        <span style="font-size: 1.5rem; font-weight: bold;">4.9</span>
+                        <span style="color: #999;">(203 reseñas)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #666;">
+                        <span>📍</span>
+                        <span>1.2 km</span>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #D86018;">50€</div>
+                    <div style="color: #999; font-size: 0.9rem;">Por sesión</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">10:00 - 11:00</div>
+                    <div style="display: inline-block; padding: 0.3rem 1rem; border-radius: 20px; background: #FFA726; color: white; font-size: 0.85rem; font-weight: 600;">
+                        Media disponibilidad
+                    </div>
+                </div>
+                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600;">
+                    Reservar →
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Confirmation -->
+        <div id="confirmation" class="hidden">
+            <div class="confirmation">
+                <div class="confirmation-icon">✅</div>
+                <h2 class="confirmation-title">¡RESERVA CONFIRMADA!</h2>
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 3rem; line-height: 1.8;">
+                    Tu cita para <strong id="confirmService"></strong><br>
+                    el día <strong id="confirmDate"></strong> a las <strong id="confirmTime"></strong><br>
+                    ha sido confirmada exitosamente
+                </p>
+
+                <div class="detail-box">
+                    <h3 style="margin-bottom: 1rem; color: #D86018;">Detalles de tu reserva:</h3>
+                    <div class="detail-row">
+                        <span style="color: #666;">Valoración:</span>
+                        <span style="font-weight: 600;" id="confirmRating"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="color: #666;">Distancia:</span>
+                        <span style="font-weight: 600;" id="confirmDistance"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="color: #666;">Precio:</span>
+                        <span style="font-weight: 600; color: #D86018;" id="confirmPrice"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="color: #666;">Código de confirmación:</span>
+                        <span style="font-weight: 600; font-family: monospace;" id="confirmCode"></span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <button class="btn btn-primary" onclick="reset()">Nueva Reserva</button>
+                    <button class="btn btn-secondary">Ver Mis Reservas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let selectedService = '';
+        let selectedDate = '';
+        let selectedTime = '';
+        let selectedBusiness = {};
+
+        function updateProgress() {
+            document.getElementById('progressFill').style.width = `${(currentStep / 4) * 100}%`;
+            
+            for (let i = 1; i <= 4; i++) {
+                const circle = document.getElementById(`step${i}`);
+                if (i < currentStep) {
+                    circle.className = 'step-circle completed';
+                } else if (i === currentStep) {
+                    circle.className = 'step-circle active';
+                } else {
+                    circle.className = 'step-circle pending';
+                }
+            }
+        }
+
+        function goToStep(step) {
+            currentStep = step;
+            updateProgress();
+            
+            document.getElementById('serviceSelection').classList.add('hidden');
+            document.getElementById('dateTimeSelection').classList.add('hidden');
+            document.getElementById('businessSelection').classList.add('hidden');
+            document.getElementById('confirmation').classList.add('hidden');
+
+            if (step === 1) {
+                document.getElementById('serviceSelection').classList.remove('hidden');
+            } else if (step === 2) {
+                document.getElementById('dateTimeSelection').classList.remove('hidden');
+            } else if (step === 3) {
+                document.getElementById('businessSelection').classList.remove('hidden');
+                document.getElementById('selectionSummary').textContent = 
+                    `${selectedService} • ${selectedDate} • ${selectedTime}`;
+            } else if (step === 4) {
+                document.getElementById('confirmation').classList.remove('hidden');
+            }
+        }
+
+        function selectService(service, icon) {
+            selectedService = service;
+            document.getElementById('selectedServiceName').textContent = service;
+            currentStep = 2;
+            updateProgress();
+            goToStep(2);
+        }
+
+        function selectDate(day, month, weekday) {
+            selectedDate = `${day} ${month}`;
+            document.querySelectorAll('.date-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            document.getElementById('timeSelection').classList.remove('hidden');
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            setTimeout(() => {
+                currentStep = 3;
+                updateProgress();
+                goToStep(3);
+            }, 300);
+        }
+
+        function selectBusiness(name, rating, reviews, distance, price) {
+            selectedBusiness = { name, rating, reviews, distance, price };
+            
+            document.getElementById('confirmService').textContent = selectedService;
+            document.getElementById('confirmDate').textContent = selectedDate;
+            document.getElementById('confirmTime').textContent = selectedTime;
+            document.getElementById('confirmRating').textContent = `⭐ ${rating}`;
+            document.getElementById('confirmDistance').textContent = distance;
+            document.getElementById('confirmPrice').textContent = price;
+            document.getElementById('confirmCode').textContent = 
+                'HF-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            
+            currentStep = 4;
+            updateProgress();
+            goToStep(4);
+        }
+
+        function reset() {
+            currentStep = 1;
+            selectedService = '';
+            selectedDate = '';
+            selectedTime = '';
+            selectedBusiness = {};
+            updateProgress();
+            goToStep(1);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
