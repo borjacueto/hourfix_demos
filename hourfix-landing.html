@@ -602,6 +602,166 @@
             opacity: 0.95;
         }
 
+        /* Business Section */
+        .business-section {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+            color: white;
+        }
+
+        .business-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .business-benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .business-benefit {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--orange-light);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .benefit-text {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .features-checklist {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .checklist-item {
+            font-size: 1.2rem;
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .checklist-item::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--orange-light);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .pricing-card-business {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card-business::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--orange-primary), var(--orange-light));
+        }
+
+        .pricing-badge {
+            background: var(--orange-light);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .pricing-amount {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .price-from {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-right: 0.5rem;
+        }
+
+        .price-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            color: var(--orange-primary);
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        .price-period {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-left: 0.5rem;
+        }
+
+        .pricing-commission {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .pricing-highlight {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-trial {
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-light));
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
         /* Footer */
         .footer {
             background: var(--dark);
@@ -668,6 +828,15 @@
                 grid-template-columns: 1fr;
             }
 
+            .business-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .business-benefits {
+                grid-template-columns: 1fr;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
             }
@@ -711,6 +880,7 @@
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#como-funciona">Cómo Funciona</a></li>
             <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#empresas">Para Empresas</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
     </nav>
@@ -992,6 +1162,76 @@
                     <div class="author-info">
                         <h4>Laura Martínez</h4>
                         <p>Barcelona</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Section -->
+    <section class="business-section" id="empresas">
+        <div class="business-content">
+            <div class="business-text">
+                <h2 class="section-title" style="text-align: left; color: white;">¿TIENES UN NEGOCIO?</h2>
+                <p style="font-size: 1.5rem; color: rgba(255,255,255,0.95); margin-bottom: 3rem; line-height: 1.6;">
+                    Únete a cientos de profesionales que ya llenan sus horas libres 
+                    y aumentan su facturación con HOURFIX.
+                </p>
+
+                <div class="business-benefits">
+                    <div class="business-benefit">
+                        <div class="benefit-number">+15%</div>
+                        <div class="benefit-text">Aumento medio de facturación</div>
+                    </div>
+                    <div class="business-benefit">
+                        <div class="benefit-number">0€</div>
+                        <div class="benefit-text">Sin costes de marketing</div>
+                    </div>
+                    <div class="business-benefit">
+                        <div class="benefit-number">24/7</div>
+                        <div class="benefit-text">Reservas automáticas</div>
+                    </div>
+                </div>
+
+                <div style="margin: 3rem 0;">
+                    <h3 style="color: white; font-size: 1.8rem; margin-bottom: 1.5rem;">Lo que incluye:</h3>
+                    <div class="features-checklist">
+                        <div class="checklist-item">✓ Gestión completa de agenda y citas</div>
+                        <div class="checklist-item">✓ Panel de control profesional</div>
+                        <div class="checklist-item">✓ Notificaciones en tiempo real</div>
+                        <div class="checklist-item">✓ Sistema de valoraciones y reseñas</div>
+                        <div class="checklist-item">✓ Sin costes de instalación ni permanencia</div>
+                        <div class="checklist-item">✓ Prueba gratis durante 3 meses</div>
+                    </div>
+                </div>
+
+                <a href="#contacto" class="btn btn-primary" style="background: white; color: var(--orange-primary); font-size: 1.3rem; padding: 1.5rem 3rem;">
+                    Quiero más información
+                </a>
+            </div>
+
+            <div class="business-pricing">
+                <div class="pricing-card-business">
+                    <div class="pricing-badge">PLAN PROFESIONAL</div>
+                    <div class="pricing-amount">
+                        <span class="price-from">Desde</span>
+                        <span class="price-number">49€</span>
+                        <span class="price-period">/mes</span>
+                    </div>
+                    <div class="pricing-commission">+ 5% de comisión por reserva</div>
+                    
+                    <div class="pricing-highlight">
+                        <strong>Recupera la inversión con solo 2 clientes al mes</strong>
+                    </div>
+
+                    <div class="pricing-trial">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎁</div>
+                        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">Prueba gratis 3 meses</div>
+                        <div style="font-size: 0.95rem; opacity: 0.9;">Solo pagas la comisión por reserva</div>
+                    </div>
+
+                    <div class="pricing-note">
+                        Sin permanencia • Cancela cuando quieras
                     </div>
                 </div>
             </div>
