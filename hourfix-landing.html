@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOURFIX - El Tiempo es Dinero. No lo Pierdas.</title>
+    <title>HOURFIX - Reserva tu cita en 3 clicks</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -60,7 +60,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 2rem 5%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -77,16 +77,14 @@
         }
 
         .logo-icon {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: var(--orange-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Bebas Neue', sans-serif;
-            color: white;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             animation: pulse 2s infinite;
         }
 
@@ -97,7 +95,7 @@
 
         .logo-text {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--orange-primary);
             letter-spacing: 2px;
         }
@@ -133,9 +131,9 @@
         .hero-text h1 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 5rem;
-            line-height: 0.9;
+            line-height: 1;
             color: var(--orange-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             animation: slideInLeft 1s ease-out;
         }
 
@@ -145,18 +143,39 @@
         }
 
         .hero-text .tagline {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--gray);
             margin-bottom: 2rem;
             font-weight: 300;
             animation: slideInLeft 1s ease-out 0.2s backwards;
+            line-height: 1.5;
         }
 
-        .hero-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+        .hero-text .benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
             animation: slideInLeft 1s ease-out 0.4s backwards;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--orange-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }
 
         .cta-buttons {
@@ -166,8 +185,8 @@
         }
 
         .btn {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             border: none;
             border-radius: 50px;
@@ -210,21 +229,72 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        .hourglass-graphic {
+        .phone-mockup {
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             margin: 0 auto;
+            background: white;
+            border-radius: 50px;
+            padding: 1.5rem;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
             position: relative;
         }
 
-        .hourglass-svg {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 20px 60px rgba(216, 96, 24, 0.3));
+        .phone-screen {
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+            border-radius: 40px;
+            padding: 2rem 1.5rem;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        /* Features Section */
-        .features {
+        .screen-header {
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--orange-primary);
+            letter-spacing: 1px;
+        }
+
+        .service-icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .service-mini {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: floatMini 3s ease-in-out infinite;
+        }
+
+        .service-mini:nth-child(2) { animation-delay: 0.5s; }
+        .service-mini:nth-child(3) { animation-delay: 1s; }
+        .service-mini:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes floatMini {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .service-mini-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-mini-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* How It Works */
+        .how-it-works {
             padding: 8rem 5%;
             background: white;
         }
@@ -244,47 +314,29 @@
             margin-bottom: 5rem;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-            max-width: 1400px;
+        .steps-container {
+            max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
         }
 
-        .feature-card {
-            padding: 3rem;
+        .step-card {
+            text-align: center;
+            padding: 3rem 2rem;
             background: var(--cream);
-            border-radius: 20px;
-            border: 2px solid transparent;
+            border-radius: 30px;
             transition: all 0.5s;
             position: relative;
-            overflow: hidden;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--orange-primary), var(--orange-light));
-            transform: scaleX(0);
-            transition: transform 0.5s;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            border-color: var(--orange-light);
-            transform: translateY(-10px);
+        .step-card:hover {
+            transform: translateY(-15px);
             box-shadow: 0 20px 60px rgba(216, 96, 24, 0.15);
         }
 
-        .feature-icon {
+        .step-number {
             width: 80px;
             height: 80px;
             background: var(--orange-primary);
@@ -292,194 +344,169 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(216, 96, 24, 0.3);
         }
 
-        .feature-label {
+        .step-card h3 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            color: var(--orange-primary);
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
             letter-spacing: 1px;
         }
 
-        .feature-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .feature-card p {
+        .step-card p {
             font-size: 1.1rem;
             line-height: 1.8;
             color: var(--gray);
         }
 
-        /* How It Works */
-        .how-it-works {
+        /* Services Grid */
+        .services {
             padding: 8rem 5%;
-            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-dark) 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--cream) 0%, #FFF5E8 100%);
         }
 
-        .timeline {
-            max-width: 1200px;
+        .services-grid {
+            max-width: 1400px;
             margin: 0 auto;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 6rem;
-            position: relative;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
 
-        .timeline-item:nth-child(even) .timeline-content {
-            grid-column: 2;
-        }
-
-        .timeline-item:nth-child(even) .timeline-number {
-            grid-column: 1;
-            grid-row: 1;
-        }
-
-        .timeline-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .number-circle {
-            width: 120px;
-            height: 120px;
+        .service-card {
             background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            color: var(--orange-primary);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            border: 3px solid transparent;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
 
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+        .service-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--orange-light);
+            box-shadow: 0 20px 50px rgba(216, 96, 24, 0.2);
         }
 
-        .timeline-content h3 {
+        .service-card-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+
+        .service-card h3 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
             letter-spacing: 1px;
         }
 
-        .timeline-content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 8rem 5%;
-            background: var(--cream);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: white;
-            border-radius: 30px;
-            padding: 4rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.5s;
-        }
-
-        .pricing-card:hover {
-            transform: scale(1.05);
-        }
-
-        .pricing-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 10px;
-            background: linear-gradient(90deg, var(--orange-primary), var(--orange-light));
-        }
-
-        .pricing-label {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            color: var(--orange-primary);
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: var(--dark);
-        }
-
-        .price {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
-            color: var(--orange-primary);
-            margin-bottom: 2rem;
-        }
-
-        .price-detail {
-            font-size: 1rem;
+        .service-card p {
             color: var(--gray);
-            margin-bottom: 2rem;
+            font-size: 1rem;
         }
 
-        .features-list {
-            list-style: none;
-            margin-bottom: 2rem;
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 5%;
+            background: white;
         }
 
-        .features-list li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #eee;
+        .testimonials-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--cream);
+            border-radius: 25px;
+            padding: 3rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(216, 96, 24, 0.15);
+        }
+
+        .quote-icon {
+            font-size: 4rem;
+            color: var(--orange-light);
+            opacity: 0.3;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .features-list li::before {
-            content: '✓';
-            color: var(--orange-primary);
-            font-weight: bold;
-            font-size: 1.3rem;
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--orange-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-dark) 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
         }
 
         /* Footer */
@@ -536,24 +563,15 @@
                 text-align: center;
             }
 
-            .features-grid {
+            .steps-container {
                 grid-template-columns: 1fr;
             }
 
-            .timeline::before {
-                left: 30px;
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .timeline-item {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline-item:nth-child(even) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-number {
-                grid-column: 1;
-            }
-
-            .pricing-grid {
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -574,6 +592,18 @@
             .nav-links {
                 display: none;
             }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -587,7 +617,7 @@
         <ul class="nav-links">
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#como-funciona">Cómo Funciona</a></li>
-            <li><a href="#precios">Precios</a></li>
+            <li><a href="#servicios">Servicios</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
     </nav>
@@ -596,156 +626,187 @@
     <section class="hero" id="inicio">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>EL TIEMPO ES DINERO. NO LO PIERDAS.</h1>
-                <p class="tagline">Un marketplace B2B2C para gestionar tu agenda mientras captas más clientes</p>
-                <p>HOURFIX conecta comercios locales con clientes que necesitan servicios. Gestiona tus horas libres, elimina cancelaciones y aumenta tu facturación hasta un 15%.</p>
+                <h1>RESERVA TU CITA EN 3 CLICKS</h1>
+                <p class="tagline">Sin llamadas, sin esperas. Encuentra fisioterapeutas, dentistas, peluquerías y más cerca de ti, al mejor precio y en el horario perfecto.</p>
+                
+                <div class="benefits">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <span><strong>Inmediato:</strong> Confirmación en segundos</span>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💰</div>
+                        <span><strong>Mejor precio:</strong> Compara opciones sin complicaciones</span>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📍</div>
+                        <span><strong>Cerca de ti:</strong> Encuentra profesionales en tu zona</span>
+                    </div>
+                </div>
+
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">Empezar Ahora</a>
-                    <a href="#como-funciona" class="btn btn-secondary">Ver Demo</a>
+                    <a href="#servicios" class="btn btn-primary">Buscar mi cita</a>
+                    <a href="#como-funciona" class="btn btn-secondary">Cómo funciona</a>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hourglass-graphic">
-                    <svg class="hourglass-svg" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 30 L150 30 L150 50 L120 150 L150 250 L150 270 L50 270 L50 250 L80 150 L50 50 Z" 
-                              fill="#D86018" opacity="0.2"/>
-                        <path d="M50 30 L150 30 L150 50 L120 150 L150 250 L150 270 L50 270 L50 250 L80 150 L50 50 Z" 
-                              stroke="#D86018" stroke-width="3" fill="none"/>
-                        <rect x="60" y="160" width="80" height="90" fill="#FF8C42" opacity="0.6">
-                            <animate attributeName="height" from="90" to="10" dur="3s" repeatCount="indefinite"/>
-                            <animate attributeName="y" from="160" to="240" dur="3s" repeatCount="indefinite"/>
-                        </rect>
-                        <circle cx="100" cy="150" r="5" fill="#D86018">
-                            <animate attributeName="cy" from="80" to="220" dur="2s" repeatCount="indefinite"/>
-                        </circle>
-                    </svg>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="screen-header">¿QUÉ NECESITAS?</div>
+                        <div class="service-icon-grid">
+                            <div class="service-mini">
+                                <div class="service-mini-icon">💆</div>
+                                <div class="service-mini-name">Fisioterapia</div>
+                            </div>
+                            <div class="service-mini">
+                                <div class="service-mini-icon">🦷</div>
+                                <div class="service-mini-name">Dental</div>
+                            </div>
+                            <div class="service-mini">
+                                <div class="service-mini-icon">✂️</div>
+                                <div class="service-mini-name">Peluquería</div>
+                            </div>
+                            <div class="service-mini">
+                                <div class="service-mini-icon">💅</div>
+                                <div class="service-mini-name">Estética</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <h2 class="section-title">¿Por Qué HOURFIX?</h2>
-        <p class="section-subtitle">Adiós a las horas muertas</p>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🏢</div>
-                <div class="feature-label">B2B</div>
-                <h3>Para Empresas</h3>
-                <p>¿Cansado de cancelaciones de última hora que descuadran tu presupuesto (-15% facturación semanal)? Gestionamos tus horas libres y captamos clientes mientras tú atiendes tu negocio.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">👤</div>
-                <div class="feature-label">B2C</div>
-                <h3>Para Clientes</h3>
-                <p>¿Urgencia? ¿Sin referencias? ¿Libertad horaria? Encuentra tu servicio ideal en 3 clicks. Nosotros buscamos por ti en el precio, radio y franja horaria perfecta.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">📅</div>
-                <div class="feature-label">GESTIÓN</div>
-                <h3>Agenda Inteligente</h3>
-                <p>Sistema de gestión de citas que minimiza gastos en internet, recepción y agenda. Todo automatizado para que te enfoques en tu servicio.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <div class="feature-label">ROI</div>
-                <h3>Más Clientes</h3>
-                <p>Cubierto con solo 2 clientes al mes. Aumenta tu facturación sin invertir en marketing. Tu reserva en 3 clicks.</p>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
     <section class="how-it-works" id="como-funciona">
-        <h2 class="section-title">Cómo Funciona</h2>
-        <p class="section-subtitle">Simple, rápido, efectivo</p>
+        <h2 class="section-title">CÓMO FUNCIONA</h2>
+        <p class="section-subtitle">Así de simple</p>
 
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-number">
-                    <div class="number-circle">1</div>
-                </div>
-                <div class="timeline-content">
-                    <h3>Indica tus Servicios</h3>
-                    <p>Elige tu categoría: Fisioterapia, Dental, Peluquería, Estética, Restaurante o Salud Mental. Configura tu perfil en minutos.</p>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Elige tu servicio</h3>
+                <p>Selecciona lo que necesitas: fisioterapia, dentista, peluquería, estética o restaurante. Todo en un solo lugar.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Busca y compara</h3>
+                <p>Te mostramos las mejores opciones cerca de ti con precios, horarios disponibles y valoraciones reales.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Confirma y listo</h3>
+                <p>Reserva en segundos. Recibe confirmación instantánea con todos los detalles de tu cita.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="servicios">
+        <h2 class="section-title">SERVICIOS DISPONIBLES</h2>
+        <p class="section-subtitle">Todo lo que necesitas en un solo lugar</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-card-icon">💆</div>
+                <h3>Fisioterapia</h3>
+                <p>Centros especializados con profesionales certificados</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-icon">🦷</div>
+                <h3>Clínicas Dentales</h3>
+                <p>Desde limpiezas hasta tratamientos avanzados</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-icon">✂️</div>
+                <h3>Peluquerías</h3>
+                <p>Cortes, tintes y peinados de última tendencia</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-icon">💅</div>
+                <h3>Centros Estéticos</h3>
+                <p>Tratamientos faciales, manicura y mucho más</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-icon">🍽️</div>
+                <h3>Restaurantes</h3>
+                <p>Reserva mesa sin esperas ni complicaciones</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-icon">🧠</div>
+                <h3>Salud Mental</h3>
+                <p>Psicólogos y terapeutas cualificados</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">LO QUE DICEN NUESTROS USUARIOS</h2>
+        <p class="section-subtitle">Experiencias reales</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">
+                    "Me cancelaron el fisio a última hora y en HOURFIX encontré otro en 5 minutos. 
+                    Increíble, nunca había sido tan fácil conseguir cita."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <h4>María González</h4>
+                        <p>Santander</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-number">
-                    <div class="number-circle">2</div>
-                </div>
-                <div class="timeline-content">
-                    <h3>Fija tu Disponibilidad</h3>
-                    <p>Indica dónde estás, tus precios y tus horas libres. El sistema se encarga del resto automáticamente.</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-number">
-                    <div class="number-circle">3</div>
-                </div>
-                <div class="timeline-content">
-                    <h3>Recibe Solicitudes</h3>
-                    <p>Los clientes encuentran tu servicio. Recibes notificaciones en tiempo real. Tú decides si aceptar o no.</p>
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">
+                    "Ya no pierdo tiempo llamando a mil sitios. Busco, comparo precios y reservo. 
+                    Todo desde el móvil en menos de un minuto."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">J</div>
+                    <div class="author-info">
+                        <h4>Javier Ruiz</h4>
+                        <p>Madrid</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-number">
-                    <div class="number-circle">4</div>
-                </div>
-                <div class="timeline-content">
-                    <h3>Atiende y Cobra</h3>
-                    <p>Confirma, recibe al cliente y cobra. Sistema de reseñas que mejora tu reputación continuamente.</p>
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">
+                    "Perfecto para gente como yo que trabaja todo el día. Puedo reservar fuera de 
+                    horario y me confirman al instante. Un acierto total."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">L</div>
+                    <div class="author-info">
+                        <h4>Laura Martínez</h4>
+                        <p>Barcelona</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing -->
-    <section class="pricing" id="precios">
-        <h2 class="section-title">Ingresos Recurrentes</h2>
-        <p class="section-subtitle">Planes flexibles para empresas y particulares</p>
-
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="pricing-label">B2B</div>
-                <h3>Para Empresas</h3>
-                <div class="price">49-79€<span style="font-size: 1.5rem;">/mes</span></div>
-                <p class="price-detail">Cubierto con 2 clientes. Minimiza gastos operativos.</p>
-                <ul class="features-list">
-                    <li>Gestión completa de agenda</li>
-                    <li>Comisión +5% por cliente</li>
-                    <li>Perfil con fotos y reseñas</li>
-                    <li>Panel de control B2B</li>
-                    <li>Notificaciones en tiempo real</li>
-                    <li>Prueba gratis 3 meses (solo comisión)</li>
-                </ul>
-                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Comenzar Prueba</a>
-            </div>
-
-            <div class="pricing-card">
-                <div class="pricing-label">B2C</div>
-                <h3>Para Particulares</h3>
-                <div class="price">4,99€<span style="font-size: 1.5rem;">/mes</span></div>
-                <p class="price-detail">Mismo precio que contratar directamente</p>
-                <ul class="features-list">
-                    <li>Sin publicidad</li>
-                    <li>Promociones exclusivas</li>
-                    <li>Listas de espera prioritarias</li>
-                    <li>Preferencia en overbooking</li>
-                    <li>Programa de referidos</li>
-                    <li>Búsqueda ilimitada</li>
-                </ul>
-                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Registrarse</a>
-            </div>
-        </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>¿LISTO PARA TU PRÓXIMA CITA?</h2>
+        <p>Únete a miles de personas que ya reservan de forma inteligente</p>
+        <a href="#servicios" class="btn btn-primary" style="background: white; color: var(--orange-primary);">
+            Empezar ahora
+        </a>
     </section>
 
     <!-- Footer -->
@@ -756,7 +817,10 @@
                     <div class="logo-icon">⏳</div>
                     <div class="logo-text">HOURFIX</div>
                 </div>
-                <p style="color: rgba(255,255,255,0.7);">El tiempo es dinero. No lo pierdas. Conectamos comercios con clientes de forma inteligente.</p>
+                <p style="color: rgba(255,255,255,0.7);">
+                    Reserva tu cita en 3 clicks. Sin llamadas, sin esperas.
+                    Conectamos a las personas con los mejores profesionales cerca de ti.
+                </p>
             </div>
             <div>
                 <h4>Empresa</h4>
@@ -768,12 +832,12 @@
                 </ul>
             </div>
             <div>
-                <h4>Producto</h4>
+                <h4>Servicios</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Para Empresas</a></li>
-                    <li><a href="#">Para Clientes</a></li>
-                    <li><a href="#">Precios</a></li>
-                    <li><a href="#">API</a></li>
+                    <li><a href="#">Fisioterapia</a></li>
+                    <li><a href="#">Dental</a></li>
+                    <li><a href="#">Peluquería</a></li>
+                    <li><a href="#">Estética</a></li>
                 </ul>
             </div>
             <div>
@@ -818,7 +882,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.feature-card, .timeline-item, .pricing-card').forEach(el => {
+        document.querySelectorAll('.step-card, .service-card, .testimonial-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(50px)';
             el.style.transition = 'all 0.8s ease-out';
