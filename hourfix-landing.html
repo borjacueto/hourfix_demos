@@ -248,6 +248,21 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screen-content {
+            position: absolute;
+            top: 2rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .screen-content.active {
+            opacity: 1;
         }
 
         .screen-header {
@@ -256,6 +271,7 @@
             font-size: 1.5rem;
             color: var(--orange-primary);
             letter-spacing: 1px;
+            margin-bottom: 1.5rem;
         }
 
         .service-icon-grid {
@@ -267,30 +283,107 @@
         .service-mini {
             background: white;
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            animation: floatMini 3s ease-in-out infinite;
-        }
-
-        .service-mini:nth-child(2) { animation-delay: 0.5s; }
-        .service-mini:nth-child(3) { animation-delay: 1s; }
-        .service-mini:nth-child(4) { animation-delay: 1.5s; }
-
-        @keyframes floatMini {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         .service-mini-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+            margin-bottom: 0.3rem;
         }
 
         .service-mini-name {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--dark);
+        }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot-mini {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .business-card-mini {
+            background: white;
+            border-radius: 15px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .rating-mini {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: bold;
+        }
+
+        .price-mini {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--orange-primary);
+        }
+
+        .business-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .confirmation-mini {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .check-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-details {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .detail-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-line:last-child {
+            border-bottom: none;
         }
 
         /* How It Works */
@@ -627,7 +720,7 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1>RESERVA TU CITA EN 3 CLICKS</h1>
-                <p class="tagline">Sin llamadas, sin esperas. Encuentra fisioterapeutas, dentistas, peluquerías y más cerca de ti, al mejor precio y en el horario perfecto.</p>
+                <p class="tagline">Sin llamadas, sin esperas. Encuentra lo que necesitas cerca de ti, al mejor precio y en el horario perfecto.</p>
                 
                 <div class="benefits">
                     <div class="benefit-item">
@@ -652,23 +745,128 @@
             <div class="hero-visual">
                 <div class="phone-mockup">
                     <div class="phone-screen">
-                        <div class="screen-header">¿QUÉ NECESITAS?</div>
-                        <div class="service-icon-grid">
-                            <div class="service-mini">
-                                <div class="service-mini-icon">💆</div>
-                                <div class="service-mini-name">Fisioterapia</div>
+                        <!-- Screen 1: Services -->
+                        <div class="screen-content active" id="screen1">
+                            <div class="screen-header">¿QUÉ NECESITAS?</div>
+                            <div class="service-icon-grid">
+                                <div class="service-mini">
+                                    <div class="service-mini-icon">💆</div>
+                                    <div class="service-mini-name">Fisioterapia</div>
+                                </div>
+                                <div class="service-mini">
+                                    <div class="service-mini-icon">🦷</div>
+                                    <div class="service-mini-name">Dental</div>
+                                </div>
+                                <div class="service-mini">
+                                    <div class="service-mini-icon">✂️</div>
+                                    <div class="service-mini-name">Peluquería</div>
+                                </div>
+                                <div class="service-mini">
+                                    <div class="service-mini-icon">💅</div>
+                                    <div class="service-mini-name">Estética</div>
+                                </div>
+                                <div class="service-mini">
+                                    <div class="service-mini-icon">🍽️</div>
+                                    <div class="service-mini-name">Restaurante</div>
+                                </div>
+                                <div class="service-mini">
+                                    <div class="service-mini-icon">🧠</div>
+                                    <div class="service-mini-name">Salud Mental</div>
+                                </div>
                             </div>
-                            <div class="service-mini">
-                                <div class="service-mini-icon">🦷</div>
-                                <div class="service-mini-name">Dental</div>
+                        </div>
+
+                        <!-- Screen 2: Time Selection -->
+                        <div class="screen-content" id="screen2">
+                            <div class="screen-header">ELIGE TU HORARIO</div>
+                            <p style="text-align: center; color: #666; margin-bottom: 1rem; font-size: 0.9rem;">
+                                Fisioterapia • 15 Feb
+                            </p>
+                            <div class="time-slots-grid">
+                                <div class="time-slot-mini">09:00</div>
+                                <div class="time-slot-mini">10:00</div>
+                                <div class="time-slot-mini">11:00</div>
+                                <div class="time-slot-mini">14:00</div>
+                                <div class="time-slot-mini">15:00</div>
+                                <div class="time-slot-mini">16:00</div>
+                                <div class="time-slot-mini">17:00</div>
+                                <div class="time-slot-mini">18:00</div>
+                                <div class="time-slot-mini">19:00</div>
                             </div>
-                            <div class="service-mini">
-                                <div class="service-mini-icon">✂️</div>
-                                <div class="service-mini-name">Peluquería</div>
+                        </div>
+
+                        <!-- Screen 3: Business Options -->
+                        <div class="screen-content" id="screen3">
+                            <div class="screen-header">OPCIONES CERCA DE TI</div>
+                            <p style="text-align: center; color: #666; margin-bottom: 1rem; font-size: 0.9rem;">
+                                3 centros disponibles
+                            </p>
+                            <div class="business-card-mini">
+                                <div class="business-header">
+                                    <div class="rating-mini">
+                                        <span style="color: #FFD700;">⭐</span>
+                                        <span>4.8</span>
+                                    </div>
+                                    <div class="price-mini">45€</div>
+                                </div>
+                                <div class="business-info">
+                                    <span>📍 0.8 km</span>
+                                    <span>🕐 10:00 - 11:00</span>
+                                </div>
                             </div>
-                            <div class="service-mini">
-                                <div class="service-mini-icon">💅</div>
-                                <div class="service-mini-name">Estética</div>
+
+                            <div class="business-card-mini">
+                                <div class="business-header">
+                                    <div class="rating-mini">
+                                        <span style="color: #FFD700;">⭐</span>
+                                        <span>4.9</span>
+                                    </div>
+                                    <div class="price-mini">50€</div>
+                                </div>
+                                <div class="business-info">
+                                    <span>📍 1.2 km</span>
+                                    <span>🕐 10:00 - 11:00</span>
+                                </div>
+                            </div>
+
+                            <div class="business-card-mini">
+                                <div class="business-header">
+                                    <div class="rating-mini">
+                                        <span style="color: #FFD700;">⭐</span>
+                                        <span>4.7</span>
+                                    </div>
+                                    <div class="price-mini">40€</div>
+                                </div>
+                                <div class="business-info">
+                                    <span>📍 2.1 km</span>
+                                    <span>🕐 10:00 - 11:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screen 4: Confirmation -->
+                        <div class="screen-content" id="screen4">
+                            <div class="confirmation-mini">
+                                <div class="check-icon">✅</div>
+                                <div class="confirmation-text">¡Reserva Confirmada!</div>
+                                <div class="confirmation-details">
+                                    <div class="detail-line">
+                                        <span style="color: #666;">Servicio:</span>
+                                        <span style="font-weight: 600;">Fisioterapia</span>
+                                    </div>
+                                    <div class="detail-line">
+                                        <span style="color: #666;">Fecha:</span>
+                                        <span style="font-weight: 600;">15 Feb, 10:00</span>
+                                    </div>
+                                    <div class="detail-line">
+                                        <span style="color: #666;">Precio:</span>
+                                        <span style="font-weight: 600; color: #D86018;">45€</span>
+                                    </div>
+                                    <div class="detail-line">
+                                        <span style="color: #666;">Código:</span>
+                                        <span style="font-weight: 600; font-family: monospace;">HF-A8X2K9</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -856,6 +1054,24 @@
     </footer>
 
     <script>
+        // Screen rotation animation
+        let currentScreen = 1;
+        const totalScreens = 4;
+        
+        function rotateScreens() {
+            // Hide current screen
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            
+            // Move to next screen
+            currentScreen = currentScreen >= totalScreens ? 1 : currentScreen + 1;
+            
+            // Show next screen
+            document.getElementById(`screen${currentScreen}`).classList.add('active');
+        }
+        
+        // Rotate every 3 seconds
+        setInterval(rotateScreens, 3000);
+
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
