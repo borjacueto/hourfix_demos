@@ -672,9 +672,39 @@
             background: white;
             border-radius: 30px;
             padding: 3rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .pricing-card-business:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .pricing-card-business.featured {
+            border: 3px solid var(--orange-primary);
+            box-shadow: 0 20px 60px rgba(216, 96, 24, 0.3);
+            transform: scale(1.05);
+        }
+
+        .pricing-card-business.featured:hover {
+            transform: scale(1.08) translateY(-10px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--orange-primary);
+            color: white;
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .pricing-card-business::before {
@@ -685,6 +715,13 @@
             right: 0;
             height: 8px;
             background: linear-gradient(90deg, var(--orange-primary), var(--orange-light));
+        }
+
+        .pricing-cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
         .pricing-badge {
@@ -715,25 +752,106 @@
 
         .price-number {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 5rem;
+            font-size: 4rem;
             color: var(--orange-primary);
             line-height: 1;
             letter-spacing: 1px;
         }
 
         .price-period {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--gray);
-            margin-left: 0.5rem;
+            margin-left: 0.3rem;
         }
 
         .pricing-commission {
             text-align: center;
             color: var(--gray);
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
             border-bottom: 2px solid #eee;
+        }
+
+        .plan-description {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-trial-small {
+            background: var(--orange-light);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-plan {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--cream);
+            color: var(--orange-primary);
+            text-align: center;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .btn-plan:hover {
+            background: var(--orange-primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(216, 96, 24, 0.3);
+        }
+
+        .btn-plan.featured-btn {
+            background: var(--orange-primary);
+            color: white;
+            box-shadow: 0 10px 25px rgba(216, 96, 24, 0.3);
+        }
+
+        .btn-plan.featured-btn:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(216, 96, 24, 0.4);
+        }
+
+        .pricing-footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .pricing-footer p {
+            font-size: 1rem;
+            margin: 0;
         }
 
         .pricing-highlight {
@@ -835,6 +953,18 @@
 
             .business-benefits {
                 grid-template-columns: 1fr;
+            }
+
+            .pricing-cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card-business.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card-business.featured:hover {
+                transform: translateY(-10px);
             }
 
             .footer-content {
@@ -1211,28 +1341,74 @@
             </div>
 
             <div class="business-pricing">
-                <div class="pricing-card-business">
-                    <div class="pricing-badge">PLAN PROFESIONAL</div>
-                    <div class="pricing-amount">
-                        <span class="price-from">Desde</span>
-                        <span class="price-number">49€</span>
-                        <span class="price-period">/mes</span>
-                    </div>
-                    <div class="pricing-commission">+ 5% de comisión por reserva</div>
-                    
-                    <div class="pricing-highlight">
-                        <strong>Recupera la inversión con solo 2 clientes al mes</strong>
+                <div class="pricing-cards-container">
+                    <!-- Plan Esencial -->
+                    <div class="pricing-card-business">
+                        <div class="pricing-badge">ESENCIAL</div>
+                        <div class="pricing-amount">
+                            <span class="price-number">49€</span>
+                            <span class="price-period">/mes</span>
+                        </div>
+                        <div class="pricing-commission">+ 5% comisión por reserva</div>
+                        
+                        <div class="plan-description">
+                            Perfecto para empezar
+                        </div>
+
+                        <div class="plan-features">
+                            <div class="feature-item">✓ Hasta 50 reservas/mes</div>
+                            <div class="feature-item">✓ 1 profesional</div>
+                            <div class="feature-item">✓ Gestión de agenda</div>
+                            <div class="feature-item">✓ Notificaciones email</div>
+                            <div class="feature-item">✓ Perfil con fotos</div>
+                            <div class="feature-item">✓ Estadísticas básicas</div>
+                            <div class="feature-item">✓ Soporte email (48h)</div>
+                            <div class="feature-item">✓ 1 categoría de servicio</div>
+                        </div>
+
+                        <div class="pricing-trial-small">
+                            🎁 Prueba gratis 3 meses
+                        </div>
+
+                        <a href="#contacto" class="btn-plan">Comenzar ahora</a>
                     </div>
 
-                    <div class="pricing-trial">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎁</div>
-                        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">Prueba gratis 3 meses</div>
-                        <div style="font-size: 0.95rem; opacity: 0.9;">Solo pagas la comisión por reserva</div>
-                    </div>
+                    <!-- Plan Profesional -->
+                    <div class="pricing-card-business featured">
+                        <div class="popular-badge">MÁS POPULAR</div>
+                        <div class="pricing-badge" style="background: var(--orange-primary);">PROFESIONAL</div>
+                        <div class="pricing-amount">
+                            <span class="price-number">79€</span>
+                            <span class="price-period">/mes</span>
+                        </div>
+                        <div class="pricing-commission">+ 5% comisión por reserva</div>
+                        
+                        <div class="plan-description">
+                            <strong>Para crecer sin límites</strong>
+                        </div>
 
-                    <div class="pricing-note">
-                        Sin permanencia • Cancela cuando quieras
+                        <div class="plan-features">
+                            <div class="feature-item">✓ <strong>Reservas ilimitadas</strong></div>
+                            <div class="feature-item">✓ <strong>Múltiples profesionales</strong></div>
+                            <div class="feature-item">✓ Gestión de agenda avanzada</div>
+                            <div class="feature-item">✓ <strong>Email + SMS + Push</strong></div>
+                            <div class="feature-item">✓ Perfil destacado con logo</div>
+                            <div class="feature-item">✓ <strong>Estadísticas avanzadas</strong></div>
+                            <div class="feature-item">✓ <strong>Soporte prioritario (24h)</strong></div>
+                            <div class="feature-item">✓ <strong>Múltiples servicios</strong></div>
+                            <div class="feature-item">✓ <strong>Gestión listas de espera</strong></div>
+                        </div>
+
+                        <div class="pricing-trial-small" style="background: var(--orange-primary);">
+                            🎁 Prueba gratis 3 meses
+                        </div>
+
+                        <a href="#contacto" class="btn-plan featured-btn">Comenzar ahora</a>
                     </div>
+                </div>
+
+                <div class="pricing-footer">
+                    <p><strong>Ambos planes incluyen:</strong> Sin permanencia · Cancela cuando quieras · Recupera la inversión con solo 2 clientes</p>
                 </div>
             </div>
         </div>
