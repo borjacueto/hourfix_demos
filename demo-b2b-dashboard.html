@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOURFIX - Dashboard</title>
+    <title>HOURFIX - Dashboard Empresas</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +18,7 @@
             min-height: 100vh;
         }
 
-        /* Mobile Menu Toggle */
+        /* Mobile Menu */
         .menu-toggle {
             position: fixed;
             top: 1rem;
@@ -78,8 +78,8 @@
             transition: all 0.3s;
         }
 
-        .nav-item:active {
-            background: rgba(255,255,255,0.2);
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         .nav-item.active {
@@ -101,24 +101,6 @@
             margin-left: auto;
         }
 
-        .plan-card {
-            margin: 1.5rem;
-            padding: 1.5rem;
-            background: rgba(255,255,255,0.15);
-            border-radius: 15px;
-        }
-
-        .plan-badge {
-            background: #4CAF50;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 0.5rem;
-        }
-
         .main-content {
             flex: 1;
             padding: 1rem;
@@ -138,38 +120,6 @@
             font-size: 2rem;
             color: #333;
             letter-spacing: 1px;
-            margin-bottom: 0.3rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .stat-icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-label {
-            color: #999;
-            font-size: 0.85rem;
         }
 
         .card {
@@ -187,68 +137,145 @@
             font-weight: 600;
         }
 
-        .commission-calculator {
-            background: #FFF8F0;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-        }
-
-        .calc-row {
+        /* Calendar Grid */
+        .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #E0E0E0;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-nav {
+            display: flex;
             gap: 1rem;
-            font-size: 0.9rem;
         }
 
-        .calc-row:last-child {
-            border-bottom: none;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #D86018;
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
         }
 
-        .request-card {
-            background: #FFF8F0;
-            border-radius: 12px;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
+        .day-header {
+            text-align: center;
+            font-weight: 600;
+            padding: 0.5rem;
+            color: #666;
+            font-size: 0.85rem;
         }
 
-        .request-header {
+        .day-cell {
+            aspect-ratio: 1;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 1rem;
+            justify-content: center;
         }
 
-        .request-title {
+        .day-cell:hover {
+            border-color: #D86018;
+            background: #FFF8F0;
+        }
+
+        .day-cell.available {
+            background: #E8F5E9;
+            border-color: #4CAF50;
+        }
+
+        .day-cell.blocked {
+            background: #FFEBEE;
+            border-color: #F44336;
+            opacity: 0.6;
+        }
+
+        .day-number {
             font-size: 1.1rem;
             font-weight: 600;
         }
 
-        .request-details {
+        .day-status {
+            font-size: 0.7rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Time Slots */
+        .time-slots-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 0.8rem;
-            margin-bottom: 1rem;
+            margin-top: 1rem;
         }
 
-        .detail-item {
+        .time-slot {
+            padding: 1rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
             text-align: center;
-        }
-
-        .detail-label {
-            font-size: 0.75rem;
-            color: #999;
-            margin-bottom: 0.2rem;
-        }
-
-        .detail-value {
+            cursor: pointer;
+            transition: all 0.3s;
             font-weight: 600;
+        }
+
+        .time-slot:hover {
+            border-color: #D86018;
+            background: #FFF8F0;
+        }
+
+        .time-slot.available {
+            background: #E8F5E9;
+            border-color: #4CAF50;
+            color: #2E7D32;
+        }
+
+        .time-slot.booked {
+            background: #E3F2FD;
+            border-color: #2196F3;
+            color: #1565C0;
+            cursor: default;
+        }
+
+        .time-slot.blocked {
+            background: #FFEBEE;
+            border-color: #F44336;
+            color: #C62828;
+        }
+
+        /* Services Management */
+        .service-item {
+            background: #FFF8F0;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .service-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #D86018;
         }
 
         .btn {
@@ -258,19 +285,57 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            width: 100%;
             font-size: 1rem;
         }
 
-        .btn-accept {
+        .btn-primary {
+            background: #D86018;
+            color: white;
+        }
+
+        .btn-secondary {
             background: #4CAF50;
             color: white;
         }
 
-        .btn-reject {
+        .btn-danger {
             background: #F44336;
             color: white;
-            margin-top: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #ccc;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #4CAF50;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.active::after {
+            left: 27px;
         }
 
         .hidden { display: none; }
@@ -290,21 +355,11 @@
                 margin-top: 0;
                 padding: 2rem;
             }
-            
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .request-details {
-                grid-template-columns: repeat(4, 1fr);
-            }
         }
     </style>
 </head>
 <body>
-    <div class="menu-toggle" onclick="toggleSidebar()">
-        ☰
-    </div>
+    <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
 
     <div class="container">
         <!-- Sidebar -->
@@ -316,157 +371,190 @@
                 </div>
             </div>
             <nav style="padding: 2rem 0;">
-                <div class="nav-item active" onclick="showTab('dashboard'); closeSidebar();">
+                <div class="nav-item" onclick="showTab('dashboard'); closeSidebar();">
                     <span style="font-size: 1.5rem;">📊</span>
-                    <span>Panel Principal</span>
+                    <span>Panel</span>
                 </div>
                 <div class="nav-item" onclick="showTab('requests'); closeSidebar();">
                     <span style="font-size: 1.5rem;">🔔</span>
                     <span>Solicitudes</span>
-                    <span class="badge" id="requestCount">5</span>
+                    <span class="badge">5</span>
+                </div>
+                <div class="nav-item active" onclick="showTab('calendar'); closeSidebar();">
+                    <span style="font-size: 1.5rem;">📅</span>
+                    <span>Mi Agenda</span>
+                </div>
+                <div class="nav-item" onclick="showTab('services'); closeSidebar();">
+                    <span style="font-size: 1.5rem;">💼</span>
+                    <span>Servicios</span>
                 </div>
                 <div class="nav-item" onclick="showTab('plan'); closeSidebar();">
                     <span style="font-size: 1.5rem;">💎</span>
                     <span>Mi Plan</span>
                 </div>
             </nav>
-
-            <div class="plan-card">
-                <div class="plan-badge">PLAN ACTUAL</div>
-                <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">Esencial</div>
-                <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.8rem;">49€/mes + 10% comisión</div>
-                <div style="font-size: 0.8rem; opacity: 0.8;">
-                    Este mes: 47 reservas<br>
-                    Comisión: ~188€
-                </div>
-            </div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Header -->
             <div class="header">
-                <h1 class="page-title" id="pageTitle">PANEL PRINCIPAL</h1>
+                <h1 class="page-title" id="pageTitle">MI AGENDA</h1>
                 <p style="color: #999; font-size: 0.9rem;">FisioSalud Premium • Santander</p>
             </div>
 
-            <!-- Dashboard View -->
-            <div id="dashboardView">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #4CAF50;">💰</div>
-                        <div class="stat-value">2.840€</div>
-                        <div class="stat-label">Ingresos Mes</div>
+            <!-- Calendar View -->
+            <div id="calendarView">
+                <div class="card">
+                    <div class="calendar-header">
+                        <h3 class="card-title" style="margin: 0;">Febrero 2026</h3>
+                        <div class="calendar-nav">
+                            <button class="btn btn-small btn-secondary">← Anterior</button>
+                            <button class="btn btn-small btn-secondary">Siguiente →</button>
+                        </div>
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #2196F3;">✅</div>
-                        <div class="stat-value">47</div>
-                        <div class="stat-label">Citas</div>
+                    <div style="background: #E8F5E9; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #4CAF50;">
+                        <strong>💡 Consejo:</strong> Marca los días y horarios que tienes libres y quieres llenar. HOURFIX automáticamente ofrecerá esos huecos a clientes.
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #FF9800;">👥</div>
-                        <div class="stat-value">23</div>
-                        <div class="stat-label">Nuevos</div>
-                    </div>
+                    <div class="calendar-grid">
+                        <div class="day-header">Lun</div>
+                        <div class="day-header">Mar</div>
+                        <div class="day-header">Mié</div>
+                        <div class="day-header">Jue</div>
+                        <div class="day-header">Vie</div>
+                        <div class="day-header">Sáb</div>
+                        <div class="day-header">Dom</div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #D86018;">📈</div>
-                        <div class="stat-value">89%</div>
-                        <div class="stat-label">Ocupación</div>
+                        <div class="day-cell" onclick="selectDay(17)">
+                            <div class="day-number">17</div>
+                            <div class="day-status">—</div>
+                        </div>
+                        <div class="day-cell available" onclick="selectDay(18)">
+                            <div class="day-number">18</div>
+                            <div class="day-status" style="color: #4CAF50;">Disponible</div>
+                        </div>
+                        <div class="day-cell" onclick="selectDay(19)">
+                            <div class="day-number">19</div>
+                            <div class="day-status">—</div>
+                        </div>
+                        <div class="day-cell available" onclick="selectDay(20)">
+                            <div class="day-number">20</div>
+                            <div class="day-status" style="color: #4CAF50;">Disponible</div>
+                        </div>
+                        <div class="day-cell" onclick="selectDay(21)">
+                            <div class="day-number">21</div>
+                            <div class="day-status">—</div>
+                        </div>
+                        <div class="day-cell blocked" onclick="selectDay(22)">
+                            <div class="day-number">22</div>
+                            <div class="day-status" style="color: #F44336;">Cerrado</div>
+                        </div>
+                        <div class="day-cell blocked" onclick="selectDay(23)">
+                            <div class="day-number">23</div>
+                            <div class="day-status" style="color: #F44336;">Cerrado</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">💡 Comisiones Este Mes</h3>
-                    <div class="commission-calculator">
-                        <div class="calc-row">
-                            <span>Plan:</span>
-                            <span style="font-weight: 600;">Esencial (10%)</span>
+                <div class="card" id="dayDetailCard" class="hidden">
+                    <h3 class="card-title">Martes 18 de Febrero - Gestionar Horarios</h3>
+                    
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                        <button class="btn btn-secondary">✓ Marcar día disponible</button>
+                        <button class="btn btn-danger">✗ Bloquear día</button>
+                    </div>
+
+                    <p style="margin-bottom: 1rem; color: #666;">Selecciona los horarios que tienes libres y quieres ofrecer:</p>
+
+                    <div class="time-slots-grid">
+                        <div class="time-slot" onclick="toggleSlot(this)">
+                            <div>09:00</div>
                         </div>
-                        <div class="calc-row">
-                            <span>Reservas:</span>
-                            <span>47 × 40€ = 1.880€</span>
+                        <div class="time-slot available" onclick="toggleSlot(this)">
+                            <div>10:00</div>
+                            <div style="font-size: 0.7rem;">Disponible</div>
                         </div>
-                        <div class="calc-row">
-                            <span>Comisión:</span>
-                            <span style="color: #F44336;">188€</span>
+                        <div class="time-slot booked" onclick="toggleSlot(this)">
+                            <div>11:00</div>
+                            <div style="font-size: 0.7rem;">Reservado</div>
                         </div>
-                        <div class="calc-row">
-                            <span>Cuota:</span>
-                            <span style="color: #F44336;">49€</span>
+                        <div class="time-slot" onclick="toggleSlot(this)">
+                            <div>12:00</div>
                         </div>
-                        <div class="calc-row">
-                            <span>TUS INGRESOS:</span>
-                            <span>1.643€</span>
+                        <div class="time-slot available" onclick="toggleSlot(this)">
+                            <div>14:00</div>
+                            <div style="font-size: 0.7rem;">Disponible</div>
+                        </div>
+                        <div class="time-slot" onclick="toggleSlot(this)">
+                            <div>15:00</div>
+                        </div>
+                        <div class="time-slot available" onclick="toggleSlot(this)">
+                            <div>16:00</div>
+                            <div style="font-size: 0.7rem;">Disponible</div>
+                        </div>
+                        <div class="time-slot blocked" onclick="toggleSlot(this)">
+                            <div>17:00</div>
+                            <div style="font-size: 0.7rem;">Bloqueado</div>
                         </div>
                     </div>
 
-                    <div style="background: #E3F2FD; padding: 1rem; border-radius: 10px; margin-top: 1rem; font-size: 0.9rem; border-left: 4px solid #2196F3;">
-                        <strong>💡 Plan Pro (79€ + 5%):</strong><br>
-                        Pagarías solo 173€ → <span style="color: #4CAF50;">Ahorras 64€/mes</span>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #FFF3CD; border-radius: 10px; border-left: 4px solid #FF8C42;">
+                        <strong>ℹ️ Estados de horarios:</strong><br>
+                        • <span style="color: #4CAF50;">Verde</span>: Disponible para reservas<br>
+                        • <span style="color: #2196F3;">Azul</span>: Ya reservado por un cliente<br>
+                        • <span style="color: #F44336;">Rojo</span>: Bloqueado (no aceptas reservas)<br>
+                        • <span style="color: #999;">Gris</span>: Sin configurar
                     </div>
                 </div>
-            </div>
 
-            <!-- Requests View -->
-            <div id="requestsView" class="hidden">
-                <div class="card">
-                    <h3 class="card-title">
-                        Solicitudes (<span id="pendingCount">5</span>)
-                    </h3>
+                <!-- Services Management -->
+                <div id="servicesView" class="hidden">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3 class="card-title" style="margin: 0;">Mis Servicios</h3>
+                            <button class="btn btn-primary">+ Añadir Servicio</button>
+                        </div>
 
-                    <div id="requestsList">
-                        <div class="request-card" id="request1">
-                            <div class="request-header">
-                                <div class="request-title">Fisioterapia</div>
-                                <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">45€</div>
+                        <div class="service-item">
+                            <div class="service-info">
+                                <div class="service-name">Fisioterapia General</div>
+                                <div class="service-details">60 minutos • Comisión: 10%</div>
                             </div>
-                            <div class="request-details">
-                                <div class="detail-item">
-                                    <div class="detail-label">Fecha</div>
-                                    <div class="detail-value">16 Feb</div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">Hora</div>
-                                    <div class="detail-value">10:00</div>
-                                </div>
-                                <div class="detail-item" style="grid-column: 1 / -1;">
-                                    <div class="detail-label">Comisión</div>
-                                    <div class="detail-value">4.50€</div>
-                                </div>
+                            <div class="service-price">45€</div>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="service-info">
+                                <div class="service-name">Masaje Deportivo</div>
+                                <div class="service-details">45 minutos • Comisión: 10%</div>
                             </div>
-                            <button class="btn btn-accept" onclick="acceptRequest(1)">✓ Aceptar</button>
-                            <button class="btn btn-reject" onclick="rejectRequest(1)">✗ Rechazar</button>
+                            <div class="service-price">60€</div>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="service-info">
+                                <div class="service-name">Rehabilitación</div>
+                                <div class="service-details">90 minutos • Comisión: 10%</div>
+                            </div>
+                            <div class="service-price">80€</div>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Plan View -->
-            <div id="planView" class="hidden">
-                <div class="card">
-                    <h3 class="card-title">Cambia a Plan Pro</h3>
-                    <p style="margin-bottom: 1.5rem;">Ahorra hasta 321€/mes con comisión reducida al 5%</p>
-                    <button class="btn btn-accept">Cambiar Plan →</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let pendingRequests = 5;
         let sidebarOpen = false;
 
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebarOpen = !sidebarOpen;
-            if (sidebarOpen) {
-                sidebar.classList.add('open');
-            } else {
-                sidebar.classList.remove('open');
-            }
+            sidebar.classList.toggle('open', sidebarOpen);
         }
 
         function closeSidebar() {
@@ -485,45 +573,42 @@
             const titles = {
                 'dashboard': 'PANEL PRINCIPAL',
                 'requests': 'SOLICITUDES',
+                'calendar': 'MI AGENDA',
+                'services': 'MIS SERVICIOS',
                 'plan': 'MI PLAN'
             };
             document.getElementById('pageTitle').textContent = titles[tab];
 
-            document.getElementById('dashboardView').classList.add('hidden');
-            document.getElementById('requestsView').classList.add('hidden');
-            document.getElementById('planView').classList.add('hidden');
-
-            if (tab === 'dashboard') document.getElementById('dashboardView').classList.remove('hidden');
-            else if (tab === 'requests') document.getElementById('requestsView').classList.remove('hidden');
-            else if (tab === 'plan') document.getElementById('planView').classList.remove('hidden');
+            // Show/hide views (simplified for demo)
+            document.getElementById('calendarView').style.display = 
+                (tab === 'calendar' || tab === 'services') ? 'block' : 'none';
+            document.getElementById('servicesView').classList.toggle('hidden', tab !== 'services');
+            document.getElementById('dayDetailCard').classList.toggle('hidden', tab !== 'calendar');
         }
 
-        function acceptRequest(id) {
-            const card = document.getElementById(`request${id}`);
-            card.style.background = '#E8F5E9';
-            card.querySelector('.btn-accept').textContent = '✓ Aceptada';
-            card.querySelector('.btn-accept').disabled = true;
-            card.querySelector('.btn-reject').style.display = 'none';
-            updatePendingCount();
+        function selectDay(day) {
+            console.log('Selected day:', day);
+            document.getElementById('dayDetailCard').classList.remove('hidden');
         }
 
-        function rejectRequest(id) {
-            const card = document.getElementById(`request${id}`);
-            card.style.background = '#FFEBEE';
-            card.querySelector('.btn-reject').textContent = '✗ Rechazada';
-            card.querySelector('.btn-reject').disabled = true;
-            card.querySelector('.btn-accept').style.display = 'none';
-            updatePendingCount();
-        }
-
-        function updatePendingCount() {
-            pendingRequests--;
-            document.getElementById('pendingCount').textContent = pendingRequests;
-            document.getElementById('requestCount').textContent = pendingRequests;
-            if (pendingRequests === 0) {
-                document.getElementById('requestCount').style.display = 'none';
+        function toggleSlot(element) {
+            if (element.classList.contains('booked')) return; // Can't modify booked slots
+            
+            if (element.classList.contains('available')) {
+                element.classList.remove('available');
+                element.classList.add('blocked');
+                element.innerHTML = '<div>'+element.innerText.split('\n')[0]+'</div><div style="font-size: 0.7rem;">Bloqueado</div>';
+            } else if (element.classList.contains('blocked')) {
+                element.classList.remove('blocked');
+                element.innerHTML = '<div>'+element.innerText.split('\n')[0]+'</div>';
+            } else {
+                element.classList.add('available');
+                element.innerHTML = '<div>'+element.innerText+'</div><div style="font-size: 0.7rem;">Disponible</div>';
             }
         }
+
+        // Show calendar by default
+        showTab('calendar');
     </script>
 </body>
 </html>
