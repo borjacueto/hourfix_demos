@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOURFIX - Demo Cliente B2C</title>
+    <title>HOURFIX - Demo Cliente</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Work Sans', sans-serif;
             background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
@@ -27,11 +23,7 @@
             justify-content: space-between;
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+        .logo-container { display: flex; align-items: center; gap: 1rem; }
 
         .logo-icon {
             width: 60px;
@@ -49,74 +41,6 @@
             font-size: 2.5rem;
             color: #D86018;
             letter-spacing: 2px;
-        }
-
-        .user-badge {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .progress-container {
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .progress-step {
-            text-align: center;
-            flex: 1;
-        }
-
-        .step-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 0.5rem;
-            font-weight: bold;
-            color: white;
-            transition: all 0.3s;
-        }
-
-        .step-circle.active {
-            background: #FF8C42;
-        }
-
-        .step-circle.completed {
-            background: #D86018;
-        }
-
-        .step-circle.pending {
-            background: #E0E0E0;
-        }
-
-        .progress-bar {
-            height: 4px;
-            background: #E0E0E0;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #D86018, #FF8C42);
-            transition: width 0.5s ease;
         }
 
         .main-content {
@@ -164,12 +88,10 @@
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(216, 96, 24, 0.25);
+            border-color: #D86018;
         }
 
-        .service-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
+        .service-icon { font-size: 4rem; margin-bottom: 1rem; }
 
         .service-name {
             font-family: 'Bebas Neue', sans-serif;
@@ -178,29 +100,43 @@
             letter-spacing: 1px;
         }
 
-        .date-selector {
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            padding: 1rem 0;
-            margin: 2rem 0;
-        }
-
-        .date-card {
-            min-width: 100px;
+        .business-card {
             background: #FFF8F0;
-            border-radius: 15px;
-            padding: 1.5rem 1rem;
-            text-align: center;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
         }
 
-        .date-card:hover, .date-card.selected {
-            background: #D86018;
-            color: white;
+        .business-card:hover {
+            transform: translateX(10px);
             border-color: #D86018;
+            box-shadow: 0 10px 30px rgba(216, 96, 24, 0.2);
+        }
+
+        .business-info-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #FF8C42;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .locked-info {
+            color: #999;
+            font-size: 0.85rem;
+            font-style: italic;
         }
 
         .time-grid {
@@ -228,26 +164,6 @@
             border-color: #D86018;
         }
 
-        .business-card {
-            background: #FFF8F0;
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 3px solid transparent;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .business-card:hover {
-            transform: translateX(10px);
-            border-color: #D86018;
-            box-shadow: 0 10px 30px rgba(216, 96, 24, 0.2);
-        }
-
         .btn {
             padding: 1rem 2.5rem;
             border: none;
@@ -267,26 +183,6 @@
             background: #B84D10;
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(216, 96, 24, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #D86018;
-            border: 2px solid #D86018;
-        }
-
-        .btn-secondary:hover {
-            background: #D86018;
-            color: white;
-        }
-
-        .back-button {
-            background: none;
-            border: none;
-            color: #D86018;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
         }
 
         .confirmation {
@@ -328,24 +224,23 @@
             border-bottom: 1px solid #E0E0E0;
         }
 
-        .detail-row:last-child {
-            border-bottom: none;
+        .detail-row:last-child { border-bottom: none; }
+
+        .alert-box {
+            background: #FFF3CD;
+            border-left: 4px solid #FF8C42;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-size: 0.95rem;
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
 
         @media (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            .time-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .business-card {
-                grid-template-columns: 1fr;
-            }
+            .services-grid { grid-template-columns: 1fr; }
+            .time-grid { grid-template-columns: repeat(2, 1fr); }
+            .business-card { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -355,33 +250,9 @@
             <div class="logo-icon">⏳</div>
             <div class="logo-text">HOURFIX</div>
         </div>
-        <div class="user-badge">
+        <div style="background: white; padding: 0.8rem 1.5rem; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
             <span style="font-size: 1.2rem;">👤</span>
-            <span style="font-weight: 600;">Demo Cliente</span>
-        </div>
-    </div>
-
-    <div class="progress-container">
-        <div class="progress-steps">
-            <div class="progress-step">
-                <div class="step-circle active" id="step1">1</div>
-                <div style="font-size: 0.9rem; font-weight: 600;">Servicio</div>
-            </div>
-            <div class="progress-step">
-                <div class="step-circle pending" id="step2">2</div>
-                <div style="font-size: 0.9rem;">Fecha y Hora</div>
-            </div>
-            <div class="progress-step">
-                <div class="step-circle pending" id="step3">3</div>
-                <div style="font-size: 0.9rem;">Opciones</div>
-            </div>
-            <div class="progress-step">
-                <div class="step-circle pending" id="step4">4</div>
-                <div style="font-size: 0.9rem;">Confirmación</div>
-            </div>
-        </div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+            <span style="font-weight: 600; margin-left: 0.5rem;">Demo Cliente</span>
         </div>
     </div>
 
@@ -393,11 +264,7 @@
             <div class="services-grid">
                 <div class="service-card" onclick="selectService('Fisioterapia', '💆')">
                     <div class="service-icon">💆</div>
-                    <div class="service-name">CLÍNICA DE FISIOTERAPIA</div>
-                </div>
-                <div class="service-card" onclick="selectService('Dental', '🦷')">
-                    <div class="service-icon">🦷</div>
-                    <div class="service-name">CLÍNICA DENTAL</div>
+                    <div class="service-name">FISIOTERAPIA</div>
                 </div>
                 <div class="service-card" onclick="selectService('Peluquería', '✂️')">
                     <div class="service-icon">✂️</div>
@@ -405,81 +272,44 @@
                 </div>
                 <div class="service-card" onclick="selectService('Estética', '💅')">
                     <div class="service-icon">💅</div>
-                    <div class="service-name">CLÍNICA ESTÉTICA</div>
-                </div>
-                <div class="service-card" onclick="selectService('Restaurante', '🍽️')">
-                    <div class="service-icon">🍽️</div>
-                    <div class="service-name">RESTAURANTE</div>
-                </div>
-                <div class="service-card" onclick="selectService('Salud Mental', '🧠')">
-                    <div class="service-icon">🧠</div>
-                    <div class="service-name">SALUD MENTAL</div>
+                    <div class="service-name">ESTÉTICA</div>
                 </div>
             </div>
         </div>
 
-        <!-- Step 2: Date & Time Selection -->
-        <div id="dateTimeSelection" class="hidden">
-            <button class="back-button" onclick="goToStep(1)">← Volver</button>
-            <h2 class="title">SELECCIONA DÓNDE Y CUÁNDO</h2>
-            <p class="subtitle">Servicio: <strong id="selectedServiceName"></strong></p>
+        <!-- Step 2: Time Selection -->
+        <div id="timeSelection" class="hidden">
+            <button class="btn btn-secondary" onclick="goToStep(1)" style="background: transparent; color: #D86018; border: 2px solid #D86018; margin-bottom: 2rem;">← Volver</button>
+            <h2 class="title">SELECCIONA HORARIO</h2>
+            <p class="subtitle">Servicio: <strong id="selectedServiceName"></strong> • 15 Feb 2026</p>
 
-            <h3 style="font-size: 1.5rem; margin: 2rem 0 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                📅 Selecciona el día
-            </h3>
-            <div class="date-selector">
-                <div class="date-card" onclick="selectDate('15', 'Feb', 'Lun')">
-                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Lun</div>
-                    <div style="font-size: 2rem; font-weight: bold;">15</div>
-                    <div style="font-size: 0.8rem;">Feb</div>
-                </div>
-                <div class="date-card" onclick="selectDate('16', 'Feb', 'Mar')">
-                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Mar</div>
-                    <div style="font-size: 2rem; font-weight: bold;">16</div>
-                    <div style="font-size: 0.8rem;">Feb</div>
-                </div>
-                <div class="date-card" onclick="selectDate('17', 'Feb', 'Mié')">
-                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Mié</div>
-                    <div style="font-size: 2rem; font-weight: bold;">17</div>
-                    <div style="font-size: 0.8rem;">Feb</div>
-                </div>
-                <div class="date-card" onclick="selectDate('18', 'Feb', 'Jue')">
-                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Jue</div>
-                    <div style="font-size: 2rem; font-weight: bold;">18</div>
-                    <div style="font-size: 0.8rem;">Feb</div>
-                </div>
-                <div class="date-card" onclick="selectDate('19', 'Feb', 'Vie')">
-                    <div style="font-size: 0.8rem; margin-bottom: 0.3rem;">Vie</div>
-                    <div style="font-size: 2rem; font-weight: bold;">19</div>
-                    <div style="font-size: 0.8rem;">Feb</div>
-                </div>
-            </div>
-
-            <div id="timeSelection" class="hidden">
-                <h3 style="font-size: 1.5rem; margin: 2rem 0 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    🕐 Selecciona la hora
-                </h3>
-                <div class="time-grid">
-                    <div class="time-slot" onclick="selectTime('09:00')">09:00</div>
-                    <div class="time-slot" onclick="selectTime('10:00')">10:00</div>
-                    <div class="time-slot" onclick="selectTime('11:00')">11:00</div>
-                    <div class="time-slot" onclick="selectTime('12:00')">12:00</div>
-                    <div class="time-slot" onclick="selectTime('14:00')">14:00</div>
-                    <div class="time-slot" onclick="selectTime('15:00')">15:00</div>
-                    <div class="time-slot" onclick="selectTime('16:00')">16:00</div>
-                    <div class="time-slot" onclick="selectTime('17:00')">17:00</div>
-                </div>
+            <h3 style="font-size: 1.5rem; margin: 2rem 0 1rem;">🕐 Elige tu hora</h3>
+            <div class="time-grid">
+                <div class="time-slot" onclick="selectTime('09:00')">09:00</div>
+                <div class="time-slot" onclick="selectTime('10:00')">10:00</div>
+                <div class="time-slot" onclick="selectTime('11:00')">11:00</div>
+                <div class="time-slot" onclick="selectTime('12:00')">12:00</div>
+                <div class="time-slot" onclick="selectTime('14:00')">14:00</div>
+                <div class="time-slot" onclick="selectTime('15:00')">15:00</div>
+                <div class="time-slot" onclick="selectTime('16:00')">16:00</div>
+                <div class="time-slot" onclick="selectTime('17:00')">17:00</div>
             </div>
         </div>
 
         <!-- Step 3: Business Options -->
         <div id="businessSelection" class="hidden">
-            <button class="back-button" onclick="goToStep(2)">← Volver</button>
+            <button class="btn btn-secondary" onclick="goToStep(2)" style="background: transparent; color: #D86018; border: 2px solid #D86018; margin-bottom: 2rem;">← Volver</button>
             <h2 class="title">OPCIONES DISPONIBLES</h2>
             <p class="subtitle" id="selectionSummary"></p>
 
-            <div class="business-card" onclick="selectBusiness('FisioSalud Premium', 4.8, 127, '0.8 km', '45€')">
+            <div class="alert-box">
+                <strong>ℹ️ Información completa tras reservar:</strong> Por tu seguridad y la del profesional, la dirección exacta y teléfono se muestran solo después de confirmar tu reserva.
+            </div>
+
+            <div class="business-card" onclick="selectBusiness('FisioSalud Premium', 4.8, 127, '0.8 km', '45€', 'Centro', 'Calle Castelar 15, bajo', '942 123 456')">
+                <div class="business-info-badge">Info completa tras reservar</div>
                 <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #D86018;">FisioSalud Premium</h3>
                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                         <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
                         <span style="font-size: 1.5rem; font-weight: bold;">4.8</span>
@@ -487,12 +317,16 @@
                     </div>
                     <div style="display: flex; align-items: center; gap: 0.5rem; color: #666;">
                         <span>📍</span>
-                        <span>0.8 km</span>
+                        <span><strong>Centro</strong>, a 0.8 km</span>
+                    </div>
+                    <div class="locked-info" style="margin-top: 0.5rem;">
+                        🔒 Dirección exacta tras confirmar
                     </div>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 2rem; font-weight: bold; color: #D86018;">45€</div>
-                    <div style="color: #999; font-size: 0.9rem;">Por sesión</div>
+                    <div style="color: #999; font-size: 0.9rem;">Precio normal</div>
+                    <div style="color: #4CAF50; font-size: 0.85rem; margin-top: 0.3rem;">✓ Sin cargos extra</div>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">10:00 - 11:00</div>
@@ -500,13 +334,15 @@
                         Alta disponibilidad
                     </div>
                 </div>
-                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600;">
+                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600; text-align: center;">
                     Reservar →
                 </div>
             </div>
 
-            <div class="business-card" onclick="selectBusiness('Centro Wellness', 4.9, 203, '1.2 km', '50€')">
+            <div class="business-card" onclick="selectBusiness('Centro Wellness', 4.9, 203, '1.2 km', '50€', 'Centro', 'Avenida Reina Victoria 28', '942 987 654')">
+                <div class="business-info-badge">Info completa tras reservar</div>
                 <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #D86018;">Centro Wellness</h3>
                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                         <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
                         <span style="font-size: 1.5rem; font-weight: bold;">4.9</span>
@@ -514,12 +350,16 @@
                     </div>
                     <div style="display: flex; align-items: center; gap: 0.5rem; color: #666;">
                         <span>📍</span>
-                        <span>1.2 km</span>
+                        <span><strong>Centro</strong>, a 1.2 km</span>
+                    </div>
+                    <div class="locked-info" style="margin-top: 0.5rem;">
+                        🔒 Dirección exacta tras confirmar
                     </div>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 2rem; font-weight: bold; color: #D86018;">50€</div>
-                    <div style="color: #999; font-size: 0.9rem;">Por sesión</div>
+                    <div style="color: #999; font-size: 0.9rem;">Precio normal</div>
+                    <div style="color: #4CAF50; font-size: 0.85rem; margin-top: 0.3rem;">✓ Sin cargos extra</div>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">10:00 - 11:00</div>
@@ -527,7 +367,7 @@
                         Media disponibilidad
                     </div>
                 </div>
-                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600;">
+                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600; text-align: center;">
                     Reservar →
                 </div>
             </div>
@@ -538,35 +378,56 @@
             <div class="confirmation">
                 <div class="confirmation-icon">✅</div>
                 <h2 class="confirmation-title">¡RESERVA CONFIRMADA!</h2>
-                <p style="font-size: 1.2rem; color: #666; margin-bottom: 3rem; line-height: 1.8;">
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; line-height: 1.8;">
                     Tu cita para <strong id="confirmService"></strong><br>
-                    el día <strong id="confirmDate"></strong> a las <strong id="confirmTime"></strong><br>
+                    el día <strong>15 Feb 2026</strong> a las <strong id="confirmTime"></strong><br>
                     ha sido confirmada exitosamente
                 </p>
 
+                <div class="alert-box" style="background: #D1ECF1; border-left-color: #0C5460;">
+                    <strong>⚠️ Política de cancelación:</strong> Puedes cancelar gratis hasta 24h antes. Cancelaciones con menos de 24h tendrán un cargo del 50% (protege al profesional).
+                </div>
+
                 <div class="detail-box">
-                    <h3 style="margin-bottom: 1rem; color: #D86018;">Detalles de tu reserva:</h3>
+                    <h3 style="margin-bottom: 1.5rem; color: #D86018; font-size: 1.5rem;">📍 Información completa del centro:</h3>
+                    <div class="detail-row">
+                        <span style="color: #666;">Centro:</span>
+                        <span style="font-weight: 600;" id="confirmBusiness"></span>
+                    </div>
                     <div class="detail-row">
                         <span style="color: #666;">Valoración:</span>
                         <span style="font-weight: 600;" id="confirmRating"></span>
                     </div>
                     <div class="detail-row">
-                        <span style="color: #666;">Distancia:</span>
-                        <span style="font-weight: 600;" id="confirmDistance"></span>
+                        <span style="color: #666;">📍 Dirección:</span>
+                        <span style="font-weight: 600; color: #4CAF50;" id="confirmAddress"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="color: #666;">📞 Teléfono:</span>
+                        <span style="font-weight: 600; color: #4CAF50;" id="confirmPhone"></span>
                     </div>
                     <div class="detail-row">
                         <span style="color: #666;">Precio:</span>
                         <span style="font-weight: 600; color: #D86018;" id="confirmPrice"></span>
                     </div>
                     <div class="detail-row">
-                        <span style="color: #666;">Código de confirmación:</span>
-                        <span style="font-weight: 600; font-family: monospace;" id="confirmCode"></span>
+                        <span style="color: #666;">Código confirmación:</span>
+                        <span style="font-weight: 600; font-family: monospace; font-size: 1.1rem;" id="confirmCode"></span>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 1rem; justify-content: center;">
+                <div style="background: #E8F5E9; padding: 1.5rem; border-radius: 15px; margin: 2rem 0;">
+                    <p style="color: #2E7D32; font-weight: 600;">
+                        ✓ Recibirás un recordatorio por email 24h antes<br>
+                        ✓ Puedes añadir la cita a tu calendario<br>
+                        ✓ Cancelación gratuita hasta el 14 Feb a las 10:00
+                    </p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <button class="btn btn-primary" onclick="reset()">Nueva Reserva</button>
-                    <button class="btn btn-secondary">Ver Mis Reservas</button>
+                    <button class="btn" style="background: #4CAF50; color: white;">📍 Cómo llegar</button>
+                    <button class="btn" style="background: transparent; border: 2px solid #D86018; color: #D86018;">Ver Mis Reservas</button>
                 </div>
             </div>
         </div>
@@ -575,107 +436,66 @@
     <script>
         let currentStep = 1;
         let selectedService = '';
-        let selectedDate = '';
         let selectedTime = '';
-        let selectedBusiness = {};
-
-        function updateProgress() {
-            document.getElementById('progressFill').style.width = `${(currentStep / 4) * 100}%`;
-            
-            for (let i = 1; i <= 4; i++) {
-                const circle = document.getElementById(`step${i}`);
-                if (i < currentStep) {
-                    circle.className = 'step-circle completed';
-                } else if (i === currentStep) {
-                    circle.className = 'step-circle active';
-                } else {
-                    circle.className = 'step-circle pending';
-                }
-            }
-        }
+        let selectedBusinessData = {};
 
         function goToStep(step) {
             currentStep = step;
-            updateProgress();
-            
             document.getElementById('serviceSelection').classList.add('hidden');
-            document.getElementById('dateTimeSelection').classList.add('hidden');
+            document.getElementById('timeSelection').classList.add('hidden');
             document.getElementById('businessSelection').classList.add('hidden');
             document.getElementById('confirmation').classList.add('hidden');
 
-            if (step === 1) {
-                document.getElementById('serviceSelection').classList.remove('hidden');
-            } else if (step === 2) {
-                document.getElementById('dateTimeSelection').classList.remove('hidden');
-            } else if (step === 3) {
-                document.getElementById('businessSelection').classList.remove('hidden');
-                document.getElementById('selectionSummary').textContent = 
-                    `${selectedService} • ${selectedDate} • ${selectedTime}`;
-            } else if (step === 4) {
-                document.getElementById('confirmation').classList.remove('hidden');
-            }
+            if (step === 1) document.getElementById('serviceSelection').classList.remove('hidden');
+            else if (step === 2) document.getElementById('timeSelection').classList.remove('hidden');
+            else if (step === 3) document.getElementById('businessSelection').classList.remove('hidden');
+            else if (step === 4) document.getElementById('confirmation').classList.remove('hidden');
         }
 
         function selectService(service, icon) {
             selectedService = service;
             document.getElementById('selectedServiceName').textContent = service;
             currentStep = 2;
-            updateProgress();
             goToStep(2);
-        }
-
-        function selectDate(day, month, weekday) {
-            selectedDate = `${day} ${month}`;
-            document.querySelectorAll('.date-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            event.currentTarget.classList.add('selected');
-            document.getElementById('timeSelection').classList.remove('hidden');
         }
 
         function selectTime(time) {
             selectedTime = time;
-            document.querySelectorAll('.time-slot').forEach(slot => {
-                slot.classList.remove('selected');
-            });
+            document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             
             setTimeout(() => {
+                document.getElementById('selectionSummary').textContent = 
+                    `${selectedService} • 15 Feb • ${selectedTime}`;
                 currentStep = 3;
-                updateProgress();
                 goToStep(3);
             }, 300);
         }
 
-        function selectBusiness(name, rating, reviews, distance, price) {
-            selectedBusiness = { name, rating, reviews, distance, price };
+        function selectBusiness(name, rating, reviews, distance, price, zone, address, phone) {
+            selectedBusinessData = { name, rating, reviews, distance, price, zone, address, phone };
             
             document.getElementById('confirmService').textContent = selectedService;
-            document.getElementById('confirmDate').textContent = selectedDate;
             document.getElementById('confirmTime').textContent = selectedTime;
-            document.getElementById('confirmRating').textContent = `⭐ ${rating}`;
-            document.getElementById('confirmDistance').textContent = distance;
+            document.getElementById('confirmBusiness').textContent = name;
+            document.getElementById('confirmRating').textContent = `⭐ ${rating} (${reviews} reseñas)`;
+            document.getElementById('confirmAddress').textContent = address;
+            document.getElementById('confirmPhone').textContent = phone;
             document.getElementById('confirmPrice').textContent = price;
             document.getElementById('confirmCode').textContent = 
                 'HF-' + Math.random().toString(36).substr(2, 6).toUpperCase();
             
             currentStep = 4;
-            updateProgress();
             goToStep(4);
         }
 
         function reset() {
             currentStep = 1;
             selectedService = '';
-            selectedDate = '';
             selectedTime = '';
-            selectedBusiness = {};
-            updateProgress();
+            selectedBusinessData = {};
             goToStep(1);
         }
-
-        // Initialize
-        updateProgress();
     </script>
 </body>
 </html>
