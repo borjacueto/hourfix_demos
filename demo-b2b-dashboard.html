@@ -3,44 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOURFIX - Dashboard</title>
+    <title>HOURFIX - Dashboard Empresas</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Work Sans', sans-serif; background: #F5F5F5; }
+        body { font-family: 'Work Sans', sans-serif; background: #F5F5F5; margin: 0; }
         
-        .menu-btn {
+        .mobile-menu {
             position: fixed; top: 1rem; left: 1rem; z-index: 2000;
             background: #D86018; color: white; width: 50px; height: 50px;
             border-radius: 50%; display: flex; align-items: center;
             justify-content: center; font-size: 1.5rem; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(216, 96, 24, 0.3);
+            box-shadow: 0 5px 15px rgba(216, 96, 24, 0.3); border: none;
         }
         
         .sidebar {
             width: 280px; background: linear-gradient(180deg, #D86018 0%, #B84D10 100%);
             color: white; position: fixed; height: 100vh; overflow-y: auto;
-            z-index: 1500; transform: translateX(-100%); transition: 0.3s;
+            z-index: 1500; transform: translateX(-280px); transition: 0.3s;
+            left: 0; top: 0;
         }
         
-        .sidebar.show { transform: translateX(0); }
+        .sidebar.active { transform: translateX(0); }
         
         .logo {
             font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
             padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.2);
-            display: flex; align-items: center; gap: 0.5rem;
         }
         
         .nav-item {
             padding: 1rem 2rem; cursor: pointer; display: flex;
             align-items: center; gap: 1rem; border-left: 4px solid transparent;
+            transition: 0.3s;
         }
         
-        .nav-item:hover { background: rgba(255,255,255,0.1); }
+        .nav-item:active { background: rgba(255,255,255,0.2); }
         .nav-item.active { background: rgba(255,255,255,0.2); border-left-color: white; }
         
-        .main {
-            flex: 1; padding: 1rem; margin-top: 60px;
+        .content {
+            padding: 1rem; margin-top: 70px;
         }
         
         .header {
@@ -48,7 +49,7 @@
             margin-bottom: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
         
-        .title {
+        .page-title {
             font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
             color: #333; margin-bottom: 0.3rem;
         }
@@ -58,14 +59,14 @@
             gap: 1rem; margin-bottom: 1.5rem;
         }
         
-        .stat-card {
+        .stat-box {
             background: white; border-radius: 15px; padding: 1.5rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
         
         .stat-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
-        .stat-value { font-size: 2rem; font-weight: bold; margin-bottom: 0.3rem; }
-        .stat-label { color: #999; font-size: 0.85rem; }
+        .stat-val { font-size: 2rem; font-weight: bold; margin-bottom: 0.3rem; }
+        .stat-lbl { color: #999; font-size: 0.85rem; }
         
         .card {
             background: white; border-radius: 15px; padding: 1.5rem;
@@ -74,7 +75,7 @@
         
         .card-title { font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600; }
         
-        .request-card {
+        .req-card {
             background: #FFF8F0; border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem;
         }
         
@@ -86,207 +87,303 @@
         .btn-green { background: #4CAF50; color: white; }
         .btn-red { background: #F44336; color: white; margin-top: 0.5rem; }
         
+        .service-item {
+            background: #FFF8F0; padding: 1.2rem; border-radius: 12px;
+            margin-bottom: 1rem; display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        
+        .toggle {
+            width: 50px; height: 26px; background: #ccc; border-radius: 13px;
+            cursor: pointer; position: relative; transition: 0.3s;
+        }
+        
+        .toggle.on { background: #4CAF50; }
+        
+        .toggle::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            background: white; border-radius: 50%; top: 3px; left: 3px;
+            transition: 0.3s;
+        }
+        
+        .toggle.on::after { left: 27px; }
+        
+        .plan-card {
+            background: white; border-radius: 20px; padding: 2rem;
+            border: 3px solid #4CAF50; margin-bottom: 1rem;
+        }
+        
         .hidden { display: none !important; }
         
         @media (min-width: 768px) {
-            .menu-btn { display: none; }
-            .sidebar { transform: translateX(0); position: relative; }
-            .main { margin-top: 0; padding: 2rem; }
+            .mobile-menu { display: none; }
+            .sidebar { transform: translateX(0); position: relative; height: auto; }
+            .content { margin-top: 0; margin-left: 0; padding: 2rem; }
+            body { display: flex; }
             .stats { grid-template-columns: repeat(4, 1fr); }
         }
     </style>
 </head>
 <body>
-    <div class="menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('show')">☰</div>
+    <button class="mobile-menu" onclick="toggleMenu()">☰</button>
     
-    <div style="display: flex;">
-        <div class="sidebar">
-            <div class="logo">⏳ HOURFIX</div>
-            <div class="nav-item active" onclick="showView('panel')">
-                📊 <span>Panel</span>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">⏳ HOURFIX</div>
+        <div class="nav-item active" onclick="cambiarVista('panel')">📊 Panel</div>
+        <div class="nav-item" onclick="cambiarVista('solicitudes')">🔔 Solicitudes</div>
+        <div class="nav-item" onclick="cambiarVista('agenda')">📅 Mi Agenda</div>
+        <div class="nav-item" onclick="cambiarVista('servicios')">💼 Servicios</div>
+        <div class="nav-item" onclick="cambiarVista('plan')">💎 Mi Plan</div>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title" id="titulo">PANEL PRINCIPAL</h1>
+            <p style="color: #999;">FisioSalud Premium • Santander</p>
+        </div>
+
+        <!-- PANEL -->
+        <div id="vista-panel">
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-icon" style="color: #4CAF50;">💰</div>
+                    <div class="stat-val">2.840€</div>
+                    <div class="stat-lbl">Ingresos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="color: #2196F3;">✅</div>
+                    <div class="stat-val">47</div>
+                    <div class="stat-lbl">Citas</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="color: #FF9800;">👥</div>
+                    <div class="stat-val">23</div>
+                    <div class="stat-lbl">Nuevos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="color: #D86018;">📈</div>
+                    <div class="stat-val">89%</div>
+                    <div class="stat-lbl">Ocupación</div>
+                </div>
             </div>
-            <div class="nav-item" onclick="showView('solicitudes')">
-                🔔 <span>Solicitudes</span>
-            </div>
-            <div class="nav-item" onclick="showView('agenda')">
-                📅 <span>Mi Agenda</span>
+
+            <div class="card">
+                <h3 class="card-title">💡 Comisiones Este Mes</h3>
+                <div style="background: #FFF8F0; padding: 1.5rem; border-radius: 10px;">
+                    <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                        <span>Plan:</span><span><b>Esencial (10%)</b></span>
+                    </div>
+                    <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                        <span>Reservas:</span><span>47 × 40€ = 1.880€</span>
+                    </div>
+                    <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                        <span>Comisión:</span><span style="color: #F44336;">188€</span>
+                    </div>
+                    <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                        <span>Cuota:</span><span style="color: #F44336;">49€</span>
+                    </div>
+                    <div style="padding: 1rem; background: #E8F5E9; margin-top: 1rem; border-radius: 10px; display: flex; justify-content: space-between; font-weight: 600;">
+                        <span>TUS INGRESOS:</span><span style="color: #4CAF50; font-size: 1.2rem;">1.643€</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="main">
-            <div class="header">
-                <h1 class="title" id="pageTitle">PANEL PRINCIPAL</h1>
-                <p style="color: #999;">FisioSalud Premium • Santander</p>
-            </div>
-
-            <!-- PANEL -->
-            <div id="panel">
-                <div class="stats">
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #4CAF50;">💰</div>
-                        <div class="stat-value">2.840€</div>
-                        <div class="stat-label">Ingresos</div>
+        <!-- SOLICITUDES -->
+        <div id="vista-solicitudes" class="hidden">
+            <div class="card">
+                <h3 class="card-title">Solicitudes Pendientes (2)</h3>
+                
+                <div class="req-card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <div>
+                            <div style="font-size: 1.1rem; font-weight: 600;">Fisioterapia</div>
+                            <div style="font-size: 0.85rem; color: #666;">16 Feb • 10:00</div>
+                        </div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">45€</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #2196F3;">✅</div>
-                        <div class="stat-value">47</div>
-                        <div class="stat-label">Citas</div>
+                    <div style="text-align: center; padding: 0.5rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem;">
+                        Tu comisión: <b>4.50€</b>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #FF9800;">👥</div>
-                        <div class="stat-value">23</div>
-                        <div class="stat-label">Nuevos</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: #D86018;">📈</div>
-                        <div class="stat-value">89%</div>
-                        <div class="stat-label">Ocupación</div>
-                    </div>
+                    <button class="btn btn-green">✓ Aceptar</button>
+                    <button class="btn btn-red">✗ Rechazar</button>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">💡 Comisiones Este Mes</h3>
-                    <div style="background: #FFF8F0; padding: 1.5rem; border-radius: 10px;">
-                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
-                            <span>Plan:</span><span><b>Esencial (10%)</b></span>
+                <div class="req-card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <div>
+                            <div style="font-size: 1.1rem; font-weight: 600;">Masaje</div>
+                            <div style="font-size: 0.85rem; color: #666;">17 Feb • 14:00</div>
                         </div>
-                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
-                            <span>Reservas:</span><span>47 × 40€ = 1.880€</span>
-                        </div>
-                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
-                            <span>Comisión:</span><span style="color: #F44336;">188€</span>
-                        </div>
-                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
-                            <span>Cuota:</span><span style="color: #F44336;">49€</span>
-                        </div>
-                        <div style="padding: 1rem; background: #E8F5E9; margin-top: 1rem; border-radius: 10px; display: flex; justify-content: space-between; font-weight: 600;">
-                            <span>TUS INGRESOS:</span><span style="color: #4CAF50; font-size: 1.2rem;">1.643€</span>
-                        </div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">60€</div>
                     </div>
+                    <div style="text-align: center; padding: 0.5rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem;">
+                        Tu comisión: <b>6.00€</b>
+                    </div>
+                    <button class="btn btn-green">✓ Aceptar</button>
+                    <button class="btn btn-red">✗ Rechazar</button>
                 </div>
             </div>
+        </div>
 
-            <!-- SOLICITUDES -->
-            <div id="solicitudes" class="hidden">
-                <div class="card">
-                    <h3 class="card-title">Solicitudes Pendientes (5)</h3>
+        <!-- AGENDA -->
+        <div id="vista-agenda" class="hidden">
+            <div class="card">
+                <h3 class="card-title">📅 Calendario - Febrero 2026</h3>
+                <p style="margin-bottom: 1rem; padding: 1rem; background: #E8F5E9; border-radius: 10px; border-left: 4px solid #4CAF50; font-size: 0.9rem;">
+                    <b>💡 Consejo:</b> Marca los días/horarios libres. HOURFIX los ofrecerá automáticamente.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; overflow-x: auto;">
+                    <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.75rem;">L</div>
+                    <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.75rem;">M</div>
+                    <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.75rem;">X</div>
+                    <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.75rem;">J</div>
+                    <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.75rem;">V</div>
+                    <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.75rem;">S</div>
+                    <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.75rem;">D</div>
                     
-                    <div class="request-card">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                            <div>
-                                <div style="font-size: 1.1rem; font-weight: 600;">Fisioterapia</div>
-                                <div style="font-size: 0.85rem; color: #666;">16 Feb • 10:00</div>
-                            </div>
-                            <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">45€</div>
-                        </div>
-                        <div style="text-align: center; padding: 0.5rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem;">
-                            Tu comisión: <b>4.50€</b>
-                        </div>
-                        <button class="btn btn-green">✓ Aceptar</button>
-                        <button class="btn btn-red">✗ Rechazar</button>
+                    <div style="border: 2px solid #E0E0E0; border-radius: 8px; padding: 0.5rem; text-align: center;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">17</div>
                     </div>
+                    <div style="border: 2px solid #4CAF50; background: #E8F5E9; border-radius: 8px; padding: 0.5rem; text-align: center;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">18</div>
+                        <div style="font-size: 0.65rem; color: #4CAF50;">🟢</div>
+                    </div>
+                    <div style="border: 2px solid #E0E0E0; border-radius: 8px; padding: 0.5rem; text-align: center;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">19</div>
+                    </div>
+                    <div style="border: 2px solid #4CAF50; background: #E8F5E9; border-radius: 8px; padding: 0.5rem; text-align: center;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">20</div>
+                        <div style="font-size: 0.65rem; color: #4CAF50;">🟢</div>
+                    </div>
+                    <div style="border: 2px solid #E0E0E0; border-radius: 8px; padding: 0.5rem; text-align: center;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">21</div>
+                    </div>
+                    <div style="border: 2px solid #F44336; background: #FFEBEE; border-radius: 8px; padding: 0.5rem; text-align: center; opacity: 0.6;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">22</div>
+                        <div style="font-size: 0.65rem; color: #F44336;">🔴</div>
+                    </div>
+                    <div style="border: 2px solid #F44336; background: #FFEBEE; border-radius: 8px; padding: 0.5rem; text-align: center; opacity: 0.6;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">23</div>
+                        <div style="font-size: 0.65rem; color: #F44336;">🔴</div>
+                    </div>
+                </div>
 
-                    <div class="request-card">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                            <div>
-                                <div style="font-size: 1.1rem; font-weight: 600;">Masaje Deportivo</div>
-                                <div style="font-size: 0.85rem; color: #666;">17 Feb • 14:00</div>
-                            </div>
-                            <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">60€</div>
-                        </div>
-                        <div style="text-align: center; padding: 0.5rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem;">
-                            Tu comisión: <b>6.00€</b>
-                        </div>
-                        <button class="btn btn-green">✓ Aceptar</button>
-                        <button class="btn btn-red">✗ Rechazar</button>
-                    </div>
+                <div style="margin-top: 2rem; padding: 1rem; background: #FFF3CD; border-radius: 10px; border-left: 4px solid #FF8C42; font-size: 0.85rem;">
+                    <b>ℹ️ Estados:</b><br>
+                    🟢 Verde = Disponible<br>
+                    🔵 Azul = Reservado<br>
+                    🔴 Rojo = Cerrado
                 </div>
             </div>
+        </div>
 
-            <!-- AGENDA -->
-            <div id="agenda" class="hidden">
-                <div class="card">
-                    <h3 class="card-title">📅 Mi Agenda - Febrero 2026</h3>
-                    <p style="margin-bottom: 1rem; padding: 1rem; background: #E8F5E9; border-radius: 10px; border-left: 4px solid #4CAF50;">
-                        <b>💡 Consejo:</b> Marca los días y horarios que tienes libres. HOURFIX los ofrecerá automáticamente a clientes.
-                    </p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;">
-                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Lun</div>
-                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Mar</div>
-                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Mié</div>
-                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Jue</div>
-                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Vie</div>
-                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Sáb</div>
-                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Dom</div>
-                        
-                        <div style="border: 2px solid #E0E0E0; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
-                            <div style="font-weight: 600;">17</div>
-                        </div>
-                        <div style="border: 2px solid #4CAF50; background: #E8F5E9; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
-                            <div style="font-weight: 600;">18</div>
-                            <div style="font-size: 0.7rem; color: #4CAF50;">Disponible</div>
-                        </div>
-                        <div style="border: 2px solid #E0E0E0; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
-                            <div style="font-weight: 600;">19</div>
-                        </div>
-                        <div style="border: 2px solid #4CAF50; background: #E8F5E9; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
-                            <div style="font-weight: 600;">20</div>
-                            <div style="font-size: 0.7rem; color: #4CAF50;">Disponible</div>
-                        </div>
-                        <div style="border: 2px solid #E0E0E0; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
-                            <div style="font-weight: 600;">21</div>
-                        </div>
-                        <div style="border: 2px solid #F44336; background: #FFEBEE; border-radius: 10px; padding: 0.8rem; text-align: center; opacity: 0.6;">
-                            <div style="font-weight: 600;">22</div>
-                            <div style="font-size: 0.7rem; color: #F44336;">Cerrado</div>
-                        </div>
-                        <div style="border: 2px solid #F44336; background: #FFEBEE; border-radius: 10px; padding: 0.8rem; text-align: center; opacity: 0.6;">
-                            <div style="font-weight: 600;">23</div>
-                            <div style="font-size: 0.7rem; color: #F44336;">Cerrado</div>
-                        </div>
+        <!-- SERVICIOS -->
+        <div id="vista-servicios" class="hidden">
+            <div class="card">
+                <h3 class="card-title">💼 Mis Servicios</h3>
+                
+                <div class="service-item">
+                    <div style="flex: 1;">
+                        <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Fisioterapia General</div>
+                        <div style="font-size: 0.85rem; color: #666;">60 min • Comisión: 10%</div>
                     </div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">45€</div>
+                    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
 
-                    <div style="margin-top: 2rem; padding: 1rem; background: #FFF3CD; border-radius: 10px; border-left: 4px solid #FF8C42;">
-                        <b>ℹ️ Estados:</b><br>
-                        🟢 Verde = Disponible para reservas<br>
-                        🔵 Azul = Ya reservado<br>
-                        🔴 Rojo = Cerrado (no trabajas)
+                <div class="service-item">
+                    <div style="flex: 1;">
+                        <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Masaje Deportivo</div>
+                        <div style="font-size: 0.85rem; color: #666;">45 min • Comisión: 10%</div>
+                    </div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">60€</div>
+                    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+
+                <div class="service-item">
+                    <div style="flex: 1;">
+                        <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Rehabilitación</div>
+                        <div style="font-size: 0.85rem; color: #666;">90 min • Comisión: 10%</div>
+                    </div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">80€</div>
+                    <div class="toggle" onclick="this.classList.toggle('on')"></div>
+                </div>
+
+                <button class="btn btn-green" style="margin-top: 1rem;">+ Añadir Servicio</button>
+            </div>
+        </div>
+
+        <!-- MI PLAN -->
+        <div id="vista-plan" class="hidden">
+            <div class="plan-card">
+                <div style="background: #4CAF50; color: white; padding: 0.3rem 0.8rem; border-radius: 10px; display: inline-block; margin-bottom: 1rem; font-size: 0.75rem; font-weight: 600;">
+                    TU PLAN ACTUAL
+                </div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Plan Esencial</h2>
+                <div style="font-size: 1.2rem; color: #666; margin-bottom: 1.5rem;">49€/mes + 10% comisión</div>
+                
+                <div style="background: #FFF8F0; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                    <div style="font-weight: 600; margin-bottom: 1rem;">Este mes:</div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                        <span>Reservas:</span><span>47</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                        <span>Comisión pagada:</span><span style="color: #F44336;">188€</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                        <span>Cuota mensual:</span><span style="color: #F44336;">49€</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; margin-top: 0.5rem; padding-top: 1rem; border-top: 2px solid #E0E0E0; font-weight: 600;">
+                        <span>Total pagado:</span><span style="color: #D86018; font-size: 1.2rem;">237€</span>
                     </div>
                 </div>
+
+                <div style="background: #E3F2FD; padding: 1rem; border-radius: 10px; border-left: 4px solid #2196F3; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    <strong>💡 Plan Profesional (79€ + 5%):</strong><br>
+                    Con tus 47 reservas pagarías solo 173€<br>
+                    <span style="color: #4CAF50; font-size: 1.1rem;">→ Ahorrarías 64€/mes</span>
+                </div>
+
+                <button class="btn btn-green">Cambiar a Plan Pro</button>
             </div>
         </div>
     </div>
 
     <script>
-        function showView(view) {
-            // Remove active from all nav items
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        function cambiarVista(vista) {
+            // Ocultar todas
+            document.getElementById('vista-panel').classList.add('hidden');
+            document.getElementById('vista-solicitudes').classList.add('hidden');
+            document.getElementById('vista-agenda').classList.add('hidden');
+            document.getElementById('vista-servicios').classList.add('hidden');
+            document.getElementById('vista-plan').classList.add('hidden');
             
-            // Add active to clicked item
+            // Mostrar la seleccionada
+            document.getElementById('vista-' + vista).classList.remove('hidden');
+            
+            // Actualizar nav
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             event.currentTarget.classList.add('active');
             
-            // Hide all views
-            document.getElementById('panel').classList.add('hidden');
-            document.getElementById('solicitudes').classList.add('hidden');
-            document.getElementById('agenda').classList.add('hidden');
-            
-            // Show selected view
-            document.getElementById(view).classList.remove('hidden');
-            
-            // Update title
-            const titles = {
+            // Actualizar título
+            const titulos = {
                 'panel': 'PANEL PRINCIPAL',
                 'solicitudes': 'SOLICITUDES PENDIENTES',
-                'agenda': 'MI AGENDA'
+                'agenda': 'MI AGENDA',
+                'servicios': 'MIS SERVICIOS',
+                'plan': 'MI PLAN'
             };
-            document.getElementById('pageTitle').textContent = titles[view];
+            document.getElementById('titulo').textContent = titulos[vista];
             
-            // Close sidebar on mobile
+            // Cerrar menú en móvil
             if (window.innerWidth < 768) {
-                document.querySelector('.sidebar').classList.remove('show');
+                document.getElementById('sidebar').classList.remove('active');
             }
         }
     </script>
