@@ -12,33 +12,35 @@
             font-family: 'Work Sans', sans-serif;
             background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
             min-height: 100vh;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         .header {
             max-width: 1200px;
-            margin: 0 auto 3rem;
+            margin: 0 auto 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .logo-container { display: flex; align-items: center; gap: 1rem; }
+        .logo-container { display: flex; align-items: center; gap: 0.8rem; }
 
         .logo-icon {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: #D86018;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         .logo-text {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #D86018;
             letter-spacing: 2px;
         }
@@ -47,131 +49,198 @@
             max-width: 1200px;
             margin: 0 auto;
             background: white;
-            border-radius: 30px;
-            padding: 3rem;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            min-height: 500px;
+            min-height: 400px;
         }
 
         .title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
+            font-size: 2rem;
             color: #D86018;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-align: center;
             letter-spacing: 2px;
         }
 
         .subtitle {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #666;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
 
         .service-card {
             background: #FFF8F0;
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
             border: 3px solid transparent;
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(216, 96, 24, 0.25);
+        .service-card:active {
+            transform: scale(0.98);
             border-color: #D86018;
         }
 
-        .service-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .service-icon { font-size: 3rem; margin-bottom: 0.8rem; }
 
         .service-name {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #333;
             letter-spacing: 1px;
         }
 
         .business-card {
             background: #FFF8F0;
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
             cursor: pointer;
             transition: all 0.3s;
             border: 3px solid transparent;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr auto;
-            gap: 2rem;
-            align-items: center;
             position: relative;
         }
 
-        .business-card:hover {
-            transform: translateX(10px);
+        .business-card:active {
             border-color: #D86018;
-            box-shadow: 0 10px 30px rgba(216, 96, 24, 0.2);
         }
 
         .business-info-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
             background: #FF8C42;
             color: white;
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 10px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .business-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #D86018;
+            margin-bottom: 0.8rem;
+        }
+
+        .business-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .business-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            margin-bottom: 0.5rem;
         }
 
         .locked-info {
             color: #999;
             font-size: 0.85rem;
             font-style: italic;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .price-section {
+            text-align: center;
+            padding: 1rem 0;
+            border-top: 1px solid #E0E0E0;
+            border-bottom: 1px solid #E0E0E0;
+            margin: 1rem 0;
+        }
+
+        .price-big {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #D86018;
+        }
+
+        .price-label {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .price-extra {
+            color: #4CAF50;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .time-section {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .time-big {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .availability-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            background: #4CAF50;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         .time-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
         .time-slot {
             background: #FFF8F0;
             border-radius: 10px;
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
         }
 
-        .time-slot:hover, .time-slot.selected {
+        .time-slot:active, .time-slot.selected {
             background: #D86018;
             color: white;
             border-color: #D86018;
         }
 
         .btn {
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 30px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            width: 100%;
+            margin-top: 1rem;
         }
 
         .btn-primary {
@@ -179,31 +248,29 @@
             color: white;
         }
 
-        .btn-primary:hover {
+        .btn-primary:active {
             background: #B84D10;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(216, 96, 24, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #D86018;
+            border: 2px solid #D86018;
         }
 
         .confirmation {
             text-align: center;
-            padding: 3rem;
+            padding: 2rem 1rem;
         }
 
         .confirmation-icon {
-            font-size: 5rem;
-            margin-bottom: 2rem;
-            animation: bounce 1s;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
         }
 
         .confirmation-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #4CAF50;
             margin-bottom: 1rem;
             letter-spacing: 2px;
@@ -211,36 +278,63 @@
 
         .detail-box {
             background: #FFF8F0;
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem 0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             text-align: left;
         }
 
         .detail-row {
             display: flex;
             justify-content: space-between;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             border-bottom: 1px solid #E0E0E0;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .detail-row:last-child { border-bottom: none; }
 
+        .detail-label {
+            color: #666;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            text-align: right;
+            word-break: break-word;
+        }
+
         .alert-box {
             background: #FFF3CD;
             border-left: 4px solid #FF8C42;
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             border-radius: 10px;
-            margin: 2rem 0;
-            font-size: 0.95rem;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .hidden { display: none; }
 
-        @media (max-width: 768px) {
-            .services-grid { grid-template-columns: 1fr; }
-            .time-grid { grid-template-columns: repeat(2, 1fr); }
-            .business-card { grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+            .main-content {
+                padding: 3rem;
+            }
+            
+            .title {
+                font-size: 3rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            
+            .time-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
     </style>
 </head>
@@ -250,27 +344,27 @@
             <div class="logo-icon">⏳</div>
             <div class="logo-text">HOURFIX</div>
         </div>
-        <div style="background: white; padding: 0.8rem 1.5rem; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-            <span style="font-size: 1.2rem;">👤</span>
-            <span style="font-weight: 600; margin-left: 0.5rem;">Demo Cliente</span>
+        <div style="background: white; padding: 0.6rem 1.2rem; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <span style="font-size: 1.1rem;">👤</span>
+            <span style="font-weight: 600; margin-left: 0.5rem; font-size: 0.9rem;">Demo</span>
         </div>
     </div>
 
     <div class="main-content">
         <!-- Step 1: Service Selection -->
         <div id="serviceSelection">
-            <h2 class="title">ELIGE LO QUE NECESITAS</h2>
-            <p class="subtitle">Selecciona el servicio que buscas</p>
+            <h2 class="title">ELIGE TU SERVICIO</h2>
+            <p class="subtitle">¿Qué necesitas hoy?</p>
             <div class="services-grid">
-                <div class="service-card" onclick="selectService('Fisioterapia', '💆')">
+                <div class="service-card" onclick="selectService('Fisioterapia')">
                     <div class="service-icon">💆</div>
                     <div class="service-name">FISIOTERAPIA</div>
                 </div>
-                <div class="service-card" onclick="selectService('Peluquería', '✂️')">
+                <div class="service-card" onclick="selectService('Peluquería')">
                     <div class="service-icon">✂️</div>
                     <div class="service-name">PELUQUERÍA</div>
                 </div>
-                <div class="service-card" onclick="selectService('Estética', '💅')">
+                <div class="service-card" onclick="selectService('Estética')">
                     <div class="service-icon">💅</div>
                     <div class="service-name">ESTÉTICA</div>
                 </div>
@@ -279,11 +373,10 @@
 
         <!-- Step 2: Time Selection -->
         <div id="timeSelection" class="hidden">
-            <button class="btn btn-secondary" onclick="goToStep(1)" style="background: transparent; color: #D86018; border: 2px solid #D86018; margin-bottom: 2rem;">← Volver</button>
-            <h2 class="title">SELECCIONA HORARIO</h2>
-            <p class="subtitle">Servicio: <strong id="selectedServiceName"></strong> • 15 Feb 2026</p>
+            <button class="btn btn-secondary" onclick="goToStep(1)">← Volver</button>
+            <h2 class="title">SELECCIONA HORA</h2>
+            <p class="subtitle"><strong id="selectedServiceName"></strong> • 15 Feb</p>
 
-            <h3 style="font-size: 1.5rem; margin: 2rem 0 1rem;">🕐 Elige tu hora</h3>
             <div class="time-grid">
                 <div class="time-slot" onclick="selectTime('09:00')">09:00</div>
                 <div class="time-slot" onclick="selectTime('10:00')">10:00</div>
@@ -291,85 +384,79 @@
                 <div class="time-slot" onclick="selectTime('12:00')">12:00</div>
                 <div class="time-slot" onclick="selectTime('14:00')">14:00</div>
                 <div class="time-slot" onclick="selectTime('15:00')">15:00</div>
-                <div class="time-slot" onclick="selectTime('16:00')">16:00</div>
-                <div class="time-slot" onclick="selectTime('17:00')">17:00</div>
             </div>
         </div>
 
         <!-- Step 3: Business Options -->
         <div id="businessSelection" class="hidden">
-            <button class="btn btn-secondary" onclick="goToStep(2)" style="background: transparent; color: #D86018; border: 2px solid #D86018; margin-bottom: 2rem;">← Volver</button>
-            <h2 class="title">OPCIONES DISPONIBLES</h2>
+            <button class="btn btn-secondary" onclick="goToStep(2)">← Volver</button>
+            <h2 class="title">OPCIONES CERCA</h2>
             <p class="subtitle" id="selectionSummary"></p>
 
             <div class="alert-box">
-                <strong>ℹ️ Información completa tras reservar:</strong> Por tu seguridad y la del profesional, la dirección exacta y teléfono se muestran solo después de confirmar tu reserva.
+                <strong>ℹ️ Info completa tras reservar:</strong> Por tu seguridad y la del profesional, la dirección exacta y teléfono se muestran solo después de confirmar tu reserva.
             </div>
 
-            <div class="business-card" onclick="selectBusiness('FisioSalud Premium', 4.8, 127, '0.8 km', '45€', 'Centro', 'Calle Castelar 15, bajo', '942 123 456')">
+            <div class="business-card" onclick="selectBusiness('FisioSalud Premium', 4.8, 127, '0.8 km', '45€', 'Calle Castelar 15', '942 123 456')">
                 <div class="business-info-badge">Info completa tras reservar</div>
-                <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #D86018;">FisioSalud Premium</h3>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                        <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
-                        <span style="font-size: 1.5rem; font-weight: bold;">4.8</span>
-                        <span style="color: #999;">(127 reseñas)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #666;">
-                        <span>📍</span>
-                        <span><strong>Centro</strong>, a 0.8 km</span>
-                    </div>
-                    <div class="locked-info" style="margin-top: 0.5rem;">
-                        🔒 Dirección exacta tras confirmar
-                    </div>
+                <div class="business-name">FisioSalud Premium</div>
+                <div class="business-rating">
+                    <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
+                    <span style="font-size: 1.3rem; font-weight: bold;">4.8</span>
+                    <span style="color: #999; font-size: 0.9rem;">(127 reseñas)</span>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold; color: #D86018;">45€</div>
-                    <div style="color: #999; font-size: 0.9rem;">Precio normal</div>
-                    <div style="color: #4CAF50; font-size: 0.85rem; margin-top: 0.3rem;">✓ Sin cargos extra</div>
+                <div class="business-location">
+                    <span>📍</span>
+                    <span><strong>Centro</strong>, a 0.8 km</span>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">10:00 - 11:00</div>
-                    <div style="display: inline-block; padding: 0.3rem 1rem; border-radius: 20px; background: #4CAF50; color: white; font-size: 0.85rem; font-weight: 600;">
-                        Alta disponibilidad
-                    </div>
+                <div class="locked-info">
+                    <span>🔒</span>
+                    <span>Dirección exacta tras confirmar</span>
                 </div>
-                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600; text-align: center;">
-                    Reservar →
+                
+                <div class="price-section">
+                    <div class="price-big">45€</div>
+                    <div class="price-label">Precio normal</div>
+                    <div class="price-extra">✓ Sin cargos extra</div>
                 </div>
+                
+                <div class="time-section">
+                    <div class="time-big">10:00 - 11:00</div>
+                    <div class="availability-badge">Alta disponibilidad</div>
+                </div>
+                
+                <button class="btn btn-primary" style="margin-top: 0;">Reservar →</button>
             </div>
 
-            <div class="business-card" onclick="selectBusiness('Centro Wellness', 4.9, 203, '1.2 km', '50€', 'Centro', 'Avenida Reina Victoria 28', '942 987 654')">
+            <div class="business-card" onclick="selectBusiness('Centro Wellness', 4.9, 203, '1.2 km', '50€', 'Av. Reina Victoria 28', '942 987 654')">
                 <div class="business-info-badge">Info completa tras reservar</div>
-                <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #D86018;">Centro Wellness</h3>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                        <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
-                        <span style="font-size: 1.5rem; font-weight: bold;">4.9</span>
-                        <span style="color: #999;">(203 reseñas)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #666;">
-                        <span>📍</span>
-                        <span><strong>Centro</strong>, a 1.2 km</span>
-                    </div>
-                    <div class="locked-info" style="margin-top: 0.5rem;">
-                        🔒 Dirección exacta tras confirmar
-                    </div>
+                <div class="business-name">Centro Wellness</div>
+                <div class="business-rating">
+                    <span style="color: #FFD700; font-size: 1.2rem;">⭐</span>
+                    <span style="font-size: 1.3rem; font-weight: bold;">4.9</span>
+                    <span style="color: #999; font-size: 0.9rem;">(203 reseñas)</span>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold; color: #D86018;">50€</div>
-                    <div style="color: #999; font-size: 0.9rem;">Precio normal</div>
-                    <div style="color: #4CAF50; font-size: 0.85rem; margin-top: 0.3rem;">✓ Sin cargos extra</div>
+                <div class="business-location">
+                    <span>📍</span>
+                    <span><strong>Centro</strong>, a 1.2 km</span>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">10:00 - 11:00</div>
-                    <div style="display: inline-block; padding: 0.3rem 1rem; border-radius: 20px; background: #FFA726; color: white; font-size: 0.85rem; font-weight: 600;">
-                        Media disponibilidad
-                    </div>
+                <div class="locked-info">
+                    <span>🔒</span>
+                    <span>Dirección exacta tras confirmar</span>
                 </div>
-                <div style="padding: 1rem 2rem; background: #D86018; color: white; border-radius: 10px; font-weight: 600; text-align: center;">
-                    Reservar →
+                
+                <div class="price-section">
+                    <div class="price-big">50€</div>
+                    <div class="price-label">Precio normal</div>
+                    <div class="price-extra">✓ Sin cargos extra</div>
                 </div>
+                
+                <div class="time-section">
+                    <div class="time-big">10:00 - 11:00</div>
+                    <div class="availability-badge" style="background: #FFA726;">Media disponibilidad</div>
+                </div>
+                
+                <button class="btn btn-primary" style="margin-top: 0;">Reservar →</button>
             </div>
         </div>
 
@@ -378,56 +465,46 @@
             <div class="confirmation">
                 <div class="confirmation-icon">✅</div>
                 <h2 class="confirmation-title">¡RESERVA CONFIRMADA!</h2>
-                <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; line-height: 1.8;">
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
                     Tu cita para <strong id="confirmService"></strong><br>
-                    el día <strong>15 Feb 2026</strong> a las <strong id="confirmTime"></strong><br>
-                    ha sido confirmada exitosamente
+                    el <strong>15 Feb</strong> a las <strong id="confirmTime"></strong>
                 </p>
 
                 <div class="alert-box" style="background: #D1ECF1; border-left-color: #0C5460;">
-                    <strong>⚠️ Política de cancelación:</strong> Puedes cancelar gratis hasta 24h antes. Cancelaciones con menos de 24h tendrán un cargo del 50% (protege al profesional).
+                    <strong>⚠️ Política de cancelación:</strong> Puedes cancelar gratis hasta 24h antes. Cancelaciones <24h = cargo 50%.
                 </div>
 
                 <div class="detail-box">
-                    <h3 style="margin-bottom: 1.5rem; color: #D86018; font-size: 1.5rem;">📍 Información completa del centro:</h3>
+                    <h3 style="margin-bottom: 1rem; color: #D86018; font-size: 1.3rem;">📍 Información completa del centro:</h3>
                     <div class="detail-row">
-                        <span style="color: #666;">Centro:</span>
-                        <span style="font-weight: 600;" id="confirmBusiness"></span>
+                        <span class="detail-label">Centro:</span>
+                        <span class="detail-value" id="confirmBusiness"></span>
                     </div>
                     <div class="detail-row">
-                        <span style="color: #666;">Valoración:</span>
-                        <span style="font-weight: 600;" id="confirmRating"></span>
+                        <span class="detail-label">Valoración:</span>
+                        <span class="detail-value" id="confirmRating"></span>
                     </div>
                     <div class="detail-row">
-                        <span style="color: #666;">📍 Dirección:</span>
-                        <span style="font-weight: 600; color: #4CAF50;" id="confirmAddress"></span>
+                        <span class="detail-label">📍 Dirección:</span>
+                        <span class="detail-value" style="color: #4CAF50;" id="confirmAddress"></span>
                     </div>
                     <div class="detail-row">
-                        <span style="color: #666;">📞 Teléfono:</span>
-                        <span style="font-weight: 600; color: #4CAF50;" id="confirmPhone"></span>
+                        <span class="detail-label">📞 Teléfono:</span>
+                        <span class="detail-value" style="color: #4CAF50;" id="confirmPhone"></span>
                     </div>
                     <div class="detail-row">
-                        <span style="color: #666;">Precio:</span>
-                        <span style="font-weight: 600; color: #D86018;" id="confirmPrice"></span>
+                        <span class="detail-label">Precio:</span>
+                        <span class="detail-value" style="color: #D86018;" id="confirmPrice"></span>
                     </div>
                     <div class="detail-row">
-                        <span style="color: #666;">Código confirmación:</span>
-                        <span style="font-weight: 600; font-family: monospace; font-size: 1.1rem;" id="confirmCode"></span>
+                        <span class="detail-label">Código:</span>
+                        <span class="detail-value" style="font-family: monospace;" id="confirmCode"></span>
                     </div>
                 </div>
 
-                <div style="background: #E8F5E9; padding: 1.5rem; border-radius: 15px; margin: 2rem 0;">
-                    <p style="color: #2E7D32; font-weight: 600;">
-                        ✓ Recibirás un recordatorio por email 24h antes<br>
-                        ✓ Puedes añadir la cita a tu calendario<br>
-                        ✓ Cancelación gratuita hasta el 14 Feb a las 10:00
-                    </p>
-                </div>
-
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <button class="btn btn-primary" onclick="reset()">Nueva Reserva</button>
                     <button class="btn" style="background: #4CAF50; color: white;">📍 Cómo llegar</button>
-                    <button class="btn" style="background: transparent; border: 2px solid #D86018; color: #D86018;">Ver Mis Reservas</button>
                 </div>
             </div>
         </div>
@@ -452,7 +529,7 @@
             else if (step === 4) document.getElementById('confirmation').classList.remove('hidden');
         }
 
-        function selectService(service, icon) {
+        function selectService(service) {
             selectedService = service;
             document.getElementById('selectedServiceName').textContent = service;
             currentStep = 2;
@@ -472,8 +549,8 @@
             }, 300);
         }
 
-        function selectBusiness(name, rating, reviews, distance, price, zone, address, phone) {
-            selectedBusinessData = { name, rating, reviews, distance, price, zone, address, phone };
+        function selectBusiness(name, rating, reviews, distance, price, address, phone) {
+            selectedBusinessData = { name, rating, reviews, distance, price, address, phone };
             
             document.getElementById('confirmService').textContent = selectedService;
             document.getElementById('confirmTime').textContent = selectedTime;
