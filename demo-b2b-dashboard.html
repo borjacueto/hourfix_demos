@@ -3,683 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOURFIX - Dashboard Empresas</title>
+    <title>HOURFIX - Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Work Sans', sans-serif; background: #F5F5F5; }
         
-        body {
-            font-family: 'Work Sans', sans-serif;
-            background: #F5F5F5;
-        }
-
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Mobile Menu */
-        .menu-toggle {
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 2000;
-            background: #D86018;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .menu-btn {
+            position: fixed; top: 1rem; left: 1rem; z-index: 2000;
+            background: #D86018; color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 1.5rem; cursor: pointer;
             box-shadow: 0 5px 15px rgba(216, 96, 24, 0.3);
         }
-
+        
         .sidebar {
-            width: 280px;
-            background: linear-gradient(180deg, #D86018 0%, #B84D10 100%);
-            color: white;
-            box-shadow: 5px 0 20px rgba(0,0,0,0.1);
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 1500;
-            transition: transform 0.3s;
-            transform: translateX(-100%);
+            width: 280px; background: linear-gradient(180deg, #D86018 0%, #B84D10 100%);
+            color: white; position: fixed; height: 100vh; overflow-y: auto;
+            z-index: 1500; transform: translateX(-100%); transition: 0.3s;
         }
-
-        .sidebar.open {
-            transform: translateX(0);
-        }
-
-        .sidebar-header {
-            padding: 2rem;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-
+        
+        .sidebar.show { transform: translateX(0); }
+        
         .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+            padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; gap: 0.5rem;
         }
-
+        
         .nav-item {
-            padding: 1rem 2rem;
-            cursor: pointer;
-            border-left: 4px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s;
+            padding: 1rem 2rem; cursor: pointer; display: flex;
+            align-items: center; gap: 1rem; border-left: 4px solid transparent;
         }
-
-        .nav-item:hover {
-            background: rgba(255,255,255,0.1);
+        
+        .nav-item:hover { background: rgba(255,255,255,0.1); }
+        .nav-item.active { background: rgba(255,255,255,0.2); border-left-color: white; }
+        
+        .main {
+            flex: 1; padding: 1rem; margin-top: 60px;
         }
-
-        .nav-item.active {
-            background: rgba(255,255,255,0.2);
-            border-left-color: white;
-        }
-
-        .badge {
-            background: #FF5252;
-            color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-left: auto;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 1rem;
-            margin-top: 60px;
-        }
-
+        
         .header {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            background: white; border-radius: 15px; padding: 1.5rem;
+            margin-bottom: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .title {
+            font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+            color: #333; margin-bottom: 0.3rem;
+        }
+        
+        .stats {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1rem; margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background: white; border-radius: 15px; padding: 1.5rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
-
-        .page-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            color: #333;
-            letter-spacing: 1px;
-        }
-
+        
+        .stat-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+        .stat-value { font-size: 2rem; font-weight: bold; margin-bottom: 0.3rem; }
+        .stat-label { color: #999; font-size: 0.85rem; }
+        
         .card {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
+            background: white; border-radius: 15px; padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 1.5rem;
         }
-
-        .card-title {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #333;
-            font-weight: 600;
+        
+        .card-title { font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600; }
+        
+        .request-card {
+            background: #FFF8F0; border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem;
         }
-
-        /* Calendar Grid */
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .calendar-nav {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.5rem;
-        }
-
-        .day-header {
-            text-align: center;
-            font-weight: 600;
-            padding: 0.5rem;
-            color: #666;
-            font-size: 0.85rem;
-        }
-
-        .day-cell {
-            aspect-ratio: 1;
-            border: 2px solid #E0E0E0;
-            border-radius: 10px;
-            padding: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .day-cell:hover {
-            border-color: #D86018;
-            background: #FFF8F0;
-        }
-
-        .day-cell.available {
-            background: #E8F5E9;
-            border-color: #4CAF50;
-        }
-
-        .day-cell.blocked {
-            background: #FFEBEE;
-            border-color: #F44336;
-            opacity: 0.6;
-        }
-
-        .day-number {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .day-status {
-            font-size: 0.7rem;
-            margin-top: 0.2rem;
-        }
-
-        /* Time Slots */
-        .time-slots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .time-slot {
-            padding: 1rem;
-            border: 2px solid #E0E0E0;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .time-slot:hover {
-            border-color: #D86018;
-            background: #FFF8F0;
-        }
-
-        .time-slot.available {
-            background: #E8F5E9;
-            border-color: #4CAF50;
-            color: #2E7D32;
-        }
-
-        .time-slot.booked {
-            background: #E3F2FD;
-            border-color: #2196F3;
-            color: #1565C0;
-            cursor: default;
-        }
-
-        .time-slot.blocked {
-            background: #FFEBEE;
-            border-color: #F44336;
-            color: #C62828;
-        }
-
-        /* Services Management */
-        .service-item {
-            background: #FFF8F0;
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .service-info {
-            flex: 1;
-        }
-
-        .service-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .service-details {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .service-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #D86018;
-        }
-
+        
         .btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
+            padding: 0.8rem 1.5rem; border: none; border-radius: 10px;
+            font-weight: 600; cursor: pointer; font-size: 1rem; width: 100%;
         }
-
-        .btn-primary {
-            background: #D86018;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .btn-danger {
-            background: #F44336;
-            color: white;
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-        }
-
-        .toggle-switch {
-            position: relative;
-            width: 50px;
-            height: 26px;
-            background: #ccc;
-            border-radius: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .toggle-switch.active {
-            background: #4CAF50;
-        }
-
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-            transition: all 0.3s;
-        }
-
-        .toggle-switch.active::after {
-            left: 27px;
-        }
-
-        .hidden { display: none; }
-
+        
+        .btn-green { background: #4CAF50; color: white; }
+        .btn-red { background: #F44336; color: white; margin-top: 0.5rem; }
+        
+        .hidden { display: none !important; }
+        
         @media (min-width: 768px) {
-            .menu-toggle {
-                display: none;
-            }
-            
-            .sidebar {
-                transform: translateX(0);
-                position: relative;
-                height: auto;
-            }
-            
-            .main-content {
-                margin-top: 0;
-                padding: 2rem;
-            }
+            .menu-btn { display: none; }
+            .sidebar { transform: translateX(0); position: relative; }
+            .main { margin-top: 0; padding: 2rem; }
+            .stats { grid-template-columns: repeat(4, 1fr); }
         }
     </style>
 </head>
 <body>
-    <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
-
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <span style="font-size: 2rem;">⏳</span>
-                    HOURFIX
-                </div>
+    <div class="menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('show')">☰</div>
+    
+    <div style="display: flex;">
+        <div class="sidebar">
+            <div class="logo">⏳ HOURFIX</div>
+            <div class="nav-item active" onclick="showView('panel')">
+                📊 <span>Panel</span>
             </div>
-            <nav style="padding: 2rem 0;">
-                <div class="nav-item active" onclick="showTab('dashboard'); closeSidebar();">
-                    <span style="font-size: 1.5rem;">📊</span>
-                    <span>Panel</span>
-                </div>
-                <div class="nav-item" onclick="showTab('requests'); closeSidebar();">
-                    <span style="font-size: 1.5rem;">🔔</span>
-                    <span>Solicitudes</span>
-                    <span class="badge">5</span>
-                </div>
-                <div class="nav-item" onclick="showTab('calendar'); closeSidebar();">
-                    <span style="font-size: 1.5rem;">📅</span>
-                    <span>Mi Agenda</span>
-                </div>
-                <div class="nav-item" onclick="showTab('services'); closeSidebar();">
-                    <span style="font-size: 1.5rem;">💼</span>
-                    <span>Servicios</span>
-                </div>
-                <div class="nav-item" onclick="showTab('plan'); closeSidebar();">
-                    <span style="font-size: 1.5rem;">💎</span>
-                    <span>Mi Plan</span>
-                </div>
-            </nav>
+            <div class="nav-item" onclick="showView('solicitudes')">
+                🔔 <span>Solicitudes</span>
+            </div>
+            <div class="nav-item" onclick="showView('agenda')">
+                📅 <span>Mi Agenda</span>
+            </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
+        <div class="main">
             <div class="header">
-                <h1 class="page-title" id="pageTitle">MI AGENDA</h1>
-                <p style="color: #999; font-size: 0.9rem;">FisioSalud Premium • Santander</p>
+                <h1 class="title" id="pageTitle">PANEL PRINCIPAL</h1>
+                <p style="color: #999;">FisioSalud Premium • Santander</p>
             </div>
 
-            <!-- Dashboard View -->
-            <div id="dashboardView">
-                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+            <!-- PANEL -->
+            <div id="panel">
+                <div class="stats">
                     <div class="stat-card">
-                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #4CAF50;">💰</div>
-                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">2.840€</div>
-                        <div style="color: #999; font-size: 0.85rem;">Ingresos del Mes</div>
+                        <div class="stat-icon" style="color: #4CAF50;">💰</div>
+                        <div class="stat-value">2.840€</div>
+                        <div class="stat-label">Ingresos</div>
                     </div>
-
                     <div class="stat-card">
-                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #2196F3;">✅</div>
-                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">47</div>
-                        <div style="color: #999; font-size: 0.85rem;">Citas Confirmadas</div>
+                        <div class="stat-icon" style="color: #2196F3;">✅</div>
+                        <div class="stat-value">47</div>
+                        <div class="stat-label">Citas</div>
                     </div>
-
                     <div class="stat-card">
-                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #FF9800;">👥</div>
-                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">23</div>
-                        <div style="color: #999; font-size: 0.85rem;">Nuevos Clientes</div>
+                        <div class="stat-icon" style="color: #FF9800;">👥</div>
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">Nuevos</div>
                     </div>
-
                     <div class="stat-card">
-                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #D86018;">📈</div>
-                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">89%</div>
-                        <div style="color: #999; font-size: 0.85rem;">Horas Ocupadas</div>
+                        <div class="stat-icon" style="color: #D86018;">📈</div>
+                        <div class="stat-value">89%</div>
+                        <div class="stat-label">Ocupación</div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title">💡 Calculadora de Comisiones - Este Mes</h3>
-                    <div style="background: #FFF8F0; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
-                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
-                            <span>Plan actual:</span>
-                            <span style="font-weight: 600;">Esencial (10% comisión)</span>
+                    <h3 class="card-title">💡 Comisiones Este Mes</h3>
+                    <div style="background: #FFF8F0; padding: 1.5rem; border-radius: 10px;">
+                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                            <span>Plan:</span><span><b>Esencial (10%)</b></span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
-                            <span>Reservas confirmadas:</span>
-                            <span>47 × 40€ = <strong>1.880€</strong></span>
+                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                            <span>Reservas:</span><span>47 × 40€ = 1.880€</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
-                            <span>Comisión pagada (10%):</span>
-                            <span style="color: #F44336;"><strong>188€</strong></span>
+                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                            <span>Comisión:</span><span style="color: #F44336;">188€</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
-                            <span>Cuota mensual:</span>
-                            <span style="color: #F44336;"><strong>49€</strong></span>
+                        <div style="padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; display: flex; justify-content: space-between;">
+                            <span>Cuota:</span><span style="color: #F44336;">49€</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; font-size: 1rem; font-weight: bold; color: #D86018;">
-                            <span>TOTAL PAGADO A HOURFIX:</span>
-                            <span>237€</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; padding: 1rem; background: #E8F5E9; margin-top: 1rem; border-radius: 10px;">
-                            <span style="font-weight: 600;">TUS INGRESOS NETOS:</span>
-                            <span style="font-weight: 600; color: #4CAF50; font-size: 1.2rem;">1.643€</span>
-                        </div>
-                    </div>
-
-                    <div style="background: #E3F2FD; padding: 1rem; border-radius: 10px; margin-top: 1rem; font-size: 0.9rem; border-left: 4px solid #2196F3;">
-                        <strong>💡 ¿Sabías que...?</strong><br>
-                        Con el <strong>Plan Profesional (79€/mes + 5% comisión)</strong> pagarías:<br>
-                        • Comisión: 94€ (en vez de 188€)<br>
-                        • Cuota: 79€<br>
-                        • <strong>Total: 173€</strong> → <span style="color: #4CAF50; font-size: 1.1rem;">¡Ahorrarías 64€/mes!</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Requests View -->
-            <div id="requestsView" class="hidden">
-                <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-                        <h3 class="card-title" style="margin: 0;">
-                            Solicitudes Pendientes (<span id="pendingCount">5</span>)
-                        </h3>
-                        <div style="background: #FFF3CD; padding: 0.6rem 1rem; border-radius: 10px; font-size: 0.85rem;">
-                            <span>⚠️</span>
-                            Responde en 24h para mantener tu rating
-                        </div>
-                    </div>
-
-                    <div id="requestsList">
-                        <div class="request-card" id="request1">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <div>
-                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Fisioterapia General</div>
-                                    <div style="font-size: 0.85rem; color: #666;">Cliente verificado ✓</div>
-                                </div>
-                                <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">45€</div>
-                            </div>
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1rem;">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Fecha</div>
-                                    <div style="font-weight: 600;">16 Feb</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Hora</div>
-                                    <div style="font-weight: 600;">10:00</div>
-                                </div>
-                                <div style="text-align: center; grid-column: 1 / -1;">
-                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Tu comisión (10%)</div>
-                                    <div style="font-weight: 600; color: #D86018;">4.50€</div>
-                                </div>
-                            </div>
-                            <button class="btn btn-secondary" onclick="acceptRequest(1)">✓ Aceptar Reserva</button>
-                            <button class="btn btn-danger" onclick="rejectRequest(1)" style="margin-top: 0.5rem;">✗ Rechazar</button>
-                        </div>
-
-                        <div class="request-card" id="request2">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <div>
-                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Masaje Deportivo</div>
-                                    <div style="font-size: 0.85rem; color: #666;">Cliente verificado ✓</div>
-                                </div>
-                                <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">60€</div>
-                            </div>
-                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1rem;">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Fecha</div>
-                                    <div style="font-weight: 600;">17 Feb</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Hora</div>
-                                    <div style="font-weight: 600;">14:00</div>
-                                </div>
-                                <div style="text-align: center; grid-column: 1 / -1;">
-                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Tu comisión (10%)</div>
-                                    <div style="font-weight: 600; color: #D86018;">6.00€</div>
-                                </div>
-                            </div>
-                            <button class="btn btn-secondary" onclick="acceptRequest(2)">✓ Aceptar Reserva</button>
-                            <button class="btn btn-danger" onclick="rejectRequest(2)" style="margin-top: 0.5rem;">✗ Rechazar</button>
+                        <div style="padding: 1rem; background: #E8F5E9; margin-top: 1rem; border-radius: 10px; display: flex; justify-content: space-between; font-weight: 600;">
+                            <span>TUS INGRESOS:</span><span style="color: #4CAF50; font-size: 1.2rem;">1.643€</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Calendar View -->
-            <div id="calendarView" class="hidden">
+            <!-- SOLICITUDES -->
+            <div id="solicitudes" class="hidden">
                 <div class="card">
-                    <div class="calendar-header">
-                        <h3 class="card-title" style="margin: 0;">Febrero 2026</h3>
-                        <div class="calendar-nav">
-                            <button class="btn btn-small btn-secondary">← Anterior</button>
-                            <button class="btn btn-small btn-secondary">Siguiente →</button>
-                        </div>
-                    </div>
-
-                    <div style="background: #E8F5E9; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #4CAF50;">
-                        <strong>💡 Consejo:</strong> Marca los días y horarios que tienes libres y quieres llenar. HOURFIX automáticamente ofrecerá esos huecos a clientes.
-                    </div>
-
-                    <div class="calendar-grid">
-                        <div class="day-header">Lun</div>
-                        <div class="day-header">Mar</div>
-                        <div class="day-header">Mié</div>
-                        <div class="day-header">Jue</div>
-                        <div class="day-header">Vie</div>
-                        <div class="day-header">Sáb</div>
-                        <div class="day-header">Dom</div>
-
-                        <div class="day-cell" onclick="selectDay(17)">
-                            <div class="day-number">17</div>
-                            <div class="day-status">—</div>
-                        </div>
-                        <div class="day-cell available" onclick="selectDay(18)">
-                            <div class="day-number">18</div>
-                            <div class="day-status" style="color: #4CAF50;">Disponible</div>
-                        </div>
-                        <div class="day-cell" onclick="selectDay(19)">
-                            <div class="day-number">19</div>
-                            <div class="day-status">—</div>
-                        </div>
-                        <div class="day-cell available" onclick="selectDay(20)">
-                            <div class="day-number">20</div>
-                            <div class="day-status" style="color: #4CAF50;">Disponible</div>
-                        </div>
-                        <div class="day-cell" onclick="selectDay(21)">
-                            <div class="day-number">21</div>
-                            <div class="day-status">—</div>
-                        </div>
-                        <div class="day-cell blocked" onclick="selectDay(22)">
-                            <div class="day-number">22</div>
-                            <div class="day-status" style="color: #F44336;">Cerrado</div>
-                        </div>
-                        <div class="day-cell blocked" onclick="selectDay(23)">
-                            <div class="day-number">23</div>
-                            <div class="day-status" style="color: #F44336;">Cerrado</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" id="dayDetailCard" class="hidden">
-                    <h3 class="card-title">Martes 18 de Febrero - Gestionar Horarios</h3>
+                    <h3 class="card-title">Solicitudes Pendientes (5)</h3>
                     
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-                        <button class="btn btn-secondary">✓ Marcar día disponible</button>
-                        <button class="btn btn-danger">✗ Bloquear día</button>
+                    <div class="request-card">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <div>
+                                <div style="font-size: 1.1rem; font-weight: 600;">Fisioterapia</div>
+                                <div style="font-size: 0.85rem; color: #666;">16 Feb • 10:00</div>
+                            </div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">45€</div>
+                        </div>
+                        <div style="text-align: center; padding: 0.5rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem;">
+                            Tu comisión: <b>4.50€</b>
+                        </div>
+                        <button class="btn btn-green">✓ Aceptar</button>
+                        <button class="btn btn-red">✗ Rechazar</button>
                     </div>
 
-                    <p style="margin-bottom: 1rem; color: #666;">Selecciona los horarios que tienes libres y quieres ofrecer:</p>
-
-                    <div class="time-slots-grid">
-                        <div class="time-slot blocked" onclick="toggleSlot(this)">
-                            <div>09:00</div>
-                            <div style="font-size: 0.7rem;">Cerrado</div>
+                    <div class="request-card">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <div>
+                                <div style="font-size: 1.1rem; font-weight: 600;">Masaje Deportivo</div>
+                                <div style="font-size: 0.85rem; color: #666;">17 Feb • 14:00</div>
+                            </div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">60€</div>
                         </div>
-                        <div class="time-slot available" onclick="toggleSlot(this)">
-                            <div>10:00</div>
-                            <div style="font-size: 0.7rem;">Disponible</div>
+                        <div style="text-align: center; padding: 0.5rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem;">
+                            Tu comisión: <b>6.00€</b>
                         </div>
-                        <div class="time-slot booked" onclick="toggleSlot(this)">
-                            <div>11:00</div>
-                            <div style="font-size: 0.7rem;">Reservado</div>
-                        </div>
-                        <div class="time-slot blocked" onclick="toggleSlot(this)">
-                            <div>12:00</div>
-                            <div style="font-size: 0.7rem;">Cerrado</div>
-                        </div>
-                        <div class="time-slot available" onclick="toggleSlot(this)">
-                            <div>14:00</div>
-                            <div style="font-size: 0.7rem;">Disponible</div>
-                        </div>
-                        <div class="time-slot blocked" onclick="toggleSlot(this)">
-                            <div>15:00</div>
-                            <div style="font-size: 0.7rem;">Cerrado</div>
-                        </div>
-                        <div class="time-slot available" onclick="toggleSlot(this)">
-                            <div>16:00</div>
-                            <div style="font-size: 0.7rem;">Disponible</div>
-                        </div>
-                        <div class="time-slot blocked" onclick="toggleSlot(this)">
-                            <div>17:00</div>
-                            <div style="font-size: 0.7rem;">Cerrado</div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: #FFF3CD; border-radius: 10px; border-left: 4px solid #FF8C42;">
-                        <strong>ℹ️ Estados de horarios:</strong><br>
-                        • <span style="color: #4CAF50; font-weight: 600;">🟢 Verde - Disponible:</span> Aceptas reservas a esta hora<br>
-                        • <span style="color: #2196F3; font-weight: 600;">🔵 Azul - Reservado:</span> Ya hay un cliente confirmado<br>
-                        • <span style="color: #F44336; font-weight: 600;">🔴 Rojo - Cerrado:</span> No trabajas a esta hora (no apareces en la app)
+                        <button class="btn btn-green">✓ Aceptar</button>
+                        <button class="btn btn-red">✗ Rechazar</button>
                     </div>
                 </div>
+            </div>
 
-                <!-- Services Management -->
-                <div id="servicesView" class="hidden">
-                    <div class="card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                            <h3 class="card-title" style="margin: 0;">Mis Servicios</h3>
-                            <button class="btn btn-primary">+ Añadir Servicio</button>
+            <!-- AGENDA -->
+            <div id="agenda" class="hidden">
+                <div class="card">
+                    <h3 class="card-title">📅 Mi Agenda - Febrero 2026</h3>
+                    <p style="margin-bottom: 1rem; padding: 1rem; background: #E8F5E9; border-radius: 10px; border-left: 4px solid #4CAF50;">
+                        <b>💡 Consejo:</b> Marca los días y horarios que tienes libres. HOURFIX los ofrecerá automáticamente a clientes.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;">
+                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Lun</div>
+                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Mar</div>
+                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Mié</div>
+                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Jue</div>
+                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Vie</div>
+                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Sáb</div>
+                        <div style="text-align: center; font-weight: 600; padding: 0.5rem; color: #666; font-size: 0.85rem;">Dom</div>
+                        
+                        <div style="border: 2px solid #E0E0E0; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
+                            <div style="font-weight: 600;">17</div>
                         </div>
+                        <div style="border: 2px solid #4CAF50; background: #E8F5E9; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
+                            <div style="font-weight: 600;">18</div>
+                            <div style="font-size: 0.7rem; color: #4CAF50;">Disponible</div>
+                        </div>
+                        <div style="border: 2px solid #E0E0E0; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
+                            <div style="font-weight: 600;">19</div>
+                        </div>
+                        <div style="border: 2px solid #4CAF50; background: #E8F5E9; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
+                            <div style="font-weight: 600;">20</div>
+                            <div style="font-size: 0.7rem; color: #4CAF50;">Disponible</div>
+                        </div>
+                        <div style="border: 2px solid #E0E0E0; border-radius: 10px; padding: 0.8rem; text-align: center; cursor: pointer;">
+                            <div style="font-weight: 600;">21</div>
+                        </div>
+                        <div style="border: 2px solid #F44336; background: #FFEBEE; border-radius: 10px; padding: 0.8rem; text-align: center; opacity: 0.6;">
+                            <div style="font-weight: 600;">22</div>
+                            <div style="font-size: 0.7rem; color: #F44336;">Cerrado</div>
+                        </div>
+                        <div style="border: 2px solid #F44336; background: #FFEBEE; border-radius: 10px; padding: 0.8rem; text-align: center; opacity: 0.6;">
+                            <div style="font-weight: 600;">23</div>
+                            <div style="font-size: 0.7rem; color: #F44336;">Cerrado</div>
+                        </div>
+                    </div>
 
-                        <div class="service-item">
-                            <div class="service-info">
-                                <div class="service-name">Fisioterapia General</div>
-                                <div class="service-details">60 minutos • Comisión: 10%</div>
-                            </div>
-                            <div class="service-price">45€</div>
-                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-
-                        <div class="service-item">
-                            <div class="service-info">
-                                <div class="service-name">Masaje Deportivo</div>
-                                <div class="service-details">45 minutos • Comisión: 10%</div>
-                            </div>
-                            <div class="service-price">60€</div>
-                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
-                        </div>
-
-                        <div class="service-item">
-                            <div class="service-info">
-                                <div class="service-name">Rehabilitación</div>
-                                <div class="service-details">90 minutos • Comisión: 10%</div>
-                            </div>
-                            <div class="service-price">80€</div>
-                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
-                        </div>
+                    <div style="margin-top: 2rem; padding: 1rem; background: #FFF3CD; border-radius: 10px; border-left: 4px solid #FF8C42;">
+                        <b>ℹ️ Estados:</b><br>
+                        🟢 Verde = Disponible para reservas<br>
+                        🔵 Azul = Ya reservado<br>
+                        🔴 Rojo = Cerrado (no trabajas)
                     </div>
                 </div>
             </div>
@@ -687,116 +259,36 @@
     </div>
 
     <script>
-        let sidebarOpen = false;
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebarOpen = !sidebarOpen;
-            sidebar.classList.toggle('open', sidebarOpen);
-        }
-
-        function closeSidebar() {
-            if (window.innerWidth < 768) {
-                document.getElementById('sidebar').classList.remove('open');
-                sidebarOpen = false;
-            }
-        }
-
-        function showTab(tab) {
+        function showView(view) {
+            // Remove active from all nav items
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
+            
+            // Add active to clicked item
             event.currentTarget.classList.add('active');
-
-            const titles = {
-                'dashboard': 'PANEL PRINCIPAL',
-                'requests': 'SOLICITUDES PENDIENTES',
-                'calendar': 'MI AGENDA',
-                'services': 'MIS SERVICIOS',
-                'plan': 'MI PLAN'
-            };
-            document.getElementById('pageTitle').textContent = titles[tab];
-
+            
             // Hide all views
-            document.getElementById('dashboardView').classList.add('hidden');
-            document.getElementById('requestsView').classList.add('hidden');
-            document.getElementById('calendarView').classList.add('hidden');
-            document.getElementById('servicesView').classList.add('hidden');
-
+            document.getElementById('panel').classList.add('hidden');
+            document.getElementById('solicitudes').classList.add('hidden');
+            document.getElementById('agenda').classList.add('hidden');
+            
             // Show selected view
-            if (tab === 'dashboard') {
-                document.getElementById('dashboardView').classList.remove('hidden');
-            } else if (tab === 'requests') {
-                document.getElementById('requestsView').classList.remove('hidden');
-            } else if (tab === 'calendar') {
-                document.getElementById('calendarView').classList.remove('hidden');
-                document.getElementById('dayDetailCard').classList.remove('hidden');
-            } else if (tab === 'services') {
-                document.getElementById('calendarView').classList.remove('hidden');
-                document.getElementById('servicesView').classList.remove('hidden');
-                document.getElementById('dayDetailCard').classList.add('hidden');
-            }
-        }
-
-        function selectDay(day) {
-            console.log('Selected day:', day);
-            document.getElementById('dayDetailCard').classList.remove('hidden');
-        }
-
-        function toggleSlot(element) {
-            if (element.classList.contains('booked')) return; // Can't modify booked slots
+            document.getElementById(view).classList.remove('hidden');
             
-            const hour = element.querySelector('div').textContent;
+            // Update title
+            const titles = {
+                'panel': 'PANEL PRINCIPAL',
+                'solicitudes': 'SOLICITUDES PENDIENTES',
+                'agenda': 'MI AGENDA'
+            };
+            document.getElementById('pageTitle').textContent = titles[view];
             
-            if (element.classList.contains('available')) {
-                // Available → Closed
-                element.classList.remove('available');
-                element.classList.add('blocked');
-                element.innerHTML = `<div>${hour}</div><div style="font-size: 0.7rem;">Cerrado</div>`;
-            } else if (element.classList.contains('blocked')) {
-                // Closed → Available
-                element.classList.remove('blocked');
-                element.classList.add('available');
-                element.innerHTML = `<div>${hour}</div><div style="font-size: 0.7rem;">Disponible</div>`;
+            // Close sidebar on mobile
+            if (window.innerWidth < 768) {
+                document.querySelector('.sidebar').classList.remove('show');
             }
         }
-
-        let pendingRequests = 5;
-
-        function acceptRequest(id) {
-            const card = document.getElementById(`request${id}`);
-            card.style.background = '#E8F5E9';
-            card.querySelector('.btn-secondary').textContent = '✓ Aceptada';
-            card.querySelector('.btn-secondary').disabled = true;
-            card.querySelector('.btn-danger').style.display = 'none';
-            updatePendingCount();
-        }
-
-        function rejectRequest(id) {
-            const card = document.getElementById(`request${id}`);
-            card.style.background = '#FFEBEE';
-            card.querySelector('.btn-danger').textContent = '✗ Rechazada';
-            card.querySelector('.btn-danger').disabled = true;
-            card.querySelector('.btn-secondary').style.display = 'none';
-            updatePendingCount();
-        }
-
-        function updatePendingCount() {
-            pendingRequests--;
-            document.getElementById('pendingCount').textContent = pendingRequests;
-            const badge = document.querySelector('.badge');
-            if (badge) {
-                badge.textContent = pendingRequests;
-                if (pendingRequests === 0) {
-                    badge.style.display = 'none';
-                }
-            }
-        }
-
-        // Show dashboard by default
-        window.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('dashboardView').classList.remove('hidden');
-        });
     </script>
 </body>
 </html>
