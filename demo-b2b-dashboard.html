@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOURFIX - Dashboard B2B</title>
+    <title>HOURFIX - Dashboard Empresas</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Work Sans', sans-serif;
             background: #F5F5F5;
@@ -23,16 +19,14 @@
             width: 280px;
             background: linear-gradient(180deg, #D86018 0%, #B84D10 100%);
             color: white;
-            transition: width 0.3s;
             box-shadow: 5px 0 20px rgba(0,0,0,0.1);
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar-header {
             padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             border-bottom: 1px solid rgba(255,255,255,0.2);
         }
 
@@ -40,6 +34,9 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 2rem;
             letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-item {
@@ -76,9 +73,29 @@
             margin-left: auto;
         }
 
+        .plan-card {
+            margin: auto 1.5rem 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .plan-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
         .main-content {
             flex: 1;
             padding: 2rem;
+            overflow-y: auto;
         }
 
         .header {
@@ -96,7 +113,6 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 2.5rem;
             color: #333;
-            margin-bottom: 0.3rem;
             letter-spacing: 1px;
         }
 
@@ -112,8 +128,6 @@
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
             transition: transform 0.3s;
         }
 
@@ -136,79 +150,55 @@
         .stat-label {
             color: #999;
             font-size: 0.9rem;
-            margin-bottom: 0.5rem;
         }
 
-        .stat-change {
-            font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .chart-container {
+        .card {
             background: white;
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .chart-title {
-            font-size: 1.5rem;
             margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
             color: #333;
+            font-weight: 600;
         }
 
-        .chart {
+        .commission-calculator {
+            background: #FFF8F0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .calc-row {
             display: flex;
-            align-items: flex-end;
             justify-content: space-between;
-            height: 250px;
-            gap: 1rem;
-        }
-
-        .bar-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #E0E0E0;
         }
 
-        .bar {
-            width: 100%;
-            background: linear-gradient(180deg, #D86018, #FF8C42);
-            border-radius: 10px 10px 0 0;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .bar:hover {
-            opacity: 0.8;
+        .calc-row:last-child {
+            border-bottom: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #D86018;
         }
 
         .request-card {
             background: #FFF8F0;
             border-radius: 15px;
-            padding: 1.5rem 2rem;
+            padding: 1.5rem;
             margin-bottom: 1rem;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
             gap: 1.5rem;
             align-items: center;
             transition: all 0.3s;
-        }
-
-        .request-card.accepted {
-            background: #E8F5E9;
-            opacity: 0.6;
-        }
-
-        .request-card.rejected {
-            background: #FFEBEE;
-            opacity: 0.6;
         }
 
         .btn {
@@ -218,9 +208,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
         }
 
         .btn-accept {
@@ -228,45 +215,27 @@
             color: white;
         }
 
-        .btn-accept:hover {
-            transform: scale(1.05);
-        }
-
         .btn-reject {
             background: #F44336;
             color: white;
         }
 
-        .btn-reject:hover {
+        .btn:hover {
             transform: scale(1.05);
         }
 
-        .status-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .status-pending {
-            background: #FFA726;
+        .upgrade-banner {
+            background: linear-gradient(135deg, #FF8C42, #D86018);
             color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .status-accepted {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .status-rejected {
-            background: #F44336;
-            color: white;
-        }
-
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
 
         @media (max-width: 1024px) {
             .stats-grid {
@@ -282,9 +251,12 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <div class="logo">HOURFIX</div>
+            <div class="logo">
+                <span style="font-size: 2rem;">⏳</span>
+                HOURFIX
+            </div>
         </div>
-        <nav style="padding: 2rem 0;">
+        <nav style="padding: 2rem 0; flex: 1;">
             <div class="nav-item active" onclick="showTab('dashboard')">
                 <span style="font-size: 1.5rem;">📊</span>
                 <span>Panel Principal</span>
@@ -294,24 +266,28 @@
                 <span>Solicitudes</span>
                 <span class="badge" id="requestCount">5</span>
             </div>
-            <div class="nav-item" onclick="showTab('calendar')">
+            <div class="nav-item" onclick="showTab('plan')">
+                <span style="font-size: 1.5rem;">💎</span>
+                <span>Mi Plan</span>
+            </div>
+            <div class="nav-item">
                 <span style="font-size: 1.5rem;">📅</span>
                 <span>Calendario</span>
             </div>
-            <div class="nav-item" onclick="showTab('clients')">
-                <span style="font-size: 1.5rem;">👥</span>
-                <span>Clientes</span>
-            </div>
-            <div class="nav-item" onclick="showTab('settings')">
+            <div class="nav-item">
                 <span style="font-size: 1.5rem;">⚙️</span>
                 <span>Configuración</span>
             </div>
         </nav>
 
-        <div style="position: absolute; bottom: 2rem; left: 2rem; right: 2rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; backdrop-filter: blur(10px);">
-            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">Plan Actual</div>
-            <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">Premium</div>
-            <div style="font-size: 0.85rem; opacity: 0.8;">79€/mes + 5% comisión</div>
+        <div class="plan-card">
+            <div class="plan-badge">PLAN ACTUAL</div>
+            <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">Esencial</div>
+            <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1rem;">49€/mes + 10% comisión</div>
+            <div style="font-size: 0.85rem; opacity: 0.8;">
+                Este mes: 47 reservas<br>
+                Comisión: ~188€
+            </div>
         </div>
     </div>
 
@@ -321,15 +297,15 @@
         <div class="header">
             <div>
                 <h1 class="page-title" id="pageTitle">PANEL PRINCIPAL</h1>
-                <p style="color: #999; font-size: 1rem;">Clínica de Fisioterapia • Santander</p>
+                <p style="color: #999; font-size: 1rem;">FisioSalud Premium • Santander</p>
             </div>
             <div style="display: flex; align-items: center; gap: 1.5rem;">
-                <div style="background: #FFF8F0; padding: 0.8rem 1.5rem; border-radius: 10px; display: flex; align-items: center; gap: 0.5rem; color: #D86018; font-weight: 600;">
+                <div style="background: #FFF8F0; padding: 0.8rem 1.5rem; border-radius: 10px; color: #D86018; font-weight: 600;">
                     <span>📅</span>
-                    Domingo, 15 Feb 2026
+                    16 Feb 2026
                 </div>
                 <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #D86018, #FF8C42); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; font-weight: bold; cursor: pointer;">
-                    CF
+                    FS
                 </div>
             </div>
         </div>
@@ -342,87 +318,72 @@
                     <div class="stat-icon" style="color: #4CAF50;">💰</div>
                     <div class="stat-value">2.840€</div>
                     <div class="stat-label">Ingresos del Mes</div>
-                    <div class="stat-change" style="color: #4CAF50;">
-                        ↑ +15%
-                    </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #2196F3;">✅</div>
                     <div class="stat-value">47</div>
                     <div class="stat-label">Citas Confirmadas</div>
-                    <div class="stat-change" style="color: #2196F3;">
-                        ↑ +8
-                    </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #FF9800;">👥</div>
                     <div class="stat-value">23</div>
                     <div class="stat-label">Nuevos Clientes</div>
-                    <div class="stat-change" style="color: #FF9800;">
-                        ↑ +12
-                    </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon" style="color: #D86018;">📈</div>
                     <div class="stat-value">89%</div>
                     <div class="stat-label">Horas Ocupadas</div>
-                    <div class="stat-change" style="color: #D86018;">
-                        ↑ +5%
-                    </div>
                 </div>
             </div>
 
-            <!-- Chart -->
-            <div class="chart-container">
-                <h3 class="chart-title">Rendimiento Semanal</h3>
-                <div class="chart">
-                    <div class="bar-container">
-                        <div class="bar" style="height: 160px;"></div>
-                        <div style="font-size: 0.9rem; color: #999; font-weight: 600;">Lun</div>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: #D86018;">8</div>
+            <!-- Commission Calculator -->
+            <div class="card">
+                <h3 class="card-title">💡 Calculadora de Comisiones - Este Mes</h3>
+                <div class="commission-calculator">
+                    <div class="calc-row">
+                        <span>Plan actual:</span>
+                        <span style="font-weight: 600;">Esencial (10% comisión)</span>
                     </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 120px;"></div>
-                        <div style="font-size: 0.9rem; color: #999; font-weight: 600;">Mar</div>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: #D86018;">6</div>
+                    <div class="calc-row">
+                        <span>Reservas confirmadas:</span>
+                        <span>47 × 40€ promedio = <strong>1.880€</strong></span>
                     </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 180px;"></div>
-                        <div style="font-size: 0.9rem; color: #999; font-weight: 600;">Mié</div>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: #D86018;">9</div>
+                    <div class="calc-row">
+                        <span>Comisión pagada (10%):</span>
+                        <span style="color: #F44336;"><strong>188€</strong></span>
                     </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 140px;"></div>
-                        <div style="font-size: 0.9rem; color: #999; font-weight: 600;">Jue</div>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: #D86018;">7</div>
+                    <div class="calc-row">
+                        <span>Cuota mensual:</span>
+                        <span style="color: #F44336;"><strong>49€</strong></span>
                     </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 200px;"></div>
-                        <div style="font-size: 0.9rem; color: #999; font-weight: 600;">Vie</div>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: #D86018;">10</div>
+                    <div class="calc-row">
+                        <span>TOTAL PAGADO A HOURFIX:</span>
+                        <span>237€</span>
                     </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 100px;"></div>
-                        <div style="font-size: 0.9rem; color: #999; font-weight: 600;">Sáb</div>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: #D86018;">5</div>
+                    <div class="calc-row" style="background: #E8F5E9; margin-top: 1rem; padding: 1rem; border-radius: 10px;">
+                        <span>TUS INGRESOS NETOS:</span>
+                        <span>1.643€</span>
                     </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 40px;"></div>
-                        <div style="font-size: 0.9rem; color: #999; font-weight: 600;">Dom</div>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: #D86018;">2</div>
-                    </div>
+                </div>
+
+                <div style="background: #E3F2FD; padding: 1.5rem; border-radius: 15px; margin-top: 1.5rem; border-left: 4px solid #2196F3;">
+                    <strong>💡 ¿Sabías que...?</strong><br>
+                    Con el <strong>Plan Profesional (79€/mes + 5% comisión)</strong> pagarías:<br>
+                    • Comisión: 94€ (en vez de 188€)<br>
+                    • Cuota: 79€<br>
+                    • <strong>Total: 173€</strong> → <span style="color: #4CAF50; font-size: 1.2rem;">¡Ahorrarías 64€/mes!</span>
                 </div>
             </div>
         </div>
 
         <!-- Requests View -->
         <div id="requestsView" class="hidden">
-            <div class="chart-container">
+            <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                    <h3 class="chart-title" style="margin: 0;">
+                    <h3 class="card-title" style="margin: 0;">
                         Solicitudes Pendientes (<span id="pendingCount">5</span>)
                     </h3>
                     <div style="background: #FFF8F0; padding: 0.8rem 1.5rem; border-radius: 10px; color: #D86018; font-weight: 600;">
@@ -435,11 +396,11 @@
                     <div class="request-card" id="request1">
                         <div>
                             <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">Fisioterapia</div>
-                            <div style="font-size: 0.9rem; color: #666;">Cliente: ****3421</div>
+                            <div style="font-size: 0.9rem; color: #666;">Cliente verificado</div>
                         </div>
                         <div style="text-align: center;">
                             <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Fecha</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">15 Feb</div>
+                            <div style="font-size: 1.1rem; font-weight: 600;">16 Feb</div>
                         </div>
                         <div style="text-align: center;">
                             <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Hora</div>
@@ -448,149 +409,86 @@
                         <div style="text-align: center;">
                             <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Precio</div>
                             <div style="font-size: 1.3rem; font-weight: bold; color: #D86018;">45€</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="status-badge status-pending">Pendiente</div>
+                            <div style="font-size: 0.75rem; color: #999;">Comisión: 4.50€</div>
                         </div>
                         <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-accept" onclick="acceptRequest(1)">
-                                ✓ Aceptar
-                            </button>
-                            <button class="btn btn-reject" onclick="rejectRequest(1)">
-                                ✗ Rechazar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="request-card" id="request2">
-                        <div>
-                            <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">Fisioterapia</div>
-                            <div style="font-size: 0.9rem; color: #666;">Cliente: ****7892</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Fecha</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">15 Feb</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Hora</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">14:00</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Precio</div>
-                            <div style="font-size: 1.3rem; font-weight: bold; color: #D86018;">45€</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="status-badge status-pending">Pendiente</div>
-                        </div>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-accept" onclick="acceptRequest(2)">
-                                ✓ Aceptar
-                            </button>
-                            <button class="btn btn-reject" onclick="rejectRequest(2)">
-                                ✗ Rechazar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="request-card" id="request3">
-                        <div>
-                            <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">Masaje deportivo</div>
-                            <div style="font-size: 0.9rem; color: #666;">Cliente: ****5634</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Fecha</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">16 Feb</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Hora</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">09:00</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Precio</div>
-                            <div style="font-size: 1.3rem; font-weight: bold; color: #D86018;">60€</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="status-badge status-pending">Pendiente</div>
-                        </div>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-accept" onclick="acceptRequest(3)">
-                                ✓ Aceptar
-                            </button>
-                            <button class="btn btn-reject" onclick="rejectRequest(3)">
-                                ✗ Rechazar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="request-card" id="request4">
-                        <div>
-                            <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">Fisioterapia</div>
-                            <div style="font-size: 0.9rem; color: #666;">Cliente: ****2109</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Fecha</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">16 Feb</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Hora</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">16:00</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Precio</div>
-                            <div style="font-size: 1.3rem; font-weight: bold; color: #D86018;">45€</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="status-badge status-pending">Pendiente</div>
-                        </div>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-accept" onclick="acceptRequest(4)">
-                                ✓ Aceptar
-                            </button>
-                            <button class="btn btn-reject" onclick="rejectRequest(4)">
-                                ✗ Rechazar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="request-card" id="request5">
-                        <div>
-                            <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem;">Rehabilitación</div>
-                            <div style="font-size: 0.9rem; color: #666;">Cliente: ****8765</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Fecha</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">17 Feb</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Hora</div>
-                            <div style="font-size: 1.1rem; font-weight: 600;">11:00</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.3rem;">Precio</div>
-                            <div style="font-size: 1.3rem; font-weight: bold; color: #D86018;">50€</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="status-badge status-pending">Pendiente</div>
-                        </div>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-accept" onclick="acceptRequest(5)">
-                                ✓ Aceptar
-                            </button>
-                            <button class="btn btn-reject" onclick="rejectRequest(5)">
-                                ✗ Rechazar
-                            </button>
+                            <button class="btn btn-accept" onclick="acceptRequest(1)">✓ Aceptar</button>
+                            <button class="btn btn-reject" onclick="rejectRequest(1)">✗ Rechazar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Other Views Placeholder -->
-        <div id="otherViews" class="hidden">
-            <div class="chart-container" style="text-align: center; padding: 4rem;">
-                <div style="font-size: 4rem; margin-bottom: 1rem;">🚧</div>
-                <h3 style="font-size: 2rem; color: #333; margin-bottom: 1rem;">Sección en Desarrollo</h3>
-                <p style="color: #999; font-size: 1.1rem;">Esta funcionalidad estará disponible próximamente</p>
+        <!-- Plan View -->
+        <div id="planView" class="hidden">
+            <div class="upgrade-banner">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Cambia a Plan Profesional</h3>
+                    <p>Reservas ilimitadas • Solo 5% comisión • Ahorra hasta 321€/mes</p>
+                </div>
+                <button class="btn" style="background: white; color: #D86018; font-size: 1.1rem;">
+                    Cambiar Plan →
+                </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                <!-- Plan Gratis -->
+                <div class="card" style="opacity: 0.7;">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <div style="background: #95E1D3; color: white; padding: 0.5rem 1rem; border-radius: 10px; display: inline-block; margin-bottom: 1rem; font-weight: 600; font-size: 0.85rem;">
+                            GRATIS
+                        </div>
+                        <div style="font-size: 3rem; font-weight: bold; color: #333;">0€</div>
+                        <div style="color: #666;">/mes + 15% comisión</div>
+                    </div>
+                    <div style="padding: 1rem 0; border-top: 2px solid #eee;">
+                        <div style="padding: 0.5rem 0;">✓ Hasta 20 reservas/mes</div>
+                        <div style="padding: 0.5rem 0;">✓ Perfil básico</div>
+                        <div style="padding: 0.5rem 0;">✓ Email</div>
+                    </div>
+                </div>
+
+                <!-- Plan Esencial (Actual) -->
+                <div class="card" style="border: 3px solid #4CAF50; position: relative;">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 0.3rem 1.5rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">
+                        TU PLAN ACTUAL
+                    </div>
+                    <div style="text-align: center; margin-bottom: 1.5rem; padding-top: 1rem;">
+                        <div style="background: var(--orange-light, #FF8C42); color: white; padding: 0.5rem 1rem; border-radius: 10px; display: inline-block; margin-bottom: 1rem; font-weight: 600; font-size: 0.85rem;">
+                            ESENCIAL
+                        </div>
+                        <div style="font-size: 3rem; font-weight: bold; color: #333;">49€</div>
+                        <div style="color: #666;">/mes + 10% comisión</div>
+                    </div>
+                    <div style="padding: 1rem 0; border-top: 2px solid #eee;">
+                        <div style="padding: 0.5rem 0;">✓ Hasta 50 reservas/mes</div>
+                        <div style="padding: 0.5rem 0;">✓ Comisión 10%</div>
+                        <div style="padding: 0.5rem 0;">✓ Perfil destacado</div>
+                        <div style="padding: 0.5rem 0;">✓ Push notifications</div>
+                    </div>
+                </div>
+
+                <!-- Plan Pro -->
+                <div class="card" style="border: 3px solid #D86018;">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <div style="background: #D86018; color: white; padding: 0.5rem 1rem; border-radius: 10px; display: inline-block; margin-bottom: 1rem; font-weight: 600; font-size: 0.85rem;">
+                            PROFESIONAL ⭐
+                        </div>
+                        <div style="font-size: 3rem; font-weight: bold; color: #333;">79€</div>
+                        <div style="color: #666;">/mes + 5% comisión</div>
+                    </div>
+                    <div style="padding: 1rem 0; border-top: 2px solid #eee;">
+                        <div style="padding: 0.5rem 0;"><strong>✓ Reservas ilimitadas</strong></div>
+                        <div style="padding: 0.5rem 0;"><strong>✓ Comisión mínima 5%</strong></div>
+                        <div style="padding: 0.5rem 0;">✓ Email + SMS + Push</div>
+                        <div style="padding: 0.5rem 0;">✓ Estadísticas avanzadas</div>
+                        <div style="padding: 0.5rem 0;">✓ Soporte 24h</div>
+                    </div>
+                    <button class="btn" style="width: 100%; background: #D86018; color: white; margin-top: 1rem; padding: 1rem;">
+                        Cambiar a Pro
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -599,61 +497,46 @@
         let pendingRequests = 5;
 
         function showTab(tab) {
-            // Update active nav item
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
 
-            // Update page title
             const titles = {
                 'dashboard': 'PANEL PRINCIPAL',
                 'requests': 'SOLICITUDES PENDIENTES',
-                'calendar': 'CALENDARIO',
-                'clients': 'GESTIÓN DE CLIENTES',
-                'settings': 'CONFIGURACIÓN'
+                'plan': 'MI PLAN Y FACTURACIÓN'
             };
             document.getElementById('pageTitle').textContent = titles[tab] || 'HOURFIX';
 
-            // Show/hide views
             document.getElementById('dashboardView').classList.add('hidden');
             document.getElementById('requestsView').classList.add('hidden');
-            document.getElementById('otherViews').classList.add('hidden');
+            document.getElementById('planView').classList.add('hidden');
 
             if (tab === 'dashboard') {
                 document.getElementById('dashboardView').classList.remove('hidden');
             } else if (tab === 'requests') {
                 document.getElementById('requestsView').classList.remove('hidden');
-            } else {
-                document.getElementById('otherViews').classList.remove('hidden');
+            } else if (tab === 'plan') {
+                document.getElementById('planView').classList.remove('hidden');
             }
         }
 
         function acceptRequest(id) {
             const card = document.getElementById(`request${id}`);
-            card.classList.add('accepted');
-            
-            const statusBadge = card.querySelector('.status-badge');
-            statusBadge.className = 'status-badge status-accepted';
-            statusBadge.textContent = 'Aceptada';
-            
-            const buttons = card.querySelector('div:last-child');
-            buttons.innerHTML = '<div style="color: #4CAF50; font-weight: 600;">✓ Aceptada</div>';
-            
+            card.style.background = '#E8F5E9';
+            card.querySelector('.btn-accept').textContent = '✓ Aceptada';
+            card.querySelector('.btn-accept').disabled = true;
+            card.querySelector('.btn-reject').style.display = 'none';
             updatePendingCount();
         }
 
         function rejectRequest(id) {
             const card = document.getElementById(`request${id}`);
-            card.classList.add('rejected');
-            
-            const statusBadge = card.querySelector('.status-badge');
-            statusBadge.className = 'status-badge status-rejected';
-            statusBadge.textContent = 'Rechazada';
-            
-            const buttons = card.querySelector('div:last-child');
-            buttons.innerHTML = '<div style="color: #F44336; font-weight: 600;">✗ Rechazada</div>';
-            
+            card.style.background = '#FFEBEE';
+            card.querySelector('.btn-reject').textContent = '✗ Rechazada';
+            card.querySelector('.btn-reject').disabled = true;
+            card.querySelector('.btn-accept').style.display = 'none';
             updatePendingCount();
         }
 
@@ -661,7 +544,6 @@
             pendingRequests--;
             document.getElementById('pendingCount').textContent = pendingRequests;
             document.getElementById('requestCount').textContent = pendingRequests;
-            
             if (pendingRequests === 0) {
                 document.getElementById('requestCount').style.display = 'none';
             }
