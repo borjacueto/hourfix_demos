@@ -371,7 +371,7 @@
                 </div>
             </div>
             <nav style="padding: 2rem 0;">
-                <div class="nav-item" onclick="showTab('dashboard'); closeSidebar();">
+                <div class="nav-item active" onclick="showTab('dashboard'); closeSidebar();">
                     <span style="font-size: 1.5rem;">📊</span>
                     <span>Panel</span>
                 </div>
@@ -380,7 +380,7 @@
                     <span>Solicitudes</span>
                     <span class="badge">5</span>
                 </div>
-                <div class="nav-item active" onclick="showTab('calendar'); closeSidebar();">
+                <div class="nav-item" onclick="showTab('calendar'); closeSidebar();">
                     <span style="font-size: 1.5rem;">📅</span>
                     <span>Mi Agenda</span>
                 </div>
@@ -402,8 +402,144 @@
                 <p style="color: #999; font-size: 0.9rem;">FisioSalud Premium • Santander</p>
             </div>
 
+            <!-- Dashboard View -->
+            <div id="dashboardView">
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="stat-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #4CAF50;">💰</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">2.840€</div>
+                        <div style="color: #999; font-size: 0.85rem;">Ingresos del Mes</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #2196F3;">✅</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">47</div>
+                        <div style="color: #999; font-size: 0.85rem;">Citas Confirmadas</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #FF9800;">👥</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">23</div>
+                        <div style="color: #999; font-size: 0.85rem;">Nuevos Clientes</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.8rem; color: #D86018;">📈</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 0.3rem;">89%</div>
+                        <div style="color: #999; font-size: 0.85rem;">Horas Ocupadas</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">💡 Calculadora de Comisiones - Este Mes</h3>
+                    <div style="background: #FFF8F0; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
+                            <span>Plan actual:</span>
+                            <span style="font-weight: 600;">Esencial (10% comisión)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
+                            <span>Reservas confirmadas:</span>
+                            <span>47 × 40€ = <strong>1.880€</strong></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
+                            <span>Comisión pagada (10%):</span>
+                            <span style="color: #F44336;"><strong>188€</strong></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #E0E0E0; font-size: 0.9rem;">
+                            <span>Cuota mensual:</span>
+                            <span style="color: #F44336;"><strong>49€</strong></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; font-size: 1rem; font-weight: bold; color: #D86018;">
+                            <span>TOTAL PAGADO A HOURFIX:</span>
+                            <span>237€</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 1rem; background: #E8F5E9; margin-top: 1rem; border-radius: 10px;">
+                            <span style="font-weight: 600;">TUS INGRESOS NETOS:</span>
+                            <span style="font-weight: 600; color: #4CAF50; font-size: 1.2rem;">1.643€</span>
+                        </div>
+                    </div>
+
+                    <div style="background: #E3F2FD; padding: 1rem; border-radius: 10px; margin-top: 1rem; font-size: 0.9rem; border-left: 4px solid #2196F3;">
+                        <strong>💡 ¿Sabías que...?</strong><br>
+                        Con el <strong>Plan Profesional (79€/mes + 5% comisión)</strong> pagarías:<br>
+                        • Comisión: 94€ (en vez de 188€)<br>
+                        • Cuota: 79€<br>
+                        • <strong>Total: 173€</strong> → <span style="color: #4CAF50; font-size: 1.1rem;">¡Ahorrarías 64€/mes!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Requests View -->
+            <div id="requestsView" class="hidden">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                        <h3 class="card-title" style="margin: 0;">
+                            Solicitudes Pendientes (<span id="pendingCount">5</span>)
+                        </h3>
+                        <div style="background: #FFF3CD; padding: 0.6rem 1rem; border-radius: 10px; font-size: 0.85rem;">
+                            <span>⚠️</span>
+                            Responde en 24h para mantener tu rating
+                        </div>
+                    </div>
+
+                    <div id="requestsList">
+                        <div class="request-card" id="request1">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <div>
+                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Fisioterapia General</div>
+                                    <div style="font-size: 0.85rem; color: #666;">Cliente verificado ✓</div>
+                                </div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">45€</div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1rem;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Fecha</div>
+                                    <div style="font-weight: 600;">16 Feb</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Hora</div>
+                                    <div style="font-weight: 600;">10:00</div>
+                                </div>
+                                <div style="text-align: center; grid-column: 1 / -1;">
+                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Tu comisión (10%)</div>
+                                    <div style="font-weight: 600; color: #D86018;">4.50€</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" onclick="acceptRequest(1)">✓ Aceptar Reserva</button>
+                            <button class="btn btn-danger" onclick="rejectRequest(1)" style="margin-top: 0.5rem;">✗ Rechazar</button>
+                        </div>
+
+                        <div class="request-card" id="request2">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <div>
+                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Masaje Deportivo</div>
+                                    <div style="font-size: 0.85rem; color: #666;">Cliente verificado ✓</div>
+                                </div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #D86018;">60€</div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1rem;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Fecha</div>
+                                    <div style="font-weight: 600;">17 Feb</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Hora</div>
+                                    <div style="font-weight: 600;">14:00</div>
+                                </div>
+                                <div style="text-align: center; grid-column: 1 / -1;">
+                                    <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.2rem;">Tu comisión (10%)</div>
+                                    <div style="font-weight: 600; color: #D86018;">6.00€</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" onclick="acceptRequest(2)">✓ Aceptar Reserva</button>
+                            <button class="btn btn-danger" onclick="rejectRequest(2)" style="margin-top: 0.5rem;">✗ Rechazar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Calendar View -->
-            <div id="calendarView">
+            <div id="calendarView" class="hidden">
                 <div class="card">
                     <div class="calendar-header">
                         <h3 class="card-title" style="margin: 0;">Febrero 2026</h3>
@@ -468,8 +604,9 @@
                     <p style="margin-bottom: 1rem; color: #666;">Selecciona los horarios que tienes libres y quieres ofrecer:</p>
 
                     <div class="time-slots-grid">
-                        <div class="time-slot" onclick="toggleSlot(this)">
+                        <div class="time-slot blocked" onclick="toggleSlot(this)">
                             <div>09:00</div>
+                            <div style="font-size: 0.7rem;">Cerrado</div>
                         </div>
                         <div class="time-slot available" onclick="toggleSlot(this)">
                             <div>10:00</div>
@@ -479,15 +616,17 @@
                             <div>11:00</div>
                             <div style="font-size: 0.7rem;">Reservado</div>
                         </div>
-                        <div class="time-slot" onclick="toggleSlot(this)">
+                        <div class="time-slot blocked" onclick="toggleSlot(this)">
                             <div>12:00</div>
+                            <div style="font-size: 0.7rem;">Cerrado</div>
                         </div>
                         <div class="time-slot available" onclick="toggleSlot(this)">
                             <div>14:00</div>
                             <div style="font-size: 0.7rem;">Disponible</div>
                         </div>
-                        <div class="time-slot" onclick="toggleSlot(this)">
+                        <div class="time-slot blocked" onclick="toggleSlot(this)">
                             <div>15:00</div>
+                            <div style="font-size: 0.7rem;">Cerrado</div>
                         </div>
                         <div class="time-slot available" onclick="toggleSlot(this)">
                             <div>16:00</div>
@@ -495,16 +634,15 @@
                         </div>
                         <div class="time-slot blocked" onclick="toggleSlot(this)">
                             <div>17:00</div>
-                            <div style="font-size: 0.7rem;">Bloqueado</div>
+                            <div style="font-size: 0.7rem;">Cerrado</div>
                         </div>
                     </div>
 
                     <div style="margin-top: 1.5rem; padding: 1rem; background: #FFF3CD; border-radius: 10px; border-left: 4px solid #FF8C42;">
                         <strong>ℹ️ Estados de horarios:</strong><br>
-                        • <span style="color: #4CAF50;">Verde</span>: Disponible para reservas<br>
-                        • <span style="color: #2196F3;">Azul</span>: Ya reservado por un cliente<br>
-                        • <span style="color: #F44336;">Rojo</span>: Bloqueado (no aceptas reservas)<br>
-                        • <span style="color: #999;">Gris</span>: Sin configurar
+                        • <span style="color: #4CAF50; font-weight: 600;">🟢 Verde - Disponible:</span> Aceptas reservas a esta hora<br>
+                        • <span style="color: #2196F3; font-weight: 600;">🔵 Azul - Reservado:</span> Ya hay un cliente confirmado<br>
+                        • <span style="color: #F44336; font-weight: 600;">🔴 Rojo - Cerrado:</span> No trabajas a esta hora (no apareces en la app)
                     </div>
                 </div>
 
@@ -572,18 +710,32 @@
 
             const titles = {
                 'dashboard': 'PANEL PRINCIPAL',
-                'requests': 'SOLICITUDES',
+                'requests': 'SOLICITUDES PENDIENTES',
                 'calendar': 'MI AGENDA',
                 'services': 'MIS SERVICIOS',
                 'plan': 'MI PLAN'
             };
             document.getElementById('pageTitle').textContent = titles[tab];
 
-            // Show/hide views (simplified for demo)
-            document.getElementById('calendarView').style.display = 
-                (tab === 'calendar' || tab === 'services') ? 'block' : 'none';
-            document.getElementById('servicesView').classList.toggle('hidden', tab !== 'services');
-            document.getElementById('dayDetailCard').classList.toggle('hidden', tab !== 'calendar');
+            // Hide all views
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('requestsView').classList.add('hidden');
+            document.getElementById('calendarView').classList.add('hidden');
+            document.getElementById('servicesView').classList.add('hidden');
+
+            // Show selected view
+            if (tab === 'dashboard') {
+                document.getElementById('dashboardView').classList.remove('hidden');
+            } else if (tab === 'requests') {
+                document.getElementById('requestsView').classList.remove('hidden');
+            } else if (tab === 'calendar') {
+                document.getElementById('calendarView').classList.remove('hidden');
+                document.getElementById('dayDetailCard').classList.remove('hidden');
+            } else if (tab === 'services') {
+                document.getElementById('calendarView').classList.remove('hidden');
+                document.getElementById('servicesView').classList.remove('hidden');
+                document.getElementById('dayDetailCard').classList.add('hidden');
+            }
         }
 
         function selectDay(day) {
@@ -594,21 +746,57 @@
         function toggleSlot(element) {
             if (element.classList.contains('booked')) return; // Can't modify booked slots
             
+            const hour = element.querySelector('div').textContent;
+            
             if (element.classList.contains('available')) {
+                // Available → Closed
                 element.classList.remove('available');
                 element.classList.add('blocked');
-                element.innerHTML = '<div>'+element.innerText.split('\n')[0]+'</div><div style="font-size: 0.7rem;">Bloqueado</div>';
+                element.innerHTML = `<div>${hour}</div><div style="font-size: 0.7rem;">Cerrado</div>`;
             } else if (element.classList.contains('blocked')) {
+                // Closed → Available
                 element.classList.remove('blocked');
-                element.innerHTML = '<div>'+element.innerText.split('\n')[0]+'</div>';
-            } else {
                 element.classList.add('available');
-                element.innerHTML = '<div>'+element.innerText+'</div><div style="font-size: 0.7rem;">Disponible</div>';
+                element.innerHTML = `<div>${hour}</div><div style="font-size: 0.7rem;">Disponible</div>`;
             }
         }
 
-        // Show calendar by default
-        showTab('calendar');
+        let pendingRequests = 5;
+
+        function acceptRequest(id) {
+            const card = document.getElementById(`request${id}`);
+            card.style.background = '#E8F5E9';
+            card.querySelector('.btn-secondary').textContent = '✓ Aceptada';
+            card.querySelector('.btn-secondary').disabled = true;
+            card.querySelector('.btn-danger').style.display = 'none';
+            updatePendingCount();
+        }
+
+        function rejectRequest(id) {
+            const card = document.getElementById(`request${id}`);
+            card.style.background = '#FFEBEE';
+            card.querySelector('.btn-danger').textContent = '✗ Rechazada';
+            card.querySelector('.btn-danger').disabled = true;
+            card.querySelector('.btn-secondary').style.display = 'none';
+            updatePendingCount();
+        }
+
+        function updatePendingCount() {
+            pendingRequests--;
+            document.getElementById('pendingCount').textContent = pendingRequests;
+            const badge = document.querySelector('.badge');
+            if (badge) {
+                badge.textContent = pendingRequests;
+                if (pendingRequests === 0) {
+                    badge.style.display = 'none';
+                }
+            }
+        }
+
+        // Show dashboard by default
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('dashboardView').classList.remove('hidden');
+        });
     </script>
 </body>
 </html>
