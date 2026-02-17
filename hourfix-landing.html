@@ -587,6 +587,17 @@
         }
 
         /* Mobile Responsive */
+        .faq-item {
+            border-bottom: 1px solid #E0E0E0;
+            padding: 1.2rem 0;
+            cursor: pointer;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+        .faq-q h3 { font-size: 1rem; font-weight: 600; color: #333; }
+        .faq-q span { font-size: 1.5rem; color: #D86018; font-weight: bold; flex-shrink: 0; }
+        .faq-a { display: none; margin-top: 0.8rem; color: #666; line-height: 1.7; font-size: 0.95rem; }
+
         @media (max-width: 1024px) {
             .hero-content {
                 grid-template-columns: 1fr;
@@ -936,54 +947,70 @@
 
         <div style="max-width: 800px; margin: 0 auto;">
 
-            <div style="border-bottom: 1px solid #E0E0E0; padding: 1.5rem 0;" onclick="toggleFaq(this)" class="faq-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #333;">¿Por qué HOURFIX y no simplemente llamar por teléfono?</h3>
-                    <span style="font-size: 1.5rem; color: #D86018; font-weight: bold;">+</span>
-                </div>
-                <p style="display: none; margin-top: 1rem; color: #666; line-height: 1.7;">
-                    Llamar implica que el negocio esté disponible en ese momento, que no haya cola, que tengan el hueco que necesitas y que recuerdes llamar en horario de apertura. HOURFIX funciona a las 11 de la noche, el domingo, o mientras estás en el trabajo. Tú ves todos los huecos disponibles en tiempo real, comparas precios y reservas en segundos. Para el negocio también es mejor: sin interrupciones, sin llamadas perdidas, sin volver a llamar.
-                </p>
+            <!-- TABS -->
+            <div style="display: flex; background: #F5F5F5; border-radius: 15px; padding: 0.4rem; margin-bottom: 2rem;">
+                <button id="tab-cliente" onclick="switchFaqTab('cliente')" style="flex: 1; padding: 0.9rem; border: none; border-radius: 12px; font-family: 'Work Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; background: #D86018; color: white; transition: 0.3s;">
+                    👤 Soy Cliente
+                </button>
+                <button id="tab-negocio" onclick="switchFaqTab('negocio')" style="flex: 1; padding: 0.9rem; border: none; border-radius: 12px; font-family: 'Work Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; background: transparent; color: #666; transition: 0.3s;">
+                    🏢 Soy Negocio
+                </button>
             </div>
 
-            <div style="border-bottom: 1px solid #E0E0E0; padding: 1.5rem 0;" onclick="toggleFaq(this)" class="faq-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #333;">¿Qué pasa si necesito cancelar?</h3>
-                    <span style="font-size: 1.5rem; color: #D86018; font-weight: bold;">+</span>
+            <!-- FAQS CLIENTE -->
+            <div id="faqs-cliente">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Los precios son los mismos que si llamo directamente?</h3><span>+</span></div>
+                    <p class="faq-a">Sí, exactamente los mismos. HOURFIX no cobra nada al cliente. La comisión la paga el negocio, no tú. Lo que ves en la plataforma es el precio final, sin sorpresas.</p>
                 </div>
-                <p style="display: none; margin-top: 1rem; color: #666; line-height: 1.7;">
-                    Puedes cancelar gratis hasta 24 horas antes de tu cita. Si cancelas con menos de 24 horas de antelación, se aplica un cargo del 50% del precio del servicio. Esto protege al profesional, que había reservado ese tiempo para ti. La política es igual para todos los negocios de la plataforma.
-                </p>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Qué pasa si necesito cancelar?</h3><span>+</span></div>
+                    <p class="faq-a">Puedes cancelar gratis hasta 24 horas antes de tu cita. Si cancelas con menos de 24 horas de antelación, se aplica un cargo del 50% del precio del servicio. Esto protege al profesional, que había reservado ese tiempo para ti.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Por qué no veo la dirección del negocio antes de reservar?</h3><span>+</span></div>
+                    <p class="faq-a">La zona y el barrio son siempre visibles. La dirección exacta y el teléfono se revelan al confirmar la reserva. Así garantizamos que los datos solo llegan a clientes reales con una cita confirmada.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Puedo reservar fuera del horario de apertura del negocio?</h3><span>+</span></div>
+                    <p class="faq-a">Sí. HOURFIX funciona las 24 horas. Reservas a las 11 de la noche para la semana siguiente y el negocio confirma cuando abra por la mañana.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Cómo sé que el profesional es de confianza?</h3><span>+</span></div>
+                    <p class="faq-a">Todos los negocios están verificados. Las valoraciones solo las pueden dejar clientes que han reservado y acudido a su cita. Sin opiniones anónimas ni falsas.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Me llega algún recordatorio de la cita?</h3><span>+</span></div>
+                    <p class="faq-a">Sí, recibes confirmación por email al reservar y un recordatorio automático 24 horas antes de tu cita.</p>
+                </div>
             </div>
 
-            <div style="border-bottom: 1px solid #E0E0E0; padding: 1.5rem 0;" onclick="toggleFaq(this)" class="faq-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #333;">¿Los precios son los mismos que si llamo directamente?</h3>
-                    <span style="font-size: 1.5rem; color: #D86018; font-weight: bold;">+</span>
+            <!-- FAQS NEGOCIO -->
+            <div id="faqs-negocio" style="display: none;">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Por qué HOURFIX y no simplemente que me llamen por teléfono?</h3><span>+</span></div>
+                    <p class="faq-a">Llamar implica que estés disponible, que no haya cola y que el cliente recuerde llamar en horario de apertura. HOURFIX funciona a las 11 de la noche, el domingo, o mientras el cliente está en el trabajo. Para ti también es mejor: sin interrupciones, sin llamadas perdidas, sin volver a llamar.</p>
                 </div>
-                <p style="display: none; margin-top: 1rem; color: #666; line-height: 1.7;">
-                    Sí, exactamente los mismos. HOURFIX no cobra nada al cliente. La comisión la paga el negocio, no tú. Lo que ves en la plataforma es el precio final, sin sorpresas.
-                </p>
-            </div>
-
-            <div style="border-bottom: 1px solid #E0E0E0; padding: 1.5rem 0;" onclick="toggleFaq(this)" class="faq-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #333;">Soy un negocio. ¿Cuánto me cuesta realmente?</h3>
-                    <span style="font-size: 1.5rem; color: #D86018; font-weight: bold;">+</span>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Cuánto me cuesta realmente?</h3><span>+</span></div>
+                    <p class="faq-a">En el plan gratuito, solo pagas el 15% de cada reserva que recibes. Si no recibes reservas, no pagas nada. En el Esencial (49€/mes) la comisión baja al 10% — con 2 clientes nuevos al mes ya está pagado. En el Profesional (79€/mes) baja al 5% y tienes posicionamiento prioritario en búsquedas.</p>
                 </div>
-                <p style="display: none; margin-top: 1rem; color: #666; line-height: 1.7;">
-                    Depende del plan. En el gratuito, pagas solo el 15% de cada reserva que recibes a través de HOURFIX — si no recibes reservas, no pagas nada. En el Esencial (49€/mes), la comisión baja al 10%. Con solo 2 clientes nuevos al mes el plan ya está más que pagado. En el Profesional (79€/mes), la comisión baja al 5% y tienes posicionamiento prioritario en búsquedas.
-                </p>
-            </div>
-
-            <div style="padding: 1.5rem 0;" onclick="toggleFaq(this)" class="faq-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #333;">¿Puedo ver la dirección y el teléfono del negocio antes de reservar?</h3>
-                    <span style="font-size: 1.5rem; color: #D86018; font-weight: bold;">+</span>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Qué pasa si un cliente cancela a última hora?</h3><span>+</span></div>
+                    <p class="faq-a">HOURFIX cobra automáticamente el 50% del servicio al cliente que cancela con menos de 24 horas. Ese dinero va a ti. Acabas con las cancelaciones sin coste y sin conversaciones incómodas.</p>
                 </div>
-                <p style="display: none; margin-top: 1rem; color: #666; line-height: 1.7;">
-                    La zona y el barrio son visibles siempre. La dirección exacta y el teléfono se revelan automáticamente en el momento de confirmar tu reserva. Así garantizamos que los datos de contacto del profesional solo llegan a clientes reales con una cita confirmada.
-                </p>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Tengo que cambiar cómo trabajo con mis clientes habituales?</h3><span>+</span></div>
+                    <p class="faq-a">No. HOURFIX es para llenar los huecos que ya tienes vacíos. Tus clientes de siempre siguen como siempre. Tú decides qué horarios ofreces en la plataforma.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Puedo controlar qué reservas acepto?</h3><span>+</span></div>
+                    <p class="faq-a">Sí. Cada solicitud llega a tu panel y tú decides aceptar o rechazar antes de confirmar. No es automático a no ser que tú quieras que lo sea.</p>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q"><h3>¿Me ata a un contrato largo?</h3><span>+</span></div>
+                    <p class="faq-a">No hay permanencia. Cancelas cuando quieras. Los planes de pago son mes a mes y puedes cambiar de plan en cualquier momento.</p>
+                </div>
             </div>
 
         </div>
@@ -1005,8 +1032,8 @@
 
     <script>
         function toggleFaq(el) {
-            const answer = el.querySelector('p');
-            const icon = el.querySelector('span');
+            const answer = el.querySelector('.faq-a');
+            const icon = el.querySelector('.faq-q span');
             if (answer.style.display === 'none' || answer.style.display === '') {
                 answer.style.display = 'block';
                 icon.textContent = '−';
@@ -1014,6 +1041,19 @@
                 answer.style.display = 'none';
                 icon.textContent = '+';
             }
+        }
+
+        function switchFaqTab(tab) {
+            const isCliente = tab === 'cliente';
+            document.getElementById('faqs-cliente').style.display = isCliente ? 'block' : 'none';
+            document.getElementById('faqs-negocio').style.display = isCliente ? 'none' : 'block';
+            document.getElementById('tab-cliente').style.background = isCliente ? '#D86018' : 'transparent';
+            document.getElementById('tab-cliente').style.color = isCliente ? 'white' : '#666';
+            document.getElementById('tab-negocio').style.background = isCliente ? 'transparent' : '#D86018';
+            document.getElementById('tab-negocio').style.color = isCliente ? '#666' : 'white';
+            // Cerrar todos los faqs abiertos al cambiar pestaña
+            document.querySelectorAll('.faq-a').forEach(a => a.style.display = 'none');
+            document.querySelectorAll('.faq-q span').forEach(s => s.textContent = '+');
         }
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
