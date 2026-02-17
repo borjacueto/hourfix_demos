@@ -157,14 +157,33 @@
 
     <!-- LEFT -->
     <div class="benefits">
-        <h1>SÉ EL PRIMERO EN GIJÓN Y OVIEDO</h1>
-        <p>Estamos seleccionando los primeros negocios de la plataforma. Los que entren ahora tendrán ventaja de posicionamiento frente a la competencia desde el primer día.</p>
+        <div style="background: linear-gradient(135deg, #D86018, #FF8C42); color: white; display: inline-block; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 1px;">
+            💊 ESPECIALIZADO EN SALUD
+        </div>
+        <h1>ACABA CON LAS CANCELACIONES SIN COSTE</h1>
+        <p>Para fisioterapeutas, psicólogos, podólogos y entrenadores personales en Gijón y Oviedo. Cobra automáticamente el 50% si cancelan con menos de 24 horas. Solo ofreces tus huecos libres — tus clientes habituales siguen como siempre.</p>
 
         <div class="benefit-item">
-            <div class="benefit-icon">🚀</div>
+            <div class="benefit-icon">💰</div>
             <div class="benefit-text">
-                <h3>Acceso prioritario</h3>
-                <p>Configura tu perfil antes que nadie. Cuando lleguen los primeros clientes, ya estarás ahí.</p>
+                <h3>Recupera el dinero perdido</h3>
+                <p>Un fisio con 5 cancelaciones al mes pierde ~300€. HOURFIX lo cobra automáticamente por ti.</p>
+            </div>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">📅</div>
+            <div class="benefit-text">
+                <h3>Solo tus huecos libres</h3>
+                <p>No hace falta cambiar nada. Ofreces solo las horas que tienes vacías. Tus clientes de siempre, como siempre.</p>
+            </div>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">🎯</div>
+            <div class="benefit-text">
+                <h3>Clientes nuevos verificados</h3>
+                <p>Solo llegan personas que han pagado y confirmado. Sin curiosos, sin no-shows.</p>
             </div>
         </div>
 
@@ -176,22 +195,6 @@
             </div>
         </div>
 
-        <div class="benefit-item">
-            <div class="benefit-icon">💰</div>
-            <div class="benefit-text">
-                <h3>Precio de lanzamiento</h3>
-                <p>Los negocios fundadores tendrán condiciones especiales que no estarán disponibles después.</p>
-            </div>
-        </div>
-
-        <div class="benefit-item">
-            <div class="benefit-icon">🤝</div>
-            <div class="benefit-text">
-                <h3>Influyes en el producto</h3>
-                <p>Tu opinión define cómo funciona HOURFIX. Acceso directo al equipo para dar feedback.</p>
-            </div>
-        </div>
-
         <div style="background: white; border-radius: 15px; padding: 1.2rem 1.5rem; margin-top: 1.5rem; border: 2px solid #D86018;">
             <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.8rem;">¿Quieres ver cómo gestionarás tus reservas?</p>
             <a href="demo-b2b-dashboard.html" style="display: flex; align-items: center; gap: 0.5rem; color: #D86018; font-weight: 700; text-decoration: none; font-size: 1rem;">
@@ -200,12 +203,10 @@
         </div>
 
         <div class="counter-box">
-            <div>
-                <div class="counter-num">47</div>
-            </div>
+            <div style="font-size: 2rem;">🚀</div>
             <div class="counter-text">
-                negocios ya apuntados<br>
-                <strong>en Gijón y Oviedo</strong>
+                <strong>Lanzamiento en Gijón y Oviedo</strong><br>
+                Sé el primero en tu zona
             </div>
         </div>
     </div>
@@ -216,7 +217,7 @@
         <!-- Formulario -->
         <div id="formView">
             <h2>APÚNTATE A LA LISTA</h2>
-            <p class="form-subtitle">Sin compromiso. Te avisamos antes del lanzamiento.</p>
+            <p class="form-subtitle">Lanzamiento en Gijón y Oviedo • Primavera 2026</p>
 
             <div class="step-indicator">
                 <div class="step-dot active" id="dot1"></div>
@@ -237,15 +238,24 @@
                     <label>Tu sector *</label>
                     <select id="category">
                         <option value="">Selecciona...</option>
-                        <option value="fisioterapia">💆 Fisioterapia / Osteopatía</option>
-                        <option value="peluqueria">✂️ Peluquería</option>
-                        <option value="estetica">💅 Estética</option>
-                        <option value="psicologia">🧠 Psicología</option>
-                        <option value="podologia">🦶 Podología</option>
-                        <option value="nutricion">🥗 Nutrición</option>
-                        <option value="dental">🦷 Odontología</option>
-                        <option value="yoga">🧘 Yoga / Pilates</option>
-                        <option value="otro">Otro</option>
+                        <optgroup label="⭐ Sectores prioritarios">
+                            <option value="fisioterapia">💆 Fisioterapia / Osteopatía</option>
+                            <option value="psicologia">🧠 Psicología</option>
+                            <option value="podologia">🦶 Podología</option>
+                            <option value="entrenador_personal">💪 Entrenador Personal</option>
+                        </optgroup>
+                        <optgroup label="Bienestar y fitness">
+                            <option value="baile">🩰 Clases de Baile</option>
+                            <option value="barre">🤸 Barre / Fitness</option>
+                            <option value="yoga">🧘 Yoga / Pilates</option>
+                            <option value="nutricion">🥗 Nutrición</option>
+                        </optgroup>
+                        <optgroup label="Otros sectores">
+                            <option value="peluqueria">✂️ Peluquería</option>
+                            <option value="estetica">💅 Estética</option>
+                            <option value="dental">🦷 Odontología</option>
+                            <option value="otro">Otro</option>
+                        </optgroup>
                     </select>
                 </div>
 
@@ -342,8 +352,8 @@
             <p style="color: var(--gray); margin-bottom: 1rem;">Te avisaremos antes del lanzamiento con instrucciones de acceso.</p>
 
             <div class="insight-box">
-                🔍 <strong>¿Sabías que...</strong> los negocios con más de 5 cancelaciones al mes pierden de media <strong>250-400€ mensuales</strong> en horas no recuperadas?<br><br>
-                HOURFIX cobra automáticamente el 50% en cancelaciones tardías. Eso ya lo recuperas.
+                🔍 <strong>¿Sabías que...</strong> los fisioterapeutas con más de 5 cancelaciones al mes pierden de media <strong>250-400€ mensuales</strong> en horas no recuperadas?<br><br>
+                HOURFIX cobra automáticamente el 50% en cancelaciones con menos de 24h. Ese dinero va directo a ti. <strong>Con 3 cancelaciones al mes ya recuperas más que lo que pagas.</strong>
             </div>
 
             <div style="background: #E8F5E9; padding: 1rem; border-radius: 12px; margin-top: 1rem; font-size: 0.9rem; border-left: 4px solid #4CAF50;">
