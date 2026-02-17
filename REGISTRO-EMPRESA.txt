@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOURFIX - Registra tu negocio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --orange: #D86018;
+            --orange-light: #FF8C42;
+            --cream: #FFF8F0;
+            --dark: #1A1A1A;
+            --gray: #666;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--cream);
+            min-height: 100vh;
+        }
+
+        /* NAV */
+        nav {
+            background: rgba(255,248,240,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(216,96,24,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--orange);
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* LAYOUT */
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* LEFT: BENEFICIOS */
+        .benefits h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .benefits .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .benefit-icon {
+            width: 50px; height: 50px;
+            background: var(--orange);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .benefit-text p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .trial-badge {
+            background: linear-gradient(135deg, var(--orange), var(--orange-light));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* RIGHT: FORM */
+        .form-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 90px;
+        }
+
+        .form-card h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .form-card .form-subtitle {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Work Sans', sans-serif;
+            transition: border-color 0.3s;
+            background: #FAFAFA;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+            background: white;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--orange);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .btn-submit:hover {
+            background: #B84D10;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(216,96,24,0.3);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 1rem;
+        }
+
+        /* ESTADOS */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            width: 50px; height: 50px;
+            border: 4px solid #f0f0f0;
+            border-top-color: var(--orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .success {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+
+        .success h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .success-detail {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .success-detail p {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 0.95rem;
+        }
+
+        .success-detail p:last-child { border-bottom: none; }
+
+        .error-msg {
+            background: #FFEBEE;
+            border-left: 4px solid #F44336;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #C62828;
+            display: none;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .page {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 5%;
+            }
+
+            .benefits h1 { font-size: 2.5rem; }
+            .form-card { position: static; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">⏳</div>
+            HOURFIX
+        </a>
+        <span style="color: var(--gray); font-size: 0.9rem;">¿Ya tienes cuenta? <a href="#" style="color: var(--orange); font-weight: 600;">Inicia sesión</a></span>
+    </nav>
+
+    <div class="page">
+
+        <!-- BENEFICIOS -->
+        <div class="benefits">
+            <h1>LLENA TUS HORAS LIBRES</h1>
+            <p class="subtitle">Únete a HOURFIX y empieza a recibir reservas de nuevos clientes hoy mismo. Sin permanencia, sin riesgos.</p>
+
+            <div class="benefit-item">
+                <div class="benefit-icon">🚀</div>
+                <div class="benefit-text">
+                    <h3>Perfil online en 5 minutos</h3>
+                    <p>Configura tus servicios, horarios y precios. Empieza a aparecer en búsquedas de clientes inmediatamente.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-icon">💰</div>
+                <div class="benefit-text">
+                    <h3>Empieza gratis</h3>
+                    <p>Plan gratuito sin límite de tiempo. Solo pagas comisión cuando recibes reservas.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-icon">📱</div>
+                <div class="benefit-text">
+                    <h3>Gestiona todo desde el móvil</h3>
+                    <p>Acepta o rechaza reservas, gestiona tu agenda y consulta tus estadísticas en tiempo real.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-icon">⭐</div>
+                <div class="benefit-text">
+                    <h3>Reseñas verificadas</h3>
+                    <p>Solo los clientes que han reservado contigo pueden dejarte reseña. Sin spam, sin falsas valoraciones.</p>
+                </div>
+            </div>
+
+            <div class="trial-badge">
+                🎁 <strong>Primer mes gratis</strong> en planes Esencial y Profesional.<br>
+                Sin tarjeta de crédito. Cancela cuando quieras.
+            </div>
+        </div>
+
+        <!-- FORMULARIO -->
+        <div class="form-card">
+
+            <!-- Error -->
+            <div class="error-msg" id="errorMsg"></div>
+
+            <!-- Formulario -->
+            <div id="formView">
+                <h2>CREAR CUENTA GRATIS</h2>
+                <p class="form-subtitle">Empieza a recibir reservas hoy mismo</p>
+
+                <div class="form-group">
+                    <label>Nombre de tu negocio *</label>
+                    <input type="text" id="name" placeholder="Ej: FisioSalud Premium" />
+                </div>
+
+                <div class="form-group">
+                    <label>Categoría *</label>
+                    <select id="category">
+                        <option value="">Selecciona tu sector...</option>
+                        <option value="fisioterapia">💆 Fisioterapia</option>
+                        <option value="peluqueria">✂️ Peluquería</option>
+                        <option value="estetica">💅 Estética</option>
+                        <option value="dental">🦷 Clínica Dental</option>
+                        <option value="psicologia">🧠 Psicología</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="email" placeholder="tu@email.com" />
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" id="phone" placeholder="942 000 000" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" id="address" placeholder="Calle Mayor 1" />
+                    </div>
+                    <div class="form-group">
+                        <label>Zona</label>
+                        <input type="text" id="zone" placeholder="Centro, Sardinero..." />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña *</label>
+                    <input type="password" id="password" placeholder="Mínimo 6 caracteres" />
+                </div>
+
+                <button class="btn-submit" onclick="registrar()">
+                    Crear cuenta gratis →
+                </button>
+
+                <p class="form-note">
+                    Al registrarte aceptas nuestros <a href="#" style="color: var(--orange);">términos y condiciones</a>.<br>
+                    Sin permanencia. Cancela cuando quieras.
+                </p>
+            </div>
+
+            <!-- Loading -->
+            <div class="loading" id="loadingView">
+                <div class="spinner"></div>
+                <p style="color: var(--gray);">Creando tu cuenta...</p>
+            </div>
+
+            <!-- Éxito -->
+            <div class="success" id="successView">
+                <div class="success-icon">🎉</div>
+                <h3>¡BIENVENIDO A HOURFIX!</h3>
+                <p style="color: var(--gray); margin-bottom: 1rem;">Tu negocio ya está registrado. Guarda estos datos:</p>
+
+                <div class="success-detail" id="successDetail"></div>
+
+                <div style="background: #E8F5E9; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.9rem; border-left: 4px solid #4CAF50;">
+                    <strong>✅ Próximos pasos:</strong><br>
+                    1. Añade tus servicios y precios<br>
+                    2. Marca tus horarios disponibles<br>
+                    3. ¡Empieza a recibir reservas!
+                </div>
+
+                <button class="btn-submit" onclick="irAlDashboard()">
+                    Ir a mi panel →
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const API = 'https://hourfix-backend-production.up.railway.app';
+        let authToken = '';
+
+        async function registrar() {
+            const name = document.getElementById('name').value.trim();
+            const category = document.getElementById('category').value;
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const zone = document.getElementById('zone').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Validar
+            if (!name || !category || !email || !password) {
+                showError('Por favor rellena los campos obligatorios (*)');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('La contraseña debe tener al menos 6 caracteres');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                showError('Introduce un email válido');
+                return;
+            }
+
+            hideError();
+            showLoading();
+
+            try {
+                const response = await fetch(`${API}/api/auth/business/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, category, email, phone, address, zone, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showForm();
+                    showError(data.error || 'Error al registrar. Inténtalo de nuevo.');
+                    return;
+                }
+
+                // Guardar token
+                authToken = data.token;
+                localStorage.setItem('hourfix_token', data.token);
+                localStorage.setItem('hourfix_business', JSON.stringify(data.business));
+
+                // Mostrar éxito
+                document.getElementById('successDetail').innerHTML = `
+                    <p>🏢 <strong>Negocio:</strong> ${data.business.name}</p>
+                    <p>📧 <strong>Email:</strong> ${data.business.email}</p>
+                    <p>🏷️ <strong>Categoría:</strong> ${data.business.category}</p>
+                    <p>💎 <strong>Plan:</strong> Gratis (15% comisión)</p>
+                    <p>🎁 <strong>Bonus:</strong> Primer mes Esencial gratis</p>
+                `;
+
+                showSuccess();
+
+            } catch (err) {
+                showForm();
+                showError('Error de conexión. Verifica tu internet e inténtalo de nuevo.');
+            }
+        }
+
+        function irAlDashboard() {
+            alert('¡El dashboard completo estará disponible pronto! Por ahora puedes explorar la demo en borjacueto.github.io/hourfix_demos/');
+        }
+
+        function showLoading() {
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('loadingView').style.display = 'block';
+            document.getElementById('successView').style.display = 'none';
+        }
+
+        function showForm() {
+            document.getElementById('formView').style.display = 'block';
+            document.getElementById('loadingView').style.display = 'none';
+            document.getElementById('successView').style.display = 'none';
+        }
+
+        function showSuccess() {
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('loadingView').style.display = 'none';
+            document.getElementById('successView').style.display = 'block';
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        // Enter para enviar
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') registrar();
+        });
+    </script>
+
+</body>
+</html>
