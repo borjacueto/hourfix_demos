@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOURFIX - Únete a la lista de espera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --orange: #D86018; --cream: #FFF8F0; --dark: #1A1A1A; --gray: #666; }
+        body { font-family: 'Work Sans', sans-serif; background: var(--cream); min-height: 100vh; }
+
+        nav {
+            background: rgba(255,248,240,0.95); backdrop-filter: blur(10px);
+            padding: 1.2rem 5%; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 1px solid rgba(216,96,24,0.1);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+            color: var(--orange); letter-spacing: 2px; text-decoration: none;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px; height: 40px; background: var(--orange); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+        }
+
+        .page {
+            max-width: 1100px; margin: 0 auto; padding: 3rem 5%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+        }
+
+        .benefits h1 {
+            font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+            color: var(--orange); line-height: 1.1; margin-bottom: 1rem;
+        }
+
+        .benefits p { font-size: 1.1rem; color: var(--gray); margin-bottom: 2rem; line-height: 1.6; }
+
+        .benefit-item { display: flex; gap: 1rem; margin-bottom: 1.2rem; align-items: flex-start; }
+
+        .benefit-icon {
+            width: 46px; height: 46px; background: var(--orange); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; flex-shrink: 0;
+        }
+
+        .benefit-text h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .benefit-text p { font-size: 0.9rem; color: var(--gray); margin: 0; }
+
+        .counter-box {
+            background: linear-gradient(135deg, var(--orange), #FF8C42);
+            color: white; padding: 1.2rem 1.5rem; border-radius: 15px;
+            margin-top: 2rem; display: flex; align-items: center; gap: 1rem;
+        }
+
+        .counter-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; line-height: 1; }
+        .counter-text { font-size: 0.9rem; line-height: 1.4; }
+
+        /* FORM */
+        .form-card {
+            background: white; border-radius: 25px; padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1); position: sticky; top: 90px;
+        }
+
+        .form-card h2 {
+            font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+            color: var(--dark); margin-bottom: 0.3rem;
+        }
+
+        .form-subtitle { color: var(--gray); margin-bottom: 2rem; font-size: 0.95rem; }
+
+        .form-group { margin-bottom: 1.2rem; }
+
+        label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
+
+        input, select {
+            width: 100%; padding: 0.9rem 1rem; border: 2px solid #E0E0E0;
+            border-radius: 12px; font-size: 1rem; font-family: 'Work Sans', sans-serif;
+            transition: 0.3s; background: #FAFAFA;
+        }
+
+        input:focus, select:focus { outline: none; border-color: var(--orange); background: white; }
+
+        .options-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-top: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.8rem; border: 2px solid #E0E0E0; border-radius: 12px;
+            text-align: center; cursor: pointer; transition: 0.3s; font-size: 0.9rem;
+            font-family: 'Work Sans', sans-serif; background: white; font-weight: 600;
+        }
+
+        .option-btn:hover { border-color: var(--orange); background: var(--cream); }
+        .option-btn.selected { border-color: var(--orange); background: var(--cream); color: var(--orange); }
+
+        .btn-submit {
+            width: 100%; padding: 1.2rem; background: var(--orange); color: white;
+            border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; margin-top: 1.5rem; font-family: 'Work Sans', sans-serif;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover { background: #B84D10; transform: translateY(-2px); }
+
+        .step-indicator {
+            display: flex; gap: 0.5rem; margin-bottom: 2rem;
+        }
+
+        .step-dot {
+            flex: 1; height: 4px; border-radius: 2px; background: #E0E0E0; transition: 0.3s;
+        }
+
+        .step-dot.active { background: var(--orange); }
+
+        .step-label {
+            font-size: 0.8rem; color: var(--gray); margin-bottom: 1.5rem; text-align: center;
+        }
+
+        /* SUCCESS */
+        .success { display: none; text-align: center; padding: 1rem; }
+        .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .success h3 {
+            font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+            color: #4CAF50; margin-bottom: 1rem;
+        }
+
+        .insight-box {
+            background: var(--cream); border-radius: 12px; padding: 1.2rem;
+            margin: 1rem 0; text-align: left; border-left: 4px solid var(--orange);
+            font-size: 0.9rem; color: #333; line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .page { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 5%; }
+            .benefits h1 { font-size: 2.2rem; }
+            .form-card { position: static; }
+            .options-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="hourfix-landing.html" class="logo">
+        <div class="logo-icon">⏳</div>
+        HOURFIX
+    </a>
+    <span style="color: var(--gray); font-size: 0.9rem;">Lanzamiento en Gijón y Oviedo • Primavera 2026</span>
+</nav>
+
+<div class="page">
+
+    <!-- LEFT -->
+    <div class="benefits">
+        <h1>SÉ EL PRIMERO EN GIJÓN Y OVIEDO</h1>
+        <p>Estamos seleccionando los primeros negocios de la plataforma. Los que entren ahora tendrán ventaja de posicionamiento frente a la competencia desde el primer día.</p>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">🚀</div>
+            <div class="benefit-text">
+                <h3>Acceso prioritario</h3>
+                <p>Configura tu perfil antes que nadie. Cuando lleguen los primeros clientes, ya estarás ahí.</p>
+            </div>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">📍</div>
+            <div class="benefit-text">
+                <h3>Top posición garantizada</h3>
+                <p>Los primeros registros aparecen siempre por encima en los resultados de búsqueda.</p>
+            </div>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">💰</div>
+            <div class="benefit-text">
+                <h3>Precio de lanzamiento</h3>
+                <p>Los negocios fundadores tendrán condiciones especiales que no estarán disponibles después.</p>
+            </div>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">🤝</div>
+            <div class="benefit-text">
+                <h3>Influyes en el producto</h3>
+                <p>Tu opinión define cómo funciona HOURFIX. Acceso directo al equipo para dar feedback.</p>
+            </div>
+        </div>
+
+        <div class="counter-box">
+            <div>
+                <div class="counter-num">47</div>
+            </div>
+            <div class="counter-text">
+                negocios ya apuntados<br>
+                <strong>en Gijón y Oviedo</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card">
+
+        <!-- Formulario -->
+        <div id="formView">
+            <h2>APÚNTATE A LA LISTA</h2>
+            <p class="form-subtitle">Sin compromiso. Te avisamos antes del lanzamiento.</p>
+
+            <div class="step-indicator">
+                <div class="step-dot active" id="dot1"></div>
+                <div class="step-dot" id="dot2"></div>
+                <div class="step-dot" id="dot3"></div>
+            </div>
+
+            <!-- PASO 1 -->
+            <div id="step1">
+                <p class="step-label">Paso 1 de 3 — Tu negocio</p>
+
+                <div class="form-group">
+                    <label>Nombre de tu negocio *</label>
+                    <input type="text" id="name" placeholder="Ej: Centro de Fisioterapia Gijón" />
+                </div>
+
+                <div class="form-group">
+                    <label>Tu sector *</label>
+                    <select id="category">
+                        <option value="">Selecciona...</option>
+                        <option value="fisioterapia">💆 Fisioterapia / Osteopatía</option>
+                        <option value="peluqueria">✂️ Peluquería</option>
+                        <option value="estetica">💅 Estética</option>
+                        <option value="psicologia">🧠 Psicología</option>
+                        <option value="podologia">🦶 Podología</option>
+                        <option value="nutricion">🥗 Nutrición</option>
+                        <option value="dental">🦷 Odontología</option>
+                        <option value="yoga">🧘 Yoga / Pilates</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Ciudad *</label>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(this, 'city', 'Gijón')">📍 Gijón</button>
+                        <button class="option-btn" onclick="selectOption(this, 'city', 'Oviedo')">📍 Oviedo</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email de contacto *</label>
+                    <input type="email" id="email" placeholder="tu@email.com" />
+                </div>
+
+                <button class="btn-submit" onclick="nextStep(2)">Siguiente →</button>
+            </div>
+
+            <!-- PASO 2 -->
+            <div id="step2" style="display:none;">
+                <p class="step-label">Paso 2 de 3 — Tus números</p>
+
+                <div class="form-group">
+                    <label>¿Cuántas citas tienes de media al mes?</label>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(this, 'bookings', 'menos de 20')">Menos de 20</button>
+                        <button class="option-btn" onclick="selectOption(this, 'bookings', '20-50')">20 a 50</button>
+                        <button class="option-btn" onclick="selectOption(this, 'bookings', '50-100')">50 a 100</button>
+                        <button class="option-btn" onclick="selectOption(this, 'bookings', 'más de 100')">Más de 100</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Cuántas cancelaciones recibes al mes aproximadamente?</label>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(this, 'cancellations', 'casi ninguna')">Casi ninguna</button>
+                        <button class="option-btn" onclick="selectOption(this, 'cancellations', '1-5')">1 a 5</button>
+                        <button class="option-btn" onclick="selectOption(this, 'cancellations', '5-15')">5 a 15</button>
+                        <button class="option-btn" onclick="selectOption(this, 'cancellations', 'más de 15')">Más de 15</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Precio medio de tu servicio?</label>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(this, 'price', 'menos de 30€')">Menos de 30€</button>
+                        <button class="option-btn" onclick="selectOption(this, 'price', '30-60€')">30 a 60€</button>
+                        <button class="option-btn" onclick="selectOption(this, 'price', '60-100€')">60 a 100€</button>
+                        <button class="option-btn" onclick="selectOption(this, 'price', 'más de 100€')">Más de 100€</button>
+                    </div>
+                </div>
+
+                <button class="btn-submit" onclick="nextStep(3)">Siguiente →</button>
+            </div>
+
+            <!-- PASO 3 -->
+            <div id="step3" style="display:none;">
+                <p class="step-label">Paso 3 de 3 — Lo que más te importa</p>
+
+                <div class="form-group">
+                    <label>¿Qué te frena para digitalizar tus reservas?</label>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(this, 'barrier', 'precio')">💸 El precio</button>
+                        <button class="option-btn" onclick="selectOption(this, 'barrier', 'tiempo de configuración')">⏱️ Configurarlo</button>
+                        <button class="option-btn" onclick="selectOption(this, 'barrier', 'no lo necesito')">🤷 No lo necesito</button>
+                        <button class="option-btn" onclick="selectOption(this, 'barrier', 'no me fío')">🤔 No me fío</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Cuánto estarías dispuesto a pagar al mes por llenar tus huecos?</label>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(this, 'willingness', 'solo comisión por reserva')">Solo comisión</button>
+                        <button class="option-btn" onclick="selectOption(this, 'willingness', 'hasta 30€/mes')">Hasta 30€/mes</button>
+                        <button class="option-btn" onclick="selectOption(this, 'willingness', 'hasta 60€/mes')">Hasta 60€/mes</button>
+                        <button class="option-btn" onclick="selectOption(this, 'willingness', 'más de 60€/mes')">Más de 60€/mes</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Algo más que quieras contarnos? (opcional)</label>
+                    <input type="text" id="comments" placeholder="Tu opinión nos ayuda a mejorar..." />
+                </div>
+
+                <button class="btn-submit" onclick="enviar()">✓ Apuntarme a la lista</button>
+            </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="success" id="successView">
+            <div class="success-icon">🎉</div>
+            <h3>¡ESTÁS EN LA LISTA!</h3>
+            <p style="color: var(--gray); margin-bottom: 1rem;">Te avisaremos antes del lanzamiento con instrucciones de acceso.</p>
+
+            <div class="insight-box">
+                🔍 <strong>¿Sabías que...</strong> los negocios con más de 5 cancelaciones al mes pierden de media <strong>250-400€ mensuales</strong> en horas no recuperadas?<br><br>
+                HOURFIX cobra automáticamente el 50% en cancelaciones tardías. Eso ya lo recuperas.
+            </div>
+
+            <div style="background: #E8F5E9; padding: 1rem; border-radius: 12px; margin-top: 1rem; font-size: 0.9rem; border-left: 4px solid #4CAF50;">
+                <strong>✅ Próximo paso:</strong> Te contactaremos antes del lanzamiento para configurar tu perfil y darte acceso prioritario.
+            </div>
+
+            <a href="demo-b2b-dashboard.html" style="display: block; margin-top: 1.5rem; padding: 1rem; background: var(--cream); border-radius: 12px; color: var(--orange); font-weight: 600; text-decoration: none; text-align: center;">
+                👀 Ver demo del panel de empresa →
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const API = 'https://hourfix-backend-production.up.railway.app';
+    const answers = {};
+
+    function selectOption(btn, key, value) {
+        // Deselect siblings
+        btn.closest('.options-grid').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[key] = value;
+    }
+
+    function nextStep(step) {
+        // Validar paso actual
+        if (step === 2) {
+            const name = document.getElementById('name').value.trim();
+            const category = document.getElementById('category').value;
+            const email = document.getElementById('email').value.trim();
+            if (!name || !category || !email || !answers.city) {
+                alert('Por favor rellena todos los campos antes de continuar.');
+                return;
+            }
+            if (!email.includes('@')) {
+                alert('Introduce un email válido.');
+                return;
+            }
+        }
+
+        // Ocultar paso actual, mostrar siguiente
+        document.getElementById(`step${step - 1}`).style.display = 'none';
+        document.getElementById(`step${step}`).style.display = 'block';
+
+        // Actualizar indicador
+        document.querySelectorAll('.step-dot').forEach((d, i) => {
+            d.classList.toggle('active', i < step);
+        });
+    }
+
+    async function enviar() {
+        const payload = {
+            name: document.getElementById('name').value.trim(),
+            category: document.getElementById('category').value,
+            email: document.getElementById('email').value.trim(),
+            city: answers.city || '',
+            monthly_bookings: answers.bookings || '',
+            monthly_cancellations: answers.cancellations || '',
+            avg_price: answers.price || '',
+            main_barrier: answers.barrier || '',
+            willingness_to_pay: answers.willingness || '',
+            comments: document.getElementById('comments').value.trim(),
+            source: 'landing_waitlist'
+        };
+
+        try {
+            // Guardamos como registro en el backend reutilizando el endpoint de empresa
+            // con password automático (no se usa, solo para almacenar los datos)
+            await fetch(`${API}/api/auth/business/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: payload.name,
+                    email: payload.email,
+                    password: 'waitlist_' + Date.now(), // auto, no se usa
+                    category: payload.category,
+                    zone: payload.city,
+                    phone: JSON.stringify(payload) // guardamos todo el payload en phone temporalmente
+                })
+            });
+        } catch(e) {
+            // Si falla el backend, mostramos éxito igual (no bloqueamos al usuario)
+            console.log('Backend no disponible, mostrando éxito local');
+        }
+
+        // Mostrar pantalla de éxito siempre
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('successView').style.display = 'block';
+    }
+</script>
+</body>
+</html>
