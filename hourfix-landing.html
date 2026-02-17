@@ -394,12 +394,9 @@
         }
 
         .quote-icon {
-            font-size: 4rem;
-            color: var(--orange-light);
-            opacity: 0.3;
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            display: block;
         }
 
         .testimonial-text {
@@ -719,6 +716,34 @@
                                 <div class="service-mini-icon">🦷</div>
                                 <div class="service-mini-name">Dental</div>
                             </div>
+                            <div class="service-mini">
+                                <div class="service-mini-icon">🧠</div>
+                                <div class="service-mini-name">Psicología</div>
+                            </div>
+                            <div class="service-mini">
+                                <div class="service-mini-icon">🦶</div>
+                                <div class="service-mini-name">Podología</div>
+                            </div>
+                        </div>
+
+                        <!-- Disponibilidad hoy -->
+                        <div style="background: white; border-radius: 15px; padding: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08);">
+                            <div style="font-size: 0.7rem; font-weight: 700; color: #D86018; margin-bottom: 0.6rem; letter-spacing: 1px;">📍 DISPONIBLE HOY EN GIJÓN</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="font-size: 0.8rem; font-weight: 600;">FisioSalud Centro</span>
+                                <span style="font-size: 0.75rem; color: #4CAF50; font-weight: 700;">⭐ 4.9</span>
+                            </div>
+                            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                                <span style="background: #E8F5E9; color: #2E7D32; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">10:00</span>
+                                <span style="background: #E8F5E9; color: #2E7D32; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">11:30</span>
+                                <span style="background: #E8F5E9; color: #2E7D32; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">16:00</span>
+                                <span style="background: #FFEBEE; color: #C62828; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">+3 más</span>
+                            </div>
+                        </div>
+
+                        <!-- Botón reservar -->
+                        <div style="background: #D86018; border-radius: 12px; padding: 0.9rem; text-align: center; color: white; font-weight: 700; font-size: 0.9rem;">
+                            Reservar ahora →
                         </div>
                     </div>
                 </div>
@@ -1034,12 +1059,14 @@
         function toggleFaq(el) {
             const answer = el.querySelector('.faq-a');
             const icon = el.querySelector('.faq-q span');
-            if (answer.style.display === 'none' || answer.style.display === '') {
+            const isOpen = answer.style.display === 'block';
+            // Cerrar todos primero
+            document.querySelectorAll('.faq-a').forEach(a => a.style.display = 'none');
+            document.querySelectorAll('.faq-q span').forEach(s => s.textContent = '+');
+            // Abrir el clickeado si estaba cerrado
+            if (!isOpen) {
                 answer.style.display = 'block';
                 icon.textContent = '−';
-            } else {
-                answer.style.display = 'none';
-                icon.textContent = '+';
             }
         }
 
