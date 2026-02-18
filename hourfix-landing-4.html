@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>HOURFIX - Reserva tu cita en 3 clicks</title>
+ <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+ <style>
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+ :root {
+ --orange-primary: #D86018;
+ --orange-light: #FF8C42;
+ --orange-dark: #B84D10;
+ --cream: #FFF8F0;
+ --dark: #1A1A1A;
+ --gray: #666;
+ }
+ body {
+ font-family: 'Work Sans', sans-serif;
+ background: var(--cream);
+ color: var(--dark);
+ overflow-x: hidden;
+ }
+ /* Navigation */
+ .nav {
+ position: fixed;
+ top: 0;
+ width: 100%;
+ padding: 1.5rem 5%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ z-index: 1000;
+ background: rgba(255, 248, 240, 0.95);
+ backdrop-filter: blur(10px);
+ border-bottom: 1px solid rgba(216, 96, 24, 0.1);
+ }
+ .logo {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ cursor: pointer;
+ }
+ .logo-icon {
+ width: 45px;
+ height: 45px;
+ background: var(--orange-primary);
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 1.3rem;
+ animation: pulse 2s infinite;
+ }
+ @keyframes pulse {
+ 0%, 100% { transform: scale(1); }
+ 50% { transform: scale(1.05); }
+ }
+ .logo-text {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 1.8rem;
+ color: var(--orange-primary);
+ letter-spacing: 2px;
+ }
+ .nav-links {
+ display: flex;
+ gap: 2rem;
+ list-style: none;
+ }
+ .nav-links a {
+ color: var(--dark);
+ text-decoration: none;
+ font-weight: 500;
+ transition: color 0.3s;
+ }
+ .nav-links a:hover {
+ color: var(--orange-primary);
+ }
+ /* Hero */
+ .hero {
+ min-height: 100vh;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background: linear-gradient(135deg, var(--cream) 0%, #FFF5E8 100%);
+ position: relative;
+ overflow: hidden;
+ padding-top: 80px;
+ }
+ .hero-content {
+ max-width: 1400px;
+ padding: 4rem 5%;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 4rem;
+ align-items: center;
+ position: relative;
+ z-index: 1;
+ }
+ .hero-text h1 {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 5rem;
+ line-height: 1;
+ color: var(--orange-primary);
+ margin-bottom: 1.5rem;
+ }
+ .hero-text .tagline {
+ font-size: 1.8rem;
+ color: var(--gray);
+ margin-bottom: 2rem;
+ font-weight: 300;
+ line-height: 1.5;
+ }
+ .benefits {
+ display: flex;
+ flex-direction: column;
+ gap: 1rem;
+ margin-bottom: 2.5rem;
+ }
+ .benefit-item {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ font-size: 1.1rem;
+ }
+ .benefit-icon {
+ width: 40px;
+ height: 40px;
+ background: var(--orange-light);
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 1.3rem;
+ flex-shrink: 0;
+ }
+ .cta-buttons {
+ display: flex;
+ gap: 1.5rem;
+ }
+ .btn {
+ padding: 1.2rem 3rem;
+ font-size: 1.2rem;
+ font-weight: 600;
+ border: none;
+ border-radius: 50px;
+ cursor: pointer;
+ transition: all 0.3s;
+ text-decoration: none;
+ display: inline-block;
+ text-align: center;
+ }
+ .btn-primary {
+ background: var(--orange-primary);
+ color: white;
+ box-shadow: 0 10px 30px rgba(216, 96, 24, 0.3);
+ }
+ .btn-primary:hover {
+ background: var(--orange-dark);
+ transform: translateY(-3px);
+ box-shadow: 0 15px 40px rgba(216, 96, 24, 0.4);
+ }
+ .btn-secondary {
+ background: transparent;
+ color: var(--orange-primary);
+ border: 2px solid var(--orange-primary);
+ }
+ .btn-secondary:hover {
+ background: var(--orange-primary);
+ color: white;
+ }
+ /* Phone Mockup */
+ .phone-mockup {
+ width: 100%;
+ max-width: 350px;
+ margin: 0 auto;
+ background: white;
+ border-radius: 40px;
+ padding: 1rem;
+ box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+ }
+ .phone-screen {
+ background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+ border-radius: 30px;
+ padding: 1.5rem 1rem;
+ min-height: 500px;
+ display: flex;
+ flex-direction: column;
+ gap: 1rem;
+ }
+ .screen-header {
+ text-align: center;
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 1.3rem;
+ color: var(--orange-primary);
+ letter-spacing: 1px;
+ margin-bottom: 1rem;
+ }
+ .service-icon-grid {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ gap: 0.8rem;
+ }
+ .service-mini {
+ background: white;
+ border-radius: 15px;
+ padding: 1.2rem 0.8rem;
+ text-align: center;
+ box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+ }
+ .service-mini-icon {
+ font-size: 2rem;
+ margin-bottom: 0.3rem;
+ }
+ .service-mini-name {
+ font-size: 0.75rem;
+ font-weight: 600;
+ color: var(--dark);
+ }
+ /* Sections */
+ .section {
+ padding: 6rem 5%;
+ }
+ .section-title {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 4rem;
+ text-align: center;
+ color: var(--orange-primary);
+ margin-bottom: 1rem;
+ letter-spacing: 2px;
+ }
+ .section-subtitle {
+ text-align: center;
+ font-size: 1.3rem;
+ color: var(--gray);
+ margin-bottom: 4rem;
+ }
+ /* How It Works */
+ .how-it-works {
+ background: white;
+ }
+ .steps-container {
+ max-width: 1200px;
+ margin: 0 auto;
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 3rem;
+ }
+ .step-card {
+ text-align: center;
+ padding: 3rem 2rem;
+ background: var(--cream);
+ border-radius: 30px;
+ transition: all 0.5s;
+ }
+ .step-card:hover {
+ transform: translateY(-15px);
+ box-shadow: 0 20px 60px rgba(216, 96, 24, 0.15);
+ }
+ .step-number {
+ width: 80px;
+ height: 80px;
+ background: var(--orange-primary);
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 3rem;
+ color: white;
+ margin: 0 auto 2rem;
+ box-shadow: 0 10px 30px rgba(216, 96, 24, 0.3);
+ }
+ .step-card h3 {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 2rem;
+ color: var(--dark);
+ margin-bottom: 1rem;
+ letter-spacing: 1px;
+ }
+ .step-card p {
+ font-size: 1.1rem;
+ line-height: 1.8;
+ color: var(--gray);
+ }
+ /* Services */
+ .services {
+ background: linear-gradient(135deg, var(--cream) 0%, #FFF5E8 100%);
+ }
+ .services-grid {
+ max-width: 1400px;
+ margin: 0 auto;
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 2rem;
+ }
+ .service-card {
+ background: white;
+ border-radius: 30px;
+ padding: 3rem 2rem;
+ text-align: center;
+ cursor: pointer;
+ transition: all 0.4s;
+ border: 3px solid transparent;
+ box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+ text-decoration: none;
+ color: inherit;
+ display: block;
+ }
+ .service-card:hover {
+ transform: translateY(-15px);
+ border-color: var(--orange-light);
+ box-shadow: 0 20px 50px rgba(216, 96, 24, 0.2);
+ }
+ .service-card-icon {
+ font-size: 5rem;
+ margin-bottom: 1.5rem;
+ }
+ .service-card h3 {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 2rem;
+ color: var(--dark);
+ margin-bottom: 0.5rem;
+ letter-spacing: 1px;
+ }
+ /* Testimonials */
+ .testimonials {
+ background: white;
+ }
+ .testimonials-grid {
+ max-width: 1400px;
+ margin: 0 auto;
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 2rem;
+ }
+ .testimonial-card {
+ background: var(--cream);
+ border-radius: 25px;
+ padding: 3rem;
+ position: relative;
+ transition: all 0.3s;
+ }
+ .testimonial-card:hover {
+ transform: translateY(-10px);
+ box-shadow: 0 20px 50px rgba(216, 96, 24, 0.15);
+ }
+ .quote-icon {
+ font-size: 2rem;
+ margin-bottom: 0.8rem;
+ display: block;
+ }
+ .testimonial-text {
+ font-size: 1.1rem;
+ line-height: 1.8;
+ color: var(--dark);
+ margin-bottom: 2rem;
+ font-style: italic;
+ }
+ .testimonial-author {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ }
+ .author-avatar {
+ width: 50px;
+ height: 50px;
+ border-radius: 50%;
+ background: var(--orange-primary);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 1.5rem;
+ color: white;
+ }
+ .author-info h4 {
+ font-weight: 600;
+ color: var(--dark);
+ }
+ .author-info p {
+ font-size: 0.9rem;
+ color: var(--gray);
+ }
+ /* Business Section */
+ .business-section {
+ background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+ color: white;
+ }
+ .business-intro {
+ text-align: center;
+ max-width: 800px;
+ margin: 0 auto 4rem;
+ }
+ .pricing-cards-container {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 2rem;
+ max-width: 1400px;
+ margin: 0 auto 3rem;
+ }
+ .pricing-card {
+ background: white;
+ border-radius: 30px;
+ padding: 2.5rem;
+ box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+ position: relative;
+ overflow: hidden;
+ transition: all 0.3s;
+ color: var(--dark);
+ }
+ .pricing-card:hover {
+ transform: translateY(-10px);
+ box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+ }
+ .pricing-card.featured {
+ border: 3px solid var(--orange-primary);
+ transform: scale(1.05);
+ }
+ .popular-badge {
+ position: absolute;
+ top: 20px;
+ right: -35px;
+ background: var(--orange-primary);
+ color: white;
+ padding: 0.5rem 3rem;
+ transform: rotate(45deg);
+ font-size: 0.75rem;
+ font-weight: bold;
+ }
+ .pricing-badge {
+ background: var(--orange-light);
+ color: white;
+ padding: 0.5rem 1.5rem;
+ border-radius: 20px;
+ display: inline-block;
+ font-weight: 600;
+ font-size: 0.9rem;
+ margin-bottom: 1.5rem;
+ }
+ .pricing-amount {
+ display: flex;
+ align-items: baseline;
+ justify-content: center;
+ margin-bottom: 1rem;
+ }
+ .price-number {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 4rem;
+ color: var(--orange-primary);
+ line-height: 1;
+ }
+ .price-period {
+ font-size: 1.3rem;
+ color: var(--gray);
+ margin-left: 0.3rem;
+ }
+ .pricing-commission {
+ text-align: center;
+ color: var(--gray);
+ font-size: 0.95rem;
+ margin-bottom: 1.5rem;
+ padding-bottom: 1.5rem;
+ border-bottom: 2px solid #eee;
+ }
+ .plan-features {
+ margin-bottom: 2rem;
+ }
+ .feature-item {
+ padding: 0.8rem 0;
+ border-bottom: 1px solid #f0f0f0;
+ font-size: 0.95rem;
+ }
+ .feature-item:last-child {
+ border-bottom: none;
+ }
+ .btn-plan {
+ display: block;
+ width: 100%;
+ padding: 1.2rem;
+ background: var(--cream);
+ color: var(--orange-primary);
+ text-align: center;
+ border-radius: 15px;
+ text-decoration: none;
+ font-weight: 600;
+ font-size: 1.1rem;
+ transition: all 0.3s;
+ }
+ .btn-plan:hover {
+ background: var(--orange-primary);
+ color: white;
+ }
+ .btn-plan.featured-btn {
+ background: var(--orange-primary);
+ color: white;
+ }
+ .pricing-footer {
+ text-align: center;
+ padding: 2rem;
+ background: rgba(255, 255, 255, 0.1);
+ border-radius: 20px;
+ max-width: 1200px;
+ margin: 0 auto;
+ }
+ /* Footer */
+ .footer {
+ background: var(--dark);
+ color: white;
+ padding: 3rem 5%;
+ text-align: center;
+ }
+ /* Mobile Responsive */
+ .faq-item {
+ border-bottom: 1px solid #E0E0E0;
+ padding: 1.2rem 0;
+ cursor: pointer;
+ }
+ .faq-item:last-child { border-bottom: none; }
+ .faq-q { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+ .faq-q h3 { font-size: 1rem; font-weight: 600; color: #333; }
+ .faq-q span { font-size: 1.5rem; color: #D86018; font-weight: bold; flex-shrink: 0; }
+ .faq-a { display: none; margin-top: 0.8rem; color: #666; line-height: 1.7; font-size: 0.95rem; }
+ @media (max-width: 1024px) {
+ .hero-content {
+ grid-template-columns: 1fr;
+ text-align: center;
+ }
+ .steps-container {
+ grid-template-columns: 1fr;
+ }
+ .services-grid {
+ grid-template-columns: repeat(2, 1fr);
+ }
+ .testimonials-grid {
+ grid-template-columns: 1fr;
+ }
+ .pricing-cards-container {
+ grid-template-columns: 1fr;
+ }
+ .pricing-card.featured {
+ transform: scale(1);
+ }
+ }
+ @media (max-width: 768px) {
+ .hero-text h1 {
+ font-size: 3rem;
+ }
+ .section-title {
+ font-size: 2.5rem;
+ }
+ .nav-links {
+ display: none;
+ }
+ .services-grid {
+ grid-template-columns: 1fr;
+ }
+ .cta-buttons {
+ flex-direction: column;
+ }
+ .btn {
+ width: 100%;
+ }
+ .phone-mockup {
+ max-width: 280px;
+ }
+ }
+ </style>
+</head>
+<body>
+ <!-- Navigation -->
+ <nav class="nav">
+ <div class="logo" onclick="location.href='#inicio'">
+ <div class="logo-icon">⏳</div>
+ <div class="logo-text">HOURFIX</div>
+ </div>
+ <ul class="nav-links">
+ <li><a href="#inicio">Inicio</a></li>
+ <li><a href="#como-funciona">Cómo Funciona</a></li>
+ <li><a href="#servicios">Servicios</a></li>
+ <li><a href="#empresas">Para Empresas</a></li>
+ </ul>
+ </nav>
+ <!-- Hero Section -->
+ <section class="hero" id="inicio">
+ <div class="hero-content">
+ <div class="hero-text">
+ <div style="background: linear-gradient(135deg, #D86018, #FF8C42); color: white; display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: 1px;">
+ 💊 ESPECIALIZADO EN SALUD • ASTURIAS
+ </div>
+ <h1>ACABA CON LAS CANCELACIONES SIN COSTE</h1>
+ <p class="tagline">Para fisios, psicólogos, podólogos y entrenadores personales. Solo tus huecos libres. Cobra automáticamente el 50% si cancelan tarde.</p>
+ <div class="benefits">
+ <div class="benefit-item">
+ <div class="benefit-icon">💰</div>
+ <span><strong>Recupera tu dinero:</strong> Cobramos el 50% en cancelaciones &lt;24h automáticamente</span>
+ </div>
+ <div class="benefit-item">
+ <div class="benefit-icon">📅</div>
+ <span><strong>Solo huecos libres:</strong> Tus clientes habituales siguen como siempre</span>
+ </div>
+ <div class="benefit-item">
+ <div class="benefit-icon">🏥</div>
+ <span><strong>Salud y bienestar:</strong> Fisios, psicólogos, podólogos, entrenadores y fitness</span>
+ </div>
+ </div>
+ <div class="cta-buttons">
+ <a href="#servicios" class="btn btn-primary">Ver cómo funciona</a>
+ <a href="#empresas" class="btn btn-secondary">Soy profesional</a>
+ </div>
+ </div>
+ <div style="display: flex; justify-content: center;">
+ <div class="phone-mockup">
+ <div class="phone-screen">
+ <div class="screen-header">¿QUÉ NECESITAS?</div>
+ <div class="service-icon-grid">
+ <div class="service-mini">
+ <div class="service-mini-icon">💆</div>
+ <div class="service-mini-name">Fisioterapia</div>
+ </div>
+ <div class="service-mini">
+ <div class="service-mini-icon">✂️</div>
+ <div class="service-mini-name">Peluquería</div>
+ </div>
+ <div class="service-mini">
+ <div class="service-mini-icon">💅</div>
+ <div class="service-mini-name">Estética</div>
+ </div>
+ <div class="service-mini">
+ <div class="service-mini-icon">🦷</div>
+ <div class="service-mini-name">Dental</div>
+ </div>
+ <div class="service-mini">
+ <div class="service-mini-icon">🧠</div>
+ <div class="service-mini-name">Psicología</div>
+ </div>
+ <div class="service-mini">
+ <div class="service-mini-icon">🦶</div>
+ <div class="service-mini-name">Podología</div>
+ </div>
+ </div>
+ <!-- Disponibilidad hoy -->
+ <div style="background: white; border-radius: 15px; padding: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08);">
+ <div style="font-size: 0.7rem; font-weight: 700; color: #D86018; margin-bottom: 0.6rem; letter-spacing: 1px;">📍 DISPONIBLE HOY EN GIJÓN</div>
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+ <span style="font-size: 0.8rem; font-weight: 600;">FisioSalud Centro</span>
+ <span style="font-size: 0.75rem; color: #4CAF50; font-weight: 700;">⭐ 4.9</span>
+ </div>
+ <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+ <span style="background: #E8F5E9; color: #2E7D32; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">10:00</span>
+ <span style="background: #E8F5E9; color: #2E7D32; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">11:30</span>
+ <span style="background: #E8F5E9; color: #2E7D32; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">16:00</span>
+ <span style="background: #FFEBEE; color: #C62828; padding: 0.3rem 0.6rem; border-radius: 8px; font-size: 0.7rem; font-weight: 600;">+3 más</span>
+ </div>
+ </div>
+ <!-- Botón reservar -->
+ <div style="background: #D86018; border-radius: 12px; padding: 0.9rem; text-align: center; color: white; font-weight: 700; font-size: 0.9rem;">
+ Reservar ahora →
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+ <!-- How It Works -->
+ <section class="section how-it-works" id="como-funciona">
+ <h2 class="section-title">CÓMO FUNCIONA</h2>
+ <p class="section-subtitle">Así de simple</p>
+ <div class="steps-container">
+ <div class="step-card">
+ <div class="step-number">1</div>
+ <h3>Elige tu servicio</h3>
+ <p>Selecciona lo que necesitas: fisioterapia, peluquería, estética o dental. Todo en un solo lugar.</p>
+ </div>
+ <div class="step-card">
+ <div class="step-number">2</div>
+ <h3>Busca y compara</h3>
+ <p>Te mostramos las mejores opciones cerca de ti con precios, horarios disponibles y valoraciones reales.</p>
+ </div>
+ <div class="step-card">
+ <div class="step-number">3</div>
+ <h3>Confirma y listo</h3>
+ <p>Reserva en segundos. Recibe confirmación instantánea con todos los detalles de tu cita.</p>
+ </div>
+ </div>
+ </section>
+ <!-- Services -->
+ <section class="section services" id="servicios">
+ <h2 class="section-title">PROFESIONALES DE SALUD Y BIENESTAR</h2>
+ <p class="section-subtitle">Especializado en servicios de salud en Gijón y Oviedo</p>
+ <div class="services-grid">
+ <a href="demo-b2c-interactive.html?servicio=fisioterapia" class="service-card" style="border: 3px solid #D86018;">
+ <div class="service-card-icon">💆</div>
+ <h3>Fisioterapia</h3>
+ <p>Centros especializados con profesionales certificados</p>
+ <div style="background: #FFF8F0; padding: 0.5rem; border-radius: 8px; margin-top: 0.8rem; font-size: 0.85rem; color: #D86018; font-weight: 600;">
+ ⭐ Sector prioritario
+ </div>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=psicologia" class="service-card" style="border: 3px solid #D86018;">
+ <div class="service-card-icon">🧠</div>
+ <h3>Psicología</h3>
+ <p>Terapia individual, de pareja y familiar</p>
+ <div style="background: #FFF8F0; padding: 0.5rem; border-radius: 8px; margin-top: 0.8rem; font-size: 0.85rem; color: #D86018; font-weight: 600;">
+ ⭐ Sector prioritario
+ </div>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=podologia" class="service-card" style="border: 3px solid #D86018;">
+ <div class="service-card-icon">🦶</div>
+ <h3>Podología</h3>
+ <p>Cuidado profesional del pie y biomecánica</p>
+ <div style="background: #FFF8F0; padding: 0.5rem; border-radius: 8px; margin-top: 0.8rem; font-size: 0.85rem; color: #D86018; font-weight: 600;">
+ ⭐ Sector prioritario
+ </div>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=entrenador" class="service-card" style="border: 3px solid #D86018;">
+ <div class="service-card-icon">💪</div>
+ <h3>Entrenadores Personales</h3>
+ <p>Sesiones individuales y entrenamiento personalizado</p>
+ <div style="background: #FFF8F0; padding: 0.5rem; border-radius: 8px; margin-top: 0.8rem; font-size: 0.85rem; color: #D86018; font-weight: 600;">
+ ⭐ Sector prioritario
+ </div>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=baile" class="service-card">
+ <div class="service-card-icon">🩰</div>
+ <h3>Clases de Baile</h3>
+ <p>Salsa, bachata, contemporáneo, urbano</p>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=fitness" class="service-card">
+ <div class="service-card-icon">🤸</div>
+ <h3>Barre y Fitness</h3>
+ <p>Clases de barre, HIIT y fitness en grupo</p>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=osteopatia" class="service-card">
+ <div class="service-card-icon">💪</div>
+ <h3>Osteopatía</h3>
+ <p>Tratamiento manual del aparato locomotor</p>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=nutricion" class="service-card">
+ <div class="service-card-icon">🥗</div>
+ <h3>Nutrición</h3>
+ <p>Dietistas y nutricionistas especializados</p>
+ </a>
+ <a href="demo-b2c-interactive.html?servicio=yoga" class="service-card">
+ <div class="service-card-icon">🧘</div>
+ <h3>Yoga y Pilates</h3>
+ <p>Clases individuales y en grupo</p>
+ </a>
+ </div>
+ <div style="text-align: center; margin-top: 3rem; padding: 1.5rem; background: #FFF8F0; border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+ <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">
+ <strong style="color: #D86018;">También disponible:</strong> Peluquerías, estética y odontología.<br>
+ Nuestro foco principal es salud y bienestar.
+ </p>
+ </div>
+ </section>
+ <!-- Testimonials -->
+ <section class="section testimonials">
+ <h2 class="section-title">ASÍ FUNCIONA PARA NUESTROS CLIENTES</h2>
+ <p class="section-subtitle">Casos de uso reales</p>
+ <div class="testimonials-grid">
+ <div class="testimonial-card">
+ <div class="quote-icon">💡</div>
+ <p class="testimonial-text">
+ Su fisio habitual le canceló a última hora. Abrió HOURFIX, filtró por "fisioterapia" y "hoy disponible", 
+ encontró tres opciones cerca y reservó en menos de 2 minutos. Sin llamadas, sin esperas.
+ </p>
+ <div class="testimonial-author">
+ <div class="author-avatar">👩</div>
+ <div class="author-info">
+ <h4>Cliente particular</h4>
+ <p>Reserva de urgencia • Gijón</p>
+ </div>
+ </div>
+ </div>
+ <div class="testimonial-card">
+ <div class="quote-icon">💡</div>
+ <p class="testimonial-text">
+ Trabaja hasta las 19h y los centros de estética cierran a las 20h. Con HOURFIX reserva 
+ su cita a las 23h para la semana siguiente. El negocio acepta la solicitud a la mañana siguiente.
+ </p>
+ <div class="testimonial-author">
+ <div class="author-avatar">👨</div>
+ <div class="author-info">
+ <h4>Profesional con poco tiempo</h4>
+ <p>Reserva fuera de horario • Oviedo</p>
+ </div>
+ </div>
+ </div>
+ <div class="testimonial-card">
+ <div class="quote-icon">💡</div>
+ <p class="testimonial-text">
+ Se mudó a Gijón hace 3 meses y no conocía ningún profesional. Buscó "psicología" 
+ en su zona, comparó valoraciones y precios, y encontró su psicóloga habitual en una semana.
+ </p>
+ <div class="testimonial-author">
+ <div class="author-avatar">👩</div>
+ <div class="author-info">
+ <h4>Recién llegado a la ciudad</h4>
+ <p>Encontrar profesional de confianza • Gijón</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+ <!-- Business Section -->
+ <section class="section business-section" id="empresas">
+ <div class="business-intro">
+ <h2 class="section-title" style="color: white;">¿PIERDES DINERO EN CANCELACIONES?</h2>
+ <p style="font-size: 1.5rem; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem;">
+ Tus huecos vacíos, llenos. Cobra automáticamente el 50% si cancelan tarde.
+ </p>
+ <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 900px; margin: 0 auto 3rem;">
+ <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 1.5rem; text-align: center; backdrop-filter: blur(10px);">
+ <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💰</div>
+ <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem;">Recupera tu dinero</div>
+ <div style="font-size: 0.9rem; opacity: 0.9;">Cobramos el 50% en cancelaciones &lt;24h</div>
+ </div>
+ <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 1.5rem; text-align: center; backdrop-filter: blur(10px);">
+ <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📅</div>
+ <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem;">Solo huecos libres</div>
+ <div style="font-size: 0.9rem; opacity: 0.9;">No toques tu agenda habitual</div>
+ </div>
+ <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 1.5rem; text-align: center; backdrop-filter: blur(10px);">
+ <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎯</div>
+ <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem;">Clientes nuevos</div>
+ <div style="font-size: 0.9rem; opacity: 0.9;">Llena las horas que tienes vacías</div>
+ </div>
+ </div>
+ </div>
+ <div class="pricing-cards-container">
+ <!-- Plan Gratis -->
+ <div class="pricing-card">
+ <div class="pricing-badge" style="background: #95E1D3;">GRATIS</div>
+ <div class="pricing-amount">
+ <span class="price-number">0€</span>
+ <span class="price-period">/mes</span>
+ </div>
+ <div class="pricing-commission">15% comisión por reserva</div>
+ <div style="background: rgba(216,96,24,0.1); border-radius: 8px; padding: 0.7rem; margin: 0.8rem 0; font-size: 0.85rem; color: #D86018; font-weight: 600;">
+ 💡 Con solo 2 reservas ya cubres el coste
+ </div>
+ <div class="plan-features">
+ <div class="feature-item">✓ Hasta 20 reservas/mes</div>
+ <div class="feature-item">✓ Perfil básico</div>
+ <div class="feature-item">✓ Notificaciones email</div>
+ <div class="feature-item">✓ Sin permanencia</div>
+ </div>
+ <a href="lista-espera.html" target="_blank" class="btn-plan">Empezar gratis</a>
+ </div>
+ <!-- Plan Esencial -->
+ <div class="pricing-card">
+ <div class="pricing-badge">ESENCIAL</div>
+ <div class="pricing-amount">
+ <span class="price-number">49€</span>
+ <span class="price-period">/mes</span>
+ </div>
+ <div class="pricing-commission">10% comisión por reserva</div>
+ <div style="background: rgba(216,96,24,0.1); border-radius: 8px; padding: 0.7rem; margin: 0.8rem 0; font-size: 0.85rem; color: #D86018; font-weight: 600;">
+ 💡 Con 2 clientes nuevos ya está pagado
+ </div>
+ <div class="plan-features">
+ <div class="feature-item">✓ Hasta 50 reservas/mes</div>
+ <div class="feature-item">✓ <strong>Comisión 10%</strong></div>
+ <div class="feature-item">✓ Perfil destacado</div>
+ <div class="feature-item">✓ <strong>Posicionamiento preferente</strong></div>
+ <div class="feature-item">✓ Estadísticas básicas</div>
+ <div class="feature-item">✓ Primer mes gratis</div>
+ </div>
+ <a href="lista-espera.html" target="_blank" class="btn-plan">Probar ahora</a>
+ </div>
+ <!-- Plan Pro -->
+ <div class="pricing-card featured">
+ <div class="popular-badge">MÁS POPULAR</div>
+ <div class="pricing-badge" style="background: var(--orange-primary);">PROFESIONAL</div>
+ <div class="pricing-amount">
+ <span class="price-number">79€</span>
+ <span class="price-period">/mes</span>
+ </div>
+ <div class="pricing-commission">5% comisión por reserva</div>
+ <div style="background: rgba(255,255,255,0.2); border-radius: 8px; padding: 0.7rem; margin: 0.8rem 0; font-size: 0.85rem; color: white; font-weight: 600;">
+ 💡 A partir de 10 reservas/mes, el más rentable
+ </div>
+ <div class="plan-features">
+ <div class="feature-item">✓ <strong>Reservas ilimitadas</strong></div>
+ <div class="feature-item">✓ <strong>Comisión mínima 5%</strong></div>
+ <div class="feature-item">✓ <strong>Top posición en búsquedas</strong></div>
+ <div class="feature-item">✓ Email + SMS + Push</div>
+ <div class="feature-item">✓ Estadísticas avanzadas</div>
+ <div class="feature-item">✓ Primer mes gratis</div>
+ </div>
+ <a href="lista-espera.html" target="_blank" class="btn-plan featured-btn">Comenzar ahora</a>
+ </div>
+ </div>
+ <div class="pricing-footer">
+ <p><strong>Todos los planes incluyen:</strong> Cancelación &lt;24h con cargo 50% • Sin permanencia • Pago integrado • Cliente paga 0€ extra</p>
+ </div>
+ </section>
+ <!-- FAQ -->
+ <section class="section" style="background: white;" id="faq">
+ <h2 class="section-title">PREGUNTAS FRECUENTES</h2>
+ <p class="section-subtitle">Lo que más nos preguntan</p>
+ <div style="max-width: 800px; margin: 0 auto;">
+ <!-- TABS -->
+ <div style="display: flex; background: #F5F5F5; border-radius: 15px; padding: 0.4rem; margin-bottom: 2rem;">
+ <button id="tab-cliente" onclick="switchFaqTab('cliente')" style="flex: 1; padding: 0.9rem; border: none; border-radius: 12px; font-family: 'Work Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; background: #D86018; color: white; transition: 0.3s;">
+ 👤 Soy Cliente
+ </button>
+ <button id="tab-negocio" onclick="switchFaqTab('negocio')" style="flex: 1; padding: 0.9rem; border: none; border-radius: 12px; font-family: 'Work Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; background: transparent; color: #666; transition: 0.3s;">
+ 🏢 Soy Negocio
+ </button>
+ </div>
+ <!-- FAQS CLIENTE -->
+ <div id="faqs-cliente">
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Los precios son los mismos que si llamo directamente?</h3><span>+</span></div>
+ <p class="faq-a">Sí, exactamente los mismos. HOURFIX no cobra nada al cliente. La comisión la paga el negocio, no tú. Lo que ves en la plataforma es el precio final, sin sorpresas.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Qué pasa si necesito cancelar?</h3><span>+</span></div>
+ <p class="faq-a">Puedes cancelar gratis hasta 24 horas antes de tu cita. Si cancelas con menos de 24 horas de antelación, se aplica un cargo del 50% del precio del servicio. Esto protege al profesional, que había reservado ese tiempo para ti.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Por qué no veo la dirección del negocio antes de reservar?</h3><span>+</span></div>
+ <p class="faq-a">La zona y el barrio son siempre visibles. La dirección exacta y el teléfono se revelan al confirmar la reserva. Así garantizamos que los datos solo llegan a clientes reales con una cita confirmada.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Puedo reservar fuera del horario de apertura del negocio?</h3><span>+</span></div>
+ <p class="faq-a">Sí. HOURFIX funciona las 24 horas. Reservas a las 11 de la noche para la semana siguiente y el negocio confirma cuando abra por la mañana.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Cómo sé que el profesional es de confianza?</h3><span>+</span></div>
+ <p class="faq-a">Todos los negocios están verificados. Las valoraciones solo las pueden dejar clientes que han reservado y acudido a su cita. Sin opiniones anónimas ni falsas.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Me llega algún recordatorio de la cita?</h3><span>+</span></div>
+ <p class="faq-a">Sí, recibes confirmación por email al reservar y un recordatorio automático 24 horas antes de tu cita.</p>
+ </div>
+ </div>
+ <!-- FAQS NEGOCIO -->
+ <div id="faqs-negocio" style="display: none;">
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Por qué HOURFIX y no simplemente que me llamen por teléfono?</h3><span>+</span></div>
+ <p class="faq-a">Llamar implica que estés disponible, que no haya cola y que el cliente recuerde llamar en horario de apertura. HOURFIX funciona a las 11 de la noche, el domingo, o mientras el cliente está en el trabajo. Para ti también es mejor: sin interrupciones, sin llamadas perdidas, sin volver a llamar.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Cuánto me cuesta realmente?</h3><span>+</span></div>
+ <p class="faq-a">En el plan gratuito, solo pagas el 15% de cada reserva que recibes. Si no recibes reservas, no pagas nada. En el Esencial (49€/mes) la comisión baja al 10% — con 2 clientes nuevos al mes ya está pagado. En el Profesional (79€/mes) baja al 5% y tienes posicionamiento prioritario en búsquedas.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Qué pasa si un cliente cancela a última hora?</h3><span>+</span></div>
+ <p class="faq-a">HOURFIX cobra automáticamente el 50% del servicio al cliente que cancela con menos de 24 horas. Ese dinero va a ti. Acabas con las cancelaciones sin coste y sin conversaciones incómodas.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Tengo que cambiar cómo trabajo con mis clientes habituales?</h3><span>+</span></div>
+ <p class="faq-a">No. HOURFIX es para llenar los huecos que ya tienes vacíos. Tus clientes de siempre siguen como siempre. Tú decides qué horarios ofreces en la plataforma.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Puedo controlar qué reservas acepto?</h3><span>+</span></div>
+ <p class="faq-a">Sí. Cada solicitud llega a tu panel y tú decides aceptar o rechazar antes de confirmar. No es automático a no ser que tú quieras que lo sea.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿En qué se diferencia HOURFIX de otras plataformas?</h3><span>+</span></div>
+ <p class="faq-a">Nos especializamos en profesionales de salud y bienestar en Asturias. Otras plataformas son globales y genéricas. Nosotros cobramos automáticamente el 50% en cancelaciones tardías (otras no lo hacen), y solo necesitas ofrecer tus huecos libres — no queremos todo tu calendario. Además, nosotros no cobramos nada al cliente final, mientras que muchas plataformas añaden tarifas de servicio que alejan a tus clientes.</p>
+ </div>
+ <div class="faq-item" onclick="toggleFaq(this)">
+ <div class="faq-q"><h3>¿Me ata a un contrato largo?</h3><span>+</span></div>
+ <p class="faq-a">No hay permanencia. Cancelas cuando quieras. Los planes de pago son mes a mes y puedes cambiar de plan en cualquier momento.</p>
+ </div>
+ </div>
+ </div>
+ </section>
+ <!-- Footer -->
+ <footer class="footer" id="contacto">
+ <div class="logo" style="justify-content: center; margin-bottom: 2rem;">
+ <div class="logo-icon">⏳</div>
+ <div class="logo-text">HOURFIX</div>
+ </div>
+ <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem;">
+ Reserva tu cita en 3 clicks. Sin llamadas, sin esperas.
+ </p>
+ <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+ &copy; 2026 HOURFIX. Todos los derechos reservados.
+ </p>
+ </footer>
+ <script>
+ function toggleFaq(el) {
+ const answer = el.querySelector('.faq-a');
+ const icon = el.querySelector('.faq-q span');
+ const isOpen = answer.style.display === 'block';
+ document.querySelectorAll('.faq-a').forEach(a => a.style.display = 'none');
+ document.querySelectorAll('.faq-q span').forEach(s => s.textContent = '+');
+ if (!isOpen) {
+ answer.style.display = 'block';
+ icon.textContent = '−';
+ }
+ }
+ function switchFaqTab(tab) {
+ const isCliente = tab === 'cliente';
+ document.getElementById('faqs-cliente').style.display = isCliente ? 'block' : 'none';
+ document.getElementById('faqs-negocio').style.display = isCliente ? 'none' : 'block';
+ document.getElementById('tab-cliente').style.background = isCliente ? '#D86018' : 'transparent';
+ document.getElementById('tab-cliente').style.color = isCliente ? 'white' : '#666';
+ document.getElementById('tab-negocio').style.background = isCliente ? 'transparent' : '#D86018';
+ document.getElementById('tab-negocio').style.color = isCliente ? '#666' : 'white';
+ document.querySelectorAll('.faq-a').forEach(a => a.style.display = 'none');
+ document.querySelectorAll('.faq-q span').forEach(s => s.textContent = '+');
+ }
+ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+ anchor.addEventListener('click', function(e) {
+ e.preventDefault();
+ const target = document.querySelector(this.getAttribute('href'));
+ if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+ });
+ });
+ </script>
+</body>
+</html>
