@@ -520,6 +520,30 @@
         let selectedTime = '';
         let selectedBusinessData = {};
 
+        // Detectar parámetro de servicio en URL
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const servicioParam = urlParams.get('servicio');
+            
+            const servicioMap = {
+                'fisioterapia': 'Fisioterapia',
+                'psicologia': 'Psicología',
+                'podologia': 'Podología',
+                'entrenador': 'Entrenadores',
+                'baile': 'Baile',
+                'fitness': 'Fitness',
+                'osteopatia': 'Osteopatía',
+                'nutricion': 'Nutrición',
+                'yoga': 'Yoga'
+            };
+            
+            if (servicioParam && servicioMap[servicioParam]) {
+                selectedService = servicioMap[servicioParam];
+                document.getElementById('selectedServiceName').textContent = selectedService;
+                goToStep(3); // Saltar directo a selección de negocio
+            }
+        });
+
         function goToStep(step) {
             currentStep = step;
             document.getElementById('serviceSelection').classList.add('hidden');
