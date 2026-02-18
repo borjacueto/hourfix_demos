@@ -416,27 +416,16 @@
             avg_price: answers.price || '',
             main_barrier: answers.barrier || '',
             willingness_to_pay: answers.willingness || '',
-            comments: document.getElementById('comments').value.trim(),
-            source: 'landing_waitlist'
+            comments: document.getElementById('comments').value.trim()
         };
 
         try {
-            // Guardamos como registro en el backend reutilizando el endpoint de empresa
-            // con password automático (no se usa, solo para almacenar los datos)
-            await fetch(`${API}/api/auth/business/register`, {
+            await fetch(`${API}/api/waitlist`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: payload.name,
-                    email: payload.email,
-                    password: 'waitlist_' + Date.now(), // auto, no se usa
-                    category: payload.category,
-                    zone: payload.city,
-                    phone: JSON.stringify(payload) // guardamos todo el payload en phone temporalmente
-                })
+                body: JSON.stringify(payload)
             });
         } catch(e) {
-            // Si falla el backend, mostramos éxito igual (no bloqueamos al usuario)
             console.log('Backend no disponible, mostrando éxito local');
         }
 
